@@ -13,10 +13,10 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 7ff1a1a258e181b6ab0e23374177eb006fd6da05..01a94c790cfd96436591213ec57d14b541a02feb 100644
+index 33b8551ef0d7ac3b29a1c111088a2c1912f5e494..4e51fb4555349bc486e80bcd72b58e3ede1bd1f8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -45,6 +45,9 @@ import java.util.logging.Logger;
+@@ -43,6 +43,9 @@ import java.util.logging.Logger;
  import java.util.stream.Collectors;
  import javax.imageio.ImageIO;
  // import jline.console.ConsoleReader;
@@ -26,7 +26,7 @@ index 7ff1a1a258e181b6ab0e23374177eb006fd6da05..01a94c790cfd96436591213ec57d14b5
  import net.minecraft.advancements.AdvancementHolder;
  import net.minecraft.commands.CommandSourceStack;
  import net.minecraft.commands.Commands;
-@@ -285,6 +288,7 @@ public final class CraftServer implements Server {
+@@ -279,6 +282,7 @@ public final class CraftServer implements Server {
      protected final DedicatedServer console;
      protected final DedicatedPlayerList playerList;
      private final Map<String, World> worlds = new LinkedHashMap<String, World>();
@@ -34,7 +34,7 @@ index 7ff1a1a258e181b6ab0e23374177eb006fd6da05..01a94c790cfd96436591213ec57d14b5
      private final Map<Class<?>, Registry<?>> registries = new HashMap<>();
      private YamlConfiguration configuration;
      private YamlConfiguration commandsConfiguration;
-@@ -1447,6 +1451,7 @@ public final class CraftServer implements Server {
+@@ -1448,6 +1452,7 @@ public final class CraftServer implements Server {
              this.getLogger().log(Level.SEVERE, null, ex);
          }
  
@@ -42,7 +42,7 @@ index 7ff1a1a258e181b6ab0e23374177eb006fd6da05..01a94c790cfd96436591213ec57d14b5
          this.worlds.remove(world.getName().toLowerCase(java.util.Locale.ENGLISH));
          this.console.removeLevel(handle);
          return true;
-@@ -1465,12 +1470,7 @@ public final class CraftServer implements Server {
+@@ -1466,12 +1471,7 @@ public final class CraftServer implements Server {
  
      @Override
      public World getWorld(UUID uid) {
@@ -56,7 +56,7 @@ index 7ff1a1a258e181b6ab0e23374177eb006fd6da05..01a94c790cfd96436591213ec57d14b5
      }
  
      // Paper start
-@@ -1488,6 +1488,7 @@ public final class CraftServer implements Server {
+@@ -1489,6 +1489,7 @@ public final class CraftServer implements Server {
              System.out.println("World " + world.getName() + " is a duplicate of another world and has been prevented from loading. Please delete the uid.dat file from " + world.getName() + "'s world directory if you want to be able to load the duplicate world.");
              return;
          }

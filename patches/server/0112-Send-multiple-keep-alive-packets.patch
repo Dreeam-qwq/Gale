@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index f5d81da99a47fc1237a670d0000f19f1d61a5160..cb453c4db347b320f19a79ede2d8898106605e25 100644
+index 9e014a140262f5dfcdcb9b21afd18ca275930bb2..e716cbde9bbf3837b614ea1ddd4f881178d938d0 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
@@ -58,13 +58,14 @@ index f5d81da99a47fc1237a670d0000f19f1d61a5160..cb453c4db347b320f19a79ede2d88981
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -51,9 +55,13 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -51,10 +55,14 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      private long keepAliveTime = Util.getMillis(); // Paper
      private boolean keepAlivePending;
      private long keepAliveChallenge;
 +    private LongList keepAlives = new LongArrayList(); // Gale - Purpur - send multiple keep-alive packets
      private int latency;
      private volatile boolean suspendFlushingOnServerThread = false;
+     public final java.util.Map<java.util.UUID, net.kyori.adventure.resource.ResourcePackCallback> packCallbacks = new java.util.concurrent.ConcurrentHashMap<>(); // Paper - adventure resource pack callbacks
 -    private static final long KEEPALIVE_LIMIT = Long.getLong("paper.playerconnection.keepalive", 30) * 1000; // Paper - provide property to set keepalive limit
 +    // Gale start - Purpur - send multiple keep-alive packets
 +    private static final long KEEPALIVE_LIMIT_IN_SECONDS = Long.getLong("paper.playerconnection.keepalive", 30); // Paper - provide property to set keepalive limit
@@ -73,7 +74,7 @@ index f5d81da99a47fc1237a670d0000f19f1d61a5160..cb453c4db347b320f19a79ede2d88981
      protected static final ResourceLocation MINECRAFT_BRAND = new ResourceLocation("brand"); // Paper - Brand support
  
      public ServerCommonPacketListenerImpl(MinecraftServer minecraftserver, Connection networkmanager, CommonListenerCookie commonlistenercookie, ServerPlayer player) { // CraftBukkit
-@@ -91,6 +99,16 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -92,6 +100,16 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      @Override
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
          //PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel()); // CraftBukkit // Paper - This shouldn't be on the main thread
@@ -90,7 +91,7 @@ index f5d81da99a47fc1237a670d0000f19f1d61a5160..cb453c4db347b320f19a79ede2d88981
          if (this.keepAlivePending && packet.getId() == this.keepAliveChallenge) {
              int i = (int) (Util.getMillis() - this.keepAliveTime);
  
-@@ -103,6 +121,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -104,6 +122,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
              });
              // Paper endg
          }
@@ -98,7 +99,7 @@ index f5d81da99a47fc1237a670d0000f19f1d61a5160..cb453c4db347b320f19a79ede2d88981
  
      }
  
-@@ -195,6 +214,20 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -208,6 +227,20 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          long currentTime = Util.getMillis();
          long elapsedTime = currentTime - this.keepAliveTime;
  
@@ -119,7 +120,7 @@ index f5d81da99a47fc1237a670d0000f19f1d61a5160..cb453c4db347b320f19a79ede2d88981
          if (this.keepAlivePending) {
              if (!this.processedDisconnect && elapsedTime >= KEEPALIVE_LIMIT) { // check keepalive limit, don't fire if already disconnected
                  ServerGamePacketListenerImpl.LOGGER.warn("{} was kicked due to keepalive timeout!", this.player.getScoreboardName()); // more info
-@@ -208,6 +241,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -221,6 +254,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
                  this.send(new ClientboundKeepAlivePacket(this.keepAliveChallenge));
              }
          }

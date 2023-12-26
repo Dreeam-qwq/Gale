@@ -599,7 +599,7 @@ index df0c15f6b5b2224d53e4f8fad42b9a1e5f33dc25..caa6dcfec13728863dcf21f9f778665b
  
      }
 diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
-index caa73632aee15583c6b6ed12a668c8f49b794708..5853b5e31a62b353f38ab47ec7455526534aba12 100644
+index d9cd497bc1b654030ff1a597f038b6a881df9f6b..20e3e1a1bac6d97507f733a7fa57081998126ea4 100644
 --- a/src/main/java/net/minecraft/server/level/ChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
 @@ -68,7 +68,6 @@ import net.minecraft.server.level.progress.ChunkProgressListener;
@@ -610,7 +610,7 @@ index caa73632aee15583c6b6ed12a668c8f49b794708..5853b5e31a62b353f38ab47ec7455526
  import net.minecraft.util.thread.BlockableEventLoop;
  import net.minecraft.util.thread.ProcessorHandle;
  import net.minecraft.util.thread.ProcessorMailbox;
-@@ -546,20 +545,14 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
+@@ -545,20 +544,14 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
      }
  
      protected void tick(BooleanSupplier shouldKeepTicking) {
@@ -632,7 +632,7 @@ index caa73632aee15583c6b6ed12a668c8f49b794708..5853b5e31a62b353f38ab47ec7455526
  
      public boolean hasWork() {
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 6e212f672579a3e08dc362c287be59ca5170d717..19625d104b19e02101ee7685a1df5bfd0c905296 100644
+index 44ada45d9bf2d9b48e5de1c3cb1a855902f3884b..7bde3392d46fb1be3d04db97a5ec02ecc4a5ca0a 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 @@ -23,7 +23,6 @@ import net.minecraft.core.SectionPos;
@@ -696,7 +696,7 @@ index 6e212f672579a3e08dc362c287be59ca5170d717..19625d104b19e02101ee7685a1df5bfd
          this.clearCache();
      }
  
-@@ -512,10 +500,6 @@ public class ServerChunkCache extends ChunkSource {
+@@ -512,17 +500,12 @@ public class ServerChunkCache extends ChunkSource {
  
          this.lastInhabitedUpdate = i;
          if (!this.level.isDebug()) {
@@ -704,18 +704,17 @@ index 6e212f672579a3e08dc362c287be59ca5170d717..19625d104b19e02101ee7685a1df5bfd
 -
 -            gameprofilerfiller.push("pollingChunks");
 -            gameprofilerfiller.push("filteringLoadedChunks");
+             // Paper - optimise chunk tick iteration
              if (this.level.getServer().tickRateManager().runsNormally()) this.level.timings.chunkTicks.startTiming(); // Paper
  
-             // Paper start - optimise chunk tick iteration
-@@ -555,7 +539,6 @@ public class ServerChunkCache extends ChunkSource {
-             // Paper end - optimise chunk tick iteration
+             // Paper - optimise chunk tick iteration
  
              if (this.level.getServer().tickRateManager().runsNormally()) {
 -                gameprofilerfiller.popPush("naturalSpawnCount");
                  this.level.timings.countNaturalMobs.startTiming(); // Paper - timings
                  int k = this.distanceManager.getNaturalSpawnChunkCount();
                  // Paper start - per player mob spawning
-@@ -584,7 +567,6 @@ public class ServerChunkCache extends ChunkSource {
+@@ -551,7 +534,6 @@ public class ServerChunkCache extends ChunkSource {
                  this.level.timings.countNaturalMobs.stopTiming(); // Paper - timings
  
                  this.lastSpawnState = spawnercreature_d;
@@ -723,7 +722,7 @@ index 6e212f672579a3e08dc362c287be59ca5170d717..19625d104b19e02101ee7685a1df5bfd
                  boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && !this.level.players().isEmpty(); // CraftBukkit
  
                  // Paper start - optimise chunk tick iteration
-@@ -690,7 +672,6 @@ public class ServerChunkCache extends ChunkSource {
+@@ -659,7 +641,6 @@ public class ServerChunkCache extends ChunkSource {
                  // Paper end - optimise chunk tick iteration
                  this.level.timings.chunkTicks.stopTiming(); // Paper
  
@@ -731,7 +730,7 @@ index 6e212f672579a3e08dc362c287be59ca5170d717..19625d104b19e02101ee7685a1df5bfd
                  if (flag) {
                      try (co.aikar.timings.Timing ignored = this.level.timings.miscMobSpawning.startTiming()) { // Paper - timings
                      this.level.tickCustomSpawners(this.spawnEnemies, this.spawnFriendlies);
-@@ -698,7 +679,6 @@ public class ServerChunkCache extends ChunkSource {
+@@ -667,7 +648,6 @@ public class ServerChunkCache extends ChunkSource {
                  }
              }
  
@@ -739,7 +738,7 @@ index 6e212f672579a3e08dc362c287be59ca5170d717..19625d104b19e02101ee7685a1df5bfd
              // Paper - optimise chunk tick iteration
                  this.level.timings.broadcastChunkUpdates.startTiming(); // Paper - timing
              // Paper start - optimise chunk tick iteration
-@@ -716,8 +696,6 @@ public class ServerChunkCache extends ChunkSource {
+@@ -685,8 +665,6 @@ public class ServerChunkCache extends ChunkSource {
              // Paper end - optimise chunk tick iteration
                  this.level.timings.broadcastChunkUpdates.stopTiming(); // Paper - timing
              // Paper - optimise chunk tick iteration
@@ -748,7 +747,7 @@ index 6e212f672579a3e08dc362c287be59ca5170d717..19625d104b19e02101ee7685a1df5bfd
          }
      }
  
-@@ -889,7 +867,6 @@ public class ServerChunkCache extends ChunkSource {
+@@ -858,7 +836,6 @@ public class ServerChunkCache extends ChunkSource {
  
          @Override
          protected void doRunTask(Runnable task) {
@@ -968,7 +967,7 @@ index 5a2e9043c671a7274baa9f9944c7db4883844026..7ec3570c1759f9c7f857fcb74cd397fe
  
                  while (iterator.hasNext()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 8efbbd379244e3ed54d4aba199037cc20ccd096a..5ed738854aebc3ca56dfba72e91971593c7a0db9 100644
+index 0eb3384df396508c3d26d1e155cd0e6d64251346..abd5b168f570fd3b9b5ac559ae4f399ab8835686 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -1212,7 +1212,6 @@ public class ServerPlayer extends Player {
@@ -997,10 +996,10 @@ index 8efbbd379244e3ed54d4aba199037cc20ccd096a..5ed738854aebc3ca56dfba72e9197159
                  this.connection.send(new ClientboundPlayerAbilitiesPacket(this.getAbilities()));
                  playerlist.sendLevelInfo(this, worldserver);
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 4a712f5fc4f0b4a4434ae808c989113bee8d8634..f5d81da99a47fc1237a670d0000f19f1d61a5160 100644
+index d28d0ef6105ddeb562ddf31ae9088739856941fc..9e014a140262f5dfcdcb9b21afd18ca275930bb2 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-@@ -190,7 +190,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -203,7 +203,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      }
  
      protected void keepConnectionAlive() {
@@ -1008,7 +1007,7 @@ index 4a712f5fc4f0b4a4434ae808c989113bee8d8634..f5d81da99a47fc1237a670d0000f19f1
          // Paper Start - give clients a longer time to respond to pings as per pre 1.12.2 timings
          // This should effectively place the keepalive handling back to "as it was" before 1.12.2
          long currentTime = Util.getMillis();
-@@ -211,7 +210,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -224,7 +223,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          }
          // Paper end
  
@@ -1097,10 +1096,10 @@ index 7ab57748b2f2aea1003d9b7e70e76c372aa1e432..47e75ec4a01f8a456ec6ebc13031c1f0
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b57642236 100644
+index 0c46a4aeafd03fbbfd590b0362d41bf2b1d5ca74..f7a8180e1cf5f48515285c4b90656bbb2fd473d4 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -816,7 +816,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -815,7 +815,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      // CraftBukkit end
  
      public void baseTick() {
@@ -1108,7 +1107,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
          if (firstTick && this instanceof net.minecraft.world.entity.NeutralMob neutralMob) neutralMob.tickInitialPersistentAnger(level); // Paper - Update last hurt when ticking
          this.feetBlockState = null;
          if (this.isPassenger() && this.getVehicle().isRemoved()) {
-@@ -877,7 +876,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -876,7 +875,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
          }
  
          this.firstTick = false;
@@ -1116,7 +1115,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
      }
  
      public void setSharedFlagOnFire(boolean onFire) {
-@@ -1096,7 +1094,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1095,7 +1093,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                  }
              }
  
@@ -1124,7 +1123,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
              if (this.stuckSpeedMultiplier.lengthSqr() > 1.0E-7D) {
                  movement = movement.multiply(this.stuckSpeedMultiplier);
                  this.stuckSpeedMultiplier = Vec3.ZERO;
-@@ -1105,7 +1102,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1104,7 +1101,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
              // Paper start - ignore movement changes while inactive.
              if (isTemporarilyActive && !(this instanceof ItemEntity || this instanceof net.minecraft.world.entity.vehicle.AbstractMinecart) && movement == getDeltaMovement() && movementType == MoverType.SELF) {
                  setDeltaMovement(Vec3.ZERO);
@@ -1132,7 +1131,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
                  return;
              }
              // Paper end
-@@ -1126,8 +1122,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1125,8 +1121,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                  this.setPos(this.getX() + vec3d1.x, this.getY() + vec3d1.y, this.getZ() + vec3d1.z);
              }
  
@@ -1141,7 +1140,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
              boolean flag = !Mth.equal(movement.x, vec3d1.x);
              boolean flag1 = !Mth.equal(movement.z, vec3d1.z);
  
-@@ -1145,9 +1139,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1144,9 +1138,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
              BlockState iblockdata = this.level().getBlockState(blockposition);
  
              this.checkFallDamage(vec3d1.y, this.onGround(), iblockdata, blockposition);
@@ -1152,7 +1151,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
                  if (this.horizontalCollision) {
                      Vec3 vec3d2 = this.getDeltaMovement();
  
-@@ -1283,8 +1275,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1282,8 +1274,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                  if (this.isOnFire() && (this.isInPowderSnow || this.isInWaterRainOrBubble())) {
                      this.setRemainingFireTicks(-this.getFireImmuneTicks());
                  }
@@ -1161,7 +1160,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
              }
          }
          // Paper start - detailed watchdog information
-@@ -3143,7 +3133,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -3138,7 +3128,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                  ServerLevel worldserver1 = minecraftserver.getLevel(resourcekey);
  
                  if (true && !this.isPassenger() && this.portalTime++ >= i) { // CraftBukkit
@@ -1169,7 +1168,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
                      this.portalTime = i;
                      // Paper start
                      io.papermc.paper.event.entity.EntityPortalReadyEvent event = new io.papermc.paper.event.entity.EntityPortalReadyEvent(this.getBukkitEntity(), worldserver1 == null ? null : worldserver1.getWorld(), org.bukkit.PortalType.NETHER);
-@@ -3161,7 +3150,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -3156,7 +3145,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                      }
                      } // Paper
                      // CraftBukkit end
@@ -1177,7 +1176,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
                  }
  
                  this.isInsidePortal = false;
-@@ -3636,14 +3624,12 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -3631,14 +3619,12 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
          }
          // Paper end
          if (this.level() instanceof ServerLevel && !this.isRemoved()) {
@@ -1192,7 +1191,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
              PortalInfo shapedetectorshape = (location == null) ? this.findDimensionEntryPoint(worldserver) : new PortalInfo(new Vec3(location.x(), location.y(), location.z()), Vec3.ZERO, this.yRot, this.xRot, worldserver, null); // CraftBukkit
  
              if (shapedetectorshape == null) {
-@@ -3682,7 +3668,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -3677,7 +3663,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                  this.unRide();
                  // CraftBukkit end
  
@@ -1200,7 +1199,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
                  // Paper start - Change lead drop timing to prevent dupe
                  if (this instanceof Mob) {
                      ((Mob) this).dropLeash(true, true); // Paper drop lead
-@@ -3709,10 +3694,8 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -3704,10 +3689,8 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                  }
  
                  this.removeAfterChangingDimensions();
@@ -1212,7 +1211,7 @@ index 9abe817ae202edaa2d88cd59ae5c7db0b1c634be..58d608a04183041e9b0cfabb1ef4a57b
              }
          } else {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 45b1a182acf6b2aef40b714d31ca125d8f74619a..f0cc2a0ce82071cf04fa5e885943cc72c44e1eab 100644
+index bc908b75cb99536df658281ae7f8b4eeedbbedc9..c4c7970e3dce12985c401d23d288bd8d9bca6913 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -404,7 +404,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1740,7 +1739,7 @@ index 9442f58dff89ec843c321533965fbee2727d02f8..3fde433edfd8835bf162cf39dd9999aa
  
          if (this.fire) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index d58865422bc63a55cb42acc7ec59d4310d34bfed..8c3c92e2a666bcfb88aaff4ca36507e6ea20afc5 100644
+index 88ffde2dbbb94f1c542f6040fc9983d20e7af3b7..21baa628ebb9a9e5263c79bbc8cb495ce998ef3a 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -132,7 +132,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
@@ -1778,7 +1777,7 @@ index d58865422bc63a55cb42acc7ec59d4310d34bfed..8c3c92e2a666bcfb88aaff4ca36507e6
          this.timings.tileEntityPending.startTiming(); // Spigot
          this.tickingBlockEntities = true;
          if (!this.pendingBlockEntityTickers.isEmpty()) {
-@@ -1310,7 +1305,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1304,7 +1299,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          this.timings.tileEntityTick.stopTiming(); // Spigot
          this.tickingBlockEntities = false;
          co.aikar.timings.TimingHistory.tileEntityTicks += this.blockEntityTickers.size(); // Paper
@@ -1786,7 +1785,7 @@ index d58865422bc63a55cb42acc7ec59d4310d34bfed..8c3c92e2a666bcfb88aaff4ca36507e6
          this.spigotConfig.currentPrimedTnt = 0; // Spigot
      }
  
-@@ -1520,7 +1514,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1514,7 +1508,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      @Override
      public List<Entity> getEntities(@Nullable Entity except, AABB box, Predicate<? super Entity> predicate) {
@@ -1794,7 +1793,7 @@ index d58865422bc63a55cb42acc7ec59d4310d34bfed..8c3c92e2a666bcfb88aaff4ca36507e6
          List<Entity> list = Lists.newArrayList();
          ((ServerLevel)this).getEntityLookup().getEntities(except, box, list, predicate); // Paper - optimise this call
          return list;
-@@ -1539,7 +1532,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1533,7 +1526,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      public <T extends Entity> void getEntities(EntityTypeTest<Entity, T> filter, AABB box, Predicate<? super T> predicate, List<? super T> result, int limit) {
@@ -1802,7 +1801,7 @@ index d58865422bc63a55cb42acc7ec59d4310d34bfed..8c3c92e2a666bcfb88aaff4ca36507e6
          // Paper start - optimise this call
          //TODO use limit
          if (filter instanceof net.minecraft.world.entity.EntityType entityTypeTest) {
-@@ -1798,11 +1790,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1792,11 +1784,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      public ProfilerFiller getProfiler() {

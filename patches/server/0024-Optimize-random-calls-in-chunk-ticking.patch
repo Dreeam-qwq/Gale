@@ -52,17 +52,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 19625d104b19e02101ee7685a1df5bfd0c905296..643143fa45c7c480e4bbd3d03e1b7cc19e2969e2 100644
+index 7bde3392d46fb1be3d04db97a5ec02ecc4a5ca0a..0466ad371e26fb49a7a58f12f1d5e2ddafa0c6c7 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -603,6 +603,7 @@ public class ServerChunkCache extends ChunkSource {
+@@ -571,6 +571,7 @@ public class ServerChunkCache extends ChunkSource {
                      player.playerNaturallySpawnedEvent = event;
                  }
                  // Paper end - optimise chunk tick iteration
 +                this.level.resetIceAndSnowTick(); // Gale - Airplane - optimize random calls in chunk ticking - reset ice & snow tick random
                  int l = this.level.getGameRules().getInt(GameRules.RULE_RANDOMTICKING);
                  boolean flag1 = this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) != 0L && this.level.getLevelData().getGameTime() % this.level.ticksPerSpawnCategory.getLong(org.bukkit.entity.SpawnCategory.ANIMAL) == 0L; // CraftBukkit
- 
+                 // Paper - optimise chunk tick iteration
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
 index e38cd60ba31129ed53c8c3839fedd6f77440f4b1..be1dbe955461823de7b3dbf032d399837be62ea9 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java

@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index bf06632144b4f1126f48d75f5e38d96be4d83167..53275a3aef1f4c03324a368a9fef34ffc6307a7f 100644
+index df46148b9ad0588353969f70d93124f47ed3b2f0..a2d778cd804362e03ddc73d5e35569c3d5b8d187 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -1235,9 +1235,19 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1234,9 +1234,19 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                  }
  
                  this.tryCheckInsideBlocks();
