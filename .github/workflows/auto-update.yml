@@ -71,6 +71,7 @@ jobs:
           if ! git diff --quiet; then
             echo "Writing to repo....."
             git add .
+            chmod +x ./scripts/upstreamCommit.sh
             ./scripts/upstreamCommit.sh --paper $CUR_PAPER_REF
             git push
           else
