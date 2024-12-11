@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/entity/ambient/Bat.java b/src/main/java/net/minecraft/world/entity/ambient/Bat.java
-index dc27ddf5131e7398a5390a5187261d4c7fb6ccaa..c888ca771efa7a570b8302d48e69fbb69bf98bd9 100644
+index dc27ddf5131e7398a5390a5187261d4c7fb6ccaa..13131a24d96094583406329d81bf51bec0d803d5 100644
 --- a/src/main/java/net/minecraft/world/entity/ambient/Bat.java
 +++ b/src/main/java/net/minecraft/world/entity/ambient/Bat.java
-@@ -239,12 +239,60 @@ public class Bat extends AmbientCreature {
+@@ -239,12 +239,66 @@ public class Bat extends AmbientCreature {
          }
      }
  
@@ -46,30 +46,36 @@ index dc27ddf5131e7398a5390a5187261d4c7fb6ccaa..c888ca771efa7a570b8302d48e69fbb6
 +     * Will be 0 while not computed yet.
 +     */
 +    private static long nextHalloweenEnd = 0;
-+    // Gale end - predict Halloween
 +
++    // The Halloween begins at 10/20 0:00, and end with 11/04 0:00
++    // Only when the current Halloween period ends, the `nextHalloweenStart`
++    // and `nextHalloweenEnd` will adjust to the epoch ms of date of next year
++    // These two fields will not change during current Halloween period.
      private static boolean isHalloween() {
 -        LocalDate localdate = LocalDate.now();
 -        int i = localdate.get(ChronoField.DAY_OF_MONTH);
 -        int j = localdate.get(ChronoField.MONTH_OF_YEAR);
-+        // Gale start - predict Halloween
 +        long currentEpochMillis = System.currentTimeMillis();
-+        if (currentEpochMillis >= nextHalloweenEnd) {
+ 
+-        return j == 10 && i >= 20 || j == 11 && i <= 3;
++        if (currentEpochMillis > nextHalloweenEnd) {
 +            // Update prediction
 +
 +            java.time.OffsetDateTime currentDate = java.time.OffsetDateTime.now();
-+            int currentMonthOfYear = currentDate.getMonth().ordinal() + 1; // Same as getValue()
-+            int currentDayOfMonth = currentDate.getDayOfYear();
++            int currentMonthOfYear = currentDate.getMonth().getValue();
++            int currentDayOfMonth = currentDate.getDayOfMonth();
 +
-+            java.time.OffsetDateTime nextHalloweenStartDate = currentDate.withMonth(halloweenStartMonthOfYear).withDayOfMonth(halloweenStartDayOfMonth);
-+            if (currentMonthOfYear > halloweenStartMonthOfYear || (currentMonthOfYear == halloweenStartMonthOfYear && currentDayOfMonth >= halloweenStartDayOfMonth)) {
-+                nextHalloweenStartDate = nextHalloweenStartDate.withYear(nextHalloweenStartDate.getYear() + 1);
++            java.time.OffsetDateTime nextHalloweenStartDate = currentDate.withMonth(halloweenStartMonthOfYear).withDayOfMonth(halloweenStartDayOfMonth)
++                .withHour(0).withMinute(0).withSecond(0).withNano(0); // Adjust to directly start or end at zero o'clock
++
++            if (currentMonthOfYear >= halloweenEndMonthOfYear && currentDayOfMonth >= halloweenEndDayOfMonth) {
++                nextHalloweenStartDate = nextHalloweenStartDate.plusYears(1);
 +            }
- 
--        return j == 10 && i >= 20 || j == 11 && i <= 3;
-+            nextHalloweenStart = nextHalloweenStartDate.toEpochSecond();
-+            nextHalloweenEnd = nextHalloweenStartDate.withMonth(halloweenEndMonthOfYear).withDayOfMonth(halloweenEndDayOfMonth).toEpochSecond();
++
++            nextHalloweenStart = nextHalloweenStartDate.toInstant().toEpochMilli();
++            nextHalloweenEnd = nextHalloweenStartDate.withMonth(halloweenEndMonthOfYear).withDayOfMonth(halloweenEndDayOfMonth).toInstant().toEpochMilli();
 +        }
++
 +        return currentEpochMillis >= nextHalloweenStart;
 +        // Gale end - predict Halloween
      }
