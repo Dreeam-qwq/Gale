@@ -32,7 +32,7 @@ index 5db5ba026462ca642dcee718af732f80fadabef5..cd380ceb40d38acc7eef289ded112593
          for (int i = 0; i < this.getContainerSize(); ++i) {
              ItemStack itemstack = this.getItem(i);
 diff --git a/src/main/java/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java b/src/main/java/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java
-index 8508ac7de8cda3127b73e11ff4aee62502e65ead..73e20e1f7d2bb1cd3d08e6bdca50efac22c9d958 100644
+index 8508ac7de8cda3127b73e11ff4aee62502e65ead..90ae43979e05839d676ab51feb489955ecbee50e 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java
 @@ -17,7 +17,10 @@ import net.minecraft.world.item.ItemStack;
@@ -58,7 +58,7 @@ index 8508ac7de8cda3127b73e11ff4aee62502e65ead..73e20e1f7d2bb1cd3d08e6bdca50efac
              if (villager.getVillagerData().getProfession() == VillagerProfession.FARMER
                  && entity.getInventory().countItem(Items.WHEAT) > Items.WHEAT.getDefaultMaxStackSize() / 2) {
 -                throwHalfStack(entity, ImmutableSet.of(Items.WHEAT), villager);
-+                throwHalfStack(entity, Villager.FOOD_POINTS_KEY_ARRAY, villager); // Gale - optimize villager data storage
++                throwHalfStack(entity, WHEAT_SINGLETON_ARRAY, villager); // Gale - optimize villager data storage
              }
  
 -            if (!this.trades.isEmpty() && entity.getInventory().hasAnyOf(this.trades)) {
