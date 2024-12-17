@@ -47,16 +47,16 @@ index 1d81b2eccaf796922e7645be4e388a44efb807dd..8cc3394f951e1560c6944343724fb0d3
          this.absMoveTo(x, y, z);
          this.absRotateTo(yaw, pitch);
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 9dbcebe04ad9dd2f5558e92e85749c7026f6d428..06c57db4e6c76945cba514fc27828ff96fcd2c10 100644
+index 9dbcebe04ad9dd2f5558e92e85749c7026f6d428..361000909cedb7ae8bfe326e87be750b6916aa62 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
-@@ -1726,13 +1726,29 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1726,13 +1726,28 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
  
      protected void playAttackSound() {}
  
 +    // Gale start - JettPack - optimize sun burn tick - cache eye blockpos
 +    private BlockPos cached_eye_blockpos;
-+    private int cached_position_hashcode;
++    private net.minecraft.world.phys.Vec3 cached_position;
 +    // Gale end - JettPack - optimize sun burn tick - cache eye blockpos
 +
      public boolean isSunBurnTick() {
@@ -64,10 +64,9 @@ index 9dbcebe04ad9dd2f5558e92e85749c7026f6d428..06c57db4e6c76945cba514fc27828ff9
 -            float f = this.getLightLevelDependentMagicValue();
 -            BlockPos blockposition = BlockPos.containing(this.getX(), this.getEyeY(), this.getZ());
 +            // Gale start - JettPack - optimize sun burn tick - optimizations and cache eye blockpos
-+            int positionHashCode = this.position.hashCode();
-+            if (this.cached_position_hashcode != positionHashCode) {
++            if (this.cached_position != this.position) {
 +                this.cached_eye_blockpos = BlockPos.containing(this.getX(), this.getEyeY(), this.getZ());
-+                this.cached_position_hashcode = positionHashCode;
++                this.cached_position = this.position;
 +            }
 +
 +            float f = this.getLightLevelDependentMagicValue(cached_eye_blockpos); // Pass BlockPos to getBrightness
