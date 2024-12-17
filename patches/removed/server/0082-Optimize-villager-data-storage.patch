@@ -3,6 +3,8 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Sun, 25 Dec 2022 11:20:37 +0100
 Subject: [PATCH] Optimize villager data storage
 
+Removed since Gale 1.21.1, imcompatible with RealisticVillagers
+
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
