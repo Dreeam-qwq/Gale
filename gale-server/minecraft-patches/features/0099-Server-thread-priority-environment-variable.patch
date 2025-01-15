@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index 6ad3cdfd10daebd1920ef54481ce07e3d03f6829..6be2931adb464598e3f3228b647190599c9bca63 100644
+index f33fb9b30863dd8ff7207db905fcfb7547b09383..0da1eeab6a2f8336283a62ebcb3aa0d1b1933c85 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
 @@ -163,6 +163,7 @@ import net.minecraft.world.phys.Vec3;

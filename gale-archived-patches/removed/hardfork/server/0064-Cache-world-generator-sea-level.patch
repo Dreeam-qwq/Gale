@@ -3,6 +3,9 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Thu, 1 Dec 2022 14:18:46 +0100
 Subject: [PATCH] Cache world generator sea level
 
+Removed since 1.21.4 hardfork, as the cache captured the wrong value and caused LeavesMC/Leaves#392.
+Also this opt has been disabled by default in Lithium since 08/12/2022 due to the early access of registry crash.
+
 License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 Gale - https://galemc.org
 
