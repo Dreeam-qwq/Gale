@@ -2,7 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    java
     `maven-publish`
     id("io.papermc.paperweight.patcher") version "2.0.0-beta.14"
 }
@@ -67,11 +66,6 @@ paperweight {
             excludes = setOf("build.gradle.kts")
             patchesDir = file("gale-api/paper-patches") // Gale - build changes
             outputDir = file("paper-api")
-        }
-        patchDir("paperApiGenerator") {
-            upstreamPath = "paper-api-generator"
-            patchesDir = file("gale-api-generator/paper-patches") // Gale - build changes
-            outputDir = file("paper-api-generator")
         }
     }
 }
