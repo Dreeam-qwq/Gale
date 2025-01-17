@@ -44,22 +44,3 @@ index 4e414a78a6acfb90d5e212398617580a3f34be9b..883a47a9ccd75ea124d45beb1645b3f0
          }
  
          return d;
-diff --git a/net/minecraft/world/entity/LivingEntity.java.rej b/net/minecraft/world/entity/LivingEntity.java.rej
-new file mode 100644
-index 0000000000000000000000000000000000000000..a1acc8d7b32caf3eebbbfc1a3058157b69dd74f4
---- /dev/null
-+++ b/net/minecraft/world/entity/LivingEntity.java.rej
-@@ -0,0 +1,13 @@
-+diff a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java	(rejected hunks)
-+@@ -1050,10 +1050,9 @@ public abstract class LivingEntity extends Entity implements Attackable {
-+         }
-+ 
-+         if (entity != null) {
-+-            ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
-+             EntityType<?> entitytypes = entity.getType();
-+ 
-+-            if (entitytypes == EntityType.SKELETON && itemstack.is(Items.SKELETON_SKULL) || entitytypes == EntityType.ZOMBIE && itemstack.is(Items.ZOMBIE_HEAD) || entitytypes == EntityType.PIGLIN && itemstack.is(Items.PIGLIN_HEAD) || entitytypes == EntityType.PIGLIN_BRUTE && itemstack.is(Items.PIGLIN_HEAD) || entitytypes == EntityType.CREEPER && itemstack.is(Items.CREEPER_HEAD)) {
-++            if (entitytypes == EntityType.SKELETON && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.SKELETON_SKULL) || entitytypes == EntityType.ZOMBIE && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.ZOMBIE_HEAD) || entitytypes == EntityType.PIGLIN && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.PIGLIN_HEAD) || entitytypes == EntityType.PIGLIN_BRUTE && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.PIGLIN_HEAD) || entitytypes == EntityType.CREEPER && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.CREEPER_HEAD)) { // Gale - Petal - reduce skull ItemStack lookups for reduced visibility
-+                 d0 *= 0.5D;
-+             }
-+         }
