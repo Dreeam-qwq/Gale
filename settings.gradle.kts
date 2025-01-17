@@ -36,7 +36,7 @@ if (!file(".git").exists()) {
 
 rootProject.name = "gale" // Gale - build changes
 
-for (name in listOf("gale-api", "gale-server",)) { // Gale - build changes
+for (name in listOf("gale-api", "gale-server")) { // Gale - build changes
     val projName = name.lowercase(Locale.ENGLISH)
     include(projName)
     findProject(":$projName")!!.projectDir = file(name)
