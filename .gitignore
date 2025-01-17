@@ -25,6 +25,4 @@ gale-api/build.gradle.kts
 gale-server/build.gradle.kts
 gale-server/src/minecraft
 paper-api
-paper-api-generator
 paper-server
-paper-api-generator.settings.gradle.kts
