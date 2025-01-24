@@ -7,15 +7,14 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 9eecd3a68a36d06c66d5f2cdc98c048fe8737337..a500bb9bc428c5fcefff3950503645a91e5d0161 100644
+index 9196b1e62b328b1e9790b966600aba9681dd0ddc..3a4e3f5b2aec6c53adb9f812552a594a70141c13 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -2407,6 +2407,37 @@ public final class Bukkit {
+@@ -2422,6 +2422,35 @@ public final class Bukkit {
          return server.getTPS();
      }
  
 +    // Gale start - specific interval TPS API
-+
 +    /**
 +     * Gets the average server TPS over the last 1 minute
 +     *
@@ -42,22 +41,20 @@ index 9eecd3a68a36d06c66d5f2cdc98c048fe8737337..a500bb9bc428c5fcefff3950503645a9
 +    public static double get15MinuteTPSAverage() {
 +        return server.get15MinuteTPSAverage();
 +    }
-+
 +    // Gale end - specific interval TPS API
 +
      /**
       * Get a sample of the servers last tick times (in nanos)
       *
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 3d986e21674591f9a04b36231086085232c4d198..e5c767dbcf8f987b4ab3abf631c66830ca2f9858 100644
+index 6442b6d51f6821ff6a703aad1493ad1cafe0d659..45837e97d83d1d636a13920bbba59d7388c16477 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -2095,6 +2095,31 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -2108,6 +2108,29 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
       */
      public double @NotNull [] getTPS();
  
 +    // Gale start - specific interval TPS API
-+
 +    /**
 +     * Gets the average server TPS over the last 1 minute
 +     *
@@ -78,7 +75,6 @@ index 3d986e21674591f9a04b36231086085232c4d198..e5c767dbcf8f987b4ab3abf631c66830
 +     * @return the average server TPS over the last 15 minutes
 +     */
 +    double get15MinuteTPSAverage();
-+
 +    // Gale end - specific interval TPS API
 +
      /**

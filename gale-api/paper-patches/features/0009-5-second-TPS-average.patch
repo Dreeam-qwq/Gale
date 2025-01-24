@@ -37,10 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index a500bb9bc428c5fcefff3950503645a91e5d0161..7d125129860799c523a36ca039d6b34ed4103ffb 100644
+index 3a4e3f5b2aec6c53adb9f812552a594a70141c13..d975042cdca36112c918b9617bd5ed335c47cd20 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -2407,8 +2407,30 @@ public final class Bukkit {
+@@ -2422,7 +2422,30 @@ public final class Bukkit {
          return server.getTPS();
      }
  
@@ -56,7 +56,7 @@ index a500bb9bc428c5fcefff3950503645a91e5d0161..7d125129860799c523a36ca039d6b34e
 +    // Gale end - Purpur - 5 second TPS average
 +
      // Gale start - specific interval TPS API
- 
++
 +    // Gale start - Purpur - 5 second TPS average
 +    /**
 +     * Gets the average server TPS over the last 5 seconds
@@ -72,10 +72,10 @@ index a500bb9bc428c5fcefff3950503645a91e5d0161..7d125129860799c523a36ca039d6b34e
       * Gets the average server TPS over the last 1 minute
       *
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index e5c767dbcf8f987b4ab3abf631c66830ca2f9858..cbc50c83c1ad3b271fbeba8cb921eb95cae61e16 100644
+index 45837e97d83d1d636a13920bbba59d7388c16477..5117891d90162db55718839b71016c25f2acd88c 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -2095,8 +2095,27 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -2108,7 +2108,27 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
       */
      public double @NotNull [] getTPS();
  
@@ -90,7 +90,7 @@ index e5c767dbcf8f987b4ab3abf631c66830ca2f9858..cbc50c83c1ad3b271fbeba8cb921eb95
 +    // Gale end - Purpur - 5 second TPS average
 +
      // Gale start - specific interval TPS API
- 
++
 +    // Gale start - Purpur - 5 second TPS average
 +    /**
 +     * Gets the average server TPS over the last 5 seconds

@@ -18,7 +18,7 @@
 build
 
 # Gale
-build-data
+build-data/dev-imports.txt
 run
 
 gale-api/build.gradle.kts
