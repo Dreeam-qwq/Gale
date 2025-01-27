@@ -16,10 +16,9 @@ PS1="$"
 
 paperHash=$(git diff gradle.properties | awk '/^-paperRef =/{print $NF}')
 
-if [[ "$(uname)" != "Darwin" ]]; then
-TEMP=$(getopt --long paper: -o "" -- "$@")
-eval set -- "$TEMP"
-fi
+# Useless params standardize
+# TEMP=$(getopt --long paper: -o "" -- "$@")
+# eval set -- "$TEMP"
 
 while true; do
     case "$1" in
