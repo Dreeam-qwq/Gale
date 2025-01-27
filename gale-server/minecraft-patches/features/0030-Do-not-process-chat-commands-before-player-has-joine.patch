@@ -13,7 +13,7 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
-index b349da64650f914db8212e19b3c05ba92e74a1a3..9c2f9bc5e5bef96fb7ad0f04aa1cb72db9d10638 100644
+index dff1e84584c66045c58f0a6fe8102a27a54716a6..6efb636b0a4443daa4861d35116905d54549e864 100644
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
 @@ -386,6 +386,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
@@ -25,10 +25,10 @@ index b349da64650f914db8212e19b3c05ba92e74a1a3..9c2f9bc5e5bef96fb7ad0f04aa1cb72d
      public boolean isRealPlayer; // Paper
      public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index dd8bb7d929ff5e0ea6e4d250899896c66ae4f707..6f025ce8785feb5901ac0bf92fac950d87c1285d 100644
+index 6dd3de8544c9d62bc3af1bef535a11b9878d1b75..f4708bd41f4036faf48e3916ec5675ec43eff394 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2325,7 +2325,7 @@ public class ServerGamePacketListenerImpl
+@@ -2332,7 +2332,7 @@ public class ServerGamePacketListenerImpl
              this.disconnectAsync(Component.translatable("multiplayer.disconnect.illegal_characters"), org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_CHARACTERS); // Paper - add proper async disconnect
          } else if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
              this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
@@ -38,7 +38,7 @@ index dd8bb7d929ff5e0ea6e4d250899896c66ae4f707..6f025ce8785feb5901ac0bf92fac950d
              // CraftBukkit start
              if (sync) {
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index 03feaf0adb8ee87e33744a4615dc2507a02f92d7..23645f84f705bfbea29d7eaeaca84d0b115aae5a 100644
+index fad7f9a80ad79e377d76d1c3a054300183f4a5b6..9b17f42afc0e3e3629382c000d7a4414053783f3 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
 @@ -330,6 +330,8 @@ public abstract class PlayerList {
