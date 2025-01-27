@@ -37,16 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index b4258db165b509d54b9c15a661c5b66ca984ffb3..af0f608e05262cbb118d92786bcdba9ae834a809 100644
+index 7d0bbbe0f902a27940bde1cbd0f2a8dbfcd22202..2b4431fd68054bfe8d216fd5461b1c56c692f48b 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -109,11 +109,12 @@ public abstract class PlayerList {
-     public static final Component CHAT_FILTERED_FULL = Component.translatable("chat.filtered_full");
-     public static final Component DUPLICATE_LOGIN_DISCONNECT_MESSAGE = Component.translatable("multiplayer.disconnect.duplicate_login");
-     private static final Logger LOGGER = LogUtils.getLogger();
--    private static final int SEND_PLAYER_INFO_INTERVAL = 600;
-+    public static final int SEND_PLAYER_INFO_INTERVAL = 600; // Gale - Purpur - spread out sending all player info - private -> public
-     private static final SimpleDateFormat BAN_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+@@ -114,6 +114,7 @@ public abstract class PlayerList {
      private final MinecraftServer server;
      public final List<ServerPlayer> players = new java.util.concurrent.CopyOnWriteArrayList(); // CraftBukkit - ArrayList -> CopyOnWriteArrayList: Iterator safety
      private final Map<UUID, ServerPlayer> playersByUUID = Maps.newHashMap();
@@ -86,7 +80,7 @@ index b4258db165b509d54b9c15a661c5b66ca984ffb3..af0f608e05262cbb118d92786bcdba9a
          }
          // serverPlayer.initInventoryMenu();
          serverPlayer.setHealth(serverPlayer.getHealth());
-@@ -890,18 +895,52 @@ public abstract class PlayerList {
+@@ -890,18 +895,58 @@ public abstract class PlayerList {
      }
  
      public void tick() {
@@ -96,6 +90,7 @@ index b4258db165b509d54b9c15a661c5b66ca984ffb3..af0f608e05262cbb118d92786bcdba9a
 -                final ServerPlayer target = this.players.get(i);
 +        // Gale start - Purpur - spread out sending all player info
 +        ServerPlayer[] sendAllPlayerInfoBucket = this.sendAllPlayerInfoBuckets[this.sendAllPlayerInfoIn];
++
 +        if (sendAllPlayerInfoBucket != null) {
 +            for (ServerPlayer target : sendAllPlayerInfoBucket) {
 +                // Gale end - Purpur - spread out sending all player info
@@ -105,6 +100,7 @@ index b4258db165b509d54b9c15a661c5b66ca984ffb3..af0f608e05262cbb118d92786bcdba9a
 -            // CraftBukkit end
 +            // Gale start - Purpur - spread out sending all player info
 +        }
++
 +        if (++this.sendAllPlayerInfoIn >= SEND_PLAYER_INFO_INTERVAL) {
 +            // Gale end - Purpur - spread out sending all player info
              this.sendAllPlayerInfoIn = 0;
@@ -114,6 +110,7 @@ index b4258db165b509d54b9c15a661c5b66ca984ffb3..af0f608e05262cbb118d92786bcdba9a
 +    // Gale start - Purpur - spread out sending all player info
 +    private void addToSendAllPlayerInfoBuckets(ServerPlayer player) {
 +        ServerPlayer[] sendAllPlayerInfoBucket = this.sendAllPlayerInfoBuckets[player.sendAllPlayerInfoBucketIndex];
++
 +        if (sendAllPlayerInfoBucket == null) {
 +            this.sendAllPlayerInfoBuckets[player.sendAllPlayerInfoBucketIndex] = new ServerPlayer[]{player};
 +        } else {
@@ -124,13 +121,16 @@ index b4258db165b509d54b9c15a661c5b66ca984ffb3..af0f608e05262cbb118d92786bcdba9a
 +
 +    private void removeFromSendAllPlayerInfoBuckets(ServerPlayer player) {
 +        ServerPlayer[] sendAllPlayerInfoBucket = this.sendAllPlayerInfoBuckets[player.sendAllPlayerInfoBucketIndex];
++
 +        if (sendAllPlayerInfoBucket != null) {
 +            if (sendAllPlayerInfoBucket.length == 1) {
 +                if (sendAllPlayerInfoBucket[0] == player) {
 +                    this.sendAllPlayerInfoBuckets[player.sendAllPlayerInfoBucketIndex] = null;
 +                }
++
 +                return;
 +            }
++
 +            for (int i = 0; i < sendAllPlayerInfoBucket.length; i++) {
 +                if (sendAllPlayerInfoBucket[i] == player) {
 +                    sendAllPlayerInfoBucket[i] = sendAllPlayerInfoBucket[sendAllPlayerInfoBucket.length - 1];

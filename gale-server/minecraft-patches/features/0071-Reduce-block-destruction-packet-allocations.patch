@@ -13,15 +13,16 @@ As part of: SportPaper (https://github.com/Electroid/SportPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index c697576d3ae22fbb7ae869fa099bffc8ac5cb2e5..ba0b5961535f0dbffda5216a6e4657ea85f30eb7 100644
+index c697576d3ae22fbb7ae869fa099bffc8ac5cb2e5..7c9496e8564c2464e79661153fd295bb027b7bdb 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -1559,6 +1559,14 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -1559,6 +1559,15 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
  
      @Override
      public void destroyBlockProgress(int breakerId, BlockPos pos, int progress) {
 +        // Gale start - SportPaper - reduce block destruction packet allocations
 +        var players = this.server.getPlayerList().getPlayers();
++
 +        if (players.isEmpty()) {
 +            return;
 +        }
@@ -31,7 +32,7 @@ index c697576d3ae22fbb7ae869fa099bffc8ac5cb2e5..ba0b5961535f0dbffda5216a6e4657ea
          // CraftBukkit start
          Player breakerPlayer = null;
          Entity entity = this.getEntity(breakerId);
-@@ -1575,7 +1583,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -1575,7 +1584,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
                  .callEvent();
          }
          // Paper end - Add BlockBreakProgressUpdateEvent
@@ -40,7 +41,7 @@ index c697576d3ae22fbb7ae869fa099bffc8ac5cb2e5..ba0b5961535f0dbffda5216a6e4657ea
              if (serverPlayer != null && serverPlayer.level() == this && serverPlayer.getId() != breakerId) {
                  double d = pos.getX() - serverPlayer.getX();
                  double d1 = pos.getY() - serverPlayer.getY();
-@@ -1586,7 +1594,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -1586,7 +1595,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
                  }
                  // CraftBukkit end
                  if (d * d + d1 * d1 + d2 * d2 < 1024.0) {

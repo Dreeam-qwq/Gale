@@ -14,10 +14,10 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/net/minecraft/world/level/EntityBasedExplosionDamageCalculator.java b/net/minecraft/world/level/EntityBasedExplosionDamageCalculator.java
-index 52cb2dcd714cf8c16f167466333eeb923e4ff183..9661def1311102bbb7e8afdd69f5484320e58d01 100644
+index 52cb2dcd714cf8c16f167466333eeb923e4ff183..af9d8f5988431eaf82da6a564c19a7a359a693d0 100644
 --- a/net/minecraft/world/level/EntityBasedExplosionDamageCalculator.java
 +++ b/net/minecraft/world/level/EntityBasedExplosionDamageCalculator.java
-@@ -15,8 +15,17 @@ public class EntityBasedExplosionDamageCalculator extends ExplosionDamageCalcula
+@@ -15,8 +15,20 @@ public class EntityBasedExplosionDamageCalculator extends ExplosionDamageCalcula
  
      @Override
      public Optional<Float> getBlockExplosionResistance(Explosion explosion, BlockGetter reader, BlockPos pos, BlockState state, FluidState fluid) {
@@ -25,13 +25,16 @@ index 52cb2dcd714cf8c16f167466333eeb923e4ff183..9661def1311102bbb7e8afdd69f54843
 -            .map(resistance -> this.source.getBlockExplosionResistance(explosion, reader, pos, state, fluid, resistance));
 +        // Gale start - Lithium - reduce lambda and Optional allocation in EntityBasedExplosionDamageCalculator
 +        Optional<Float> optionalBlastResistance = super.getBlockExplosionResistance(explosion, reader, pos, state, fluid);
++
 +        if (optionalBlastResistance.isPresent()) {
 +            float resistance = optionalBlastResistance.get();
 +            float effectiveExplosionResistance = this.source.getBlockExplosionResistance(explosion, reader, pos, state, fluid, resistance);
++
 +            if (effectiveExplosionResistance != resistance) {
 +                return Optional.of(effectiveExplosionResistance);
 +            }
 +        }
++
 +        return optionalBlastResistance;
 +        // Gale end - Lithium - reduce lambda and Optional allocation in EntityBasedExplosionDamageCalculator
      }

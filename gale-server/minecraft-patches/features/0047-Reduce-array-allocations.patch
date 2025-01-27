@@ -13,7 +13,7 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java b/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java
-index d21ce54ebb5724c04eadf56a2cde701d5eeb5db2..848374fa7383d6a82c33dad03deb0e97eca97d23 100644
+index d21ce54ebb5724c04eadf56a2cde701d5eeb5db2..b6af8da084c83ee38bb3ecea6a98feb0c1c74d2a 100644
 --- a/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java
 +++ b/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java
 @@ -378,7 +378,6 @@ public final class ChunkEntitySlices {
@@ -24,17 +24,15 @@ index d21ce54ebb5724c04eadf56a2cde701d5eeb5db2..848374fa7383d6a82c33dad03deb0e97
          private static final int DEFAULT_CAPACITY = 4;
  
          private E[] storage;
-@@ -389,8 +388,8 @@ public final class ChunkEntitySlices {
+@@ -389,7 +388,7 @@ public final class ChunkEntitySlices {
          }
  
          public BasicEntityList(final int cap) {
 -            this.storage = (E[])(cap <= 0 ? EMPTY : new Entity[cap]);
--        }
 +            this.storage = (E[])(cap <= 0 ? me.titaniumtown.ArrayConstants.emptyEntityArray : new Entity[cap]); // Gale - JettPack - reduce array allocations
-+        } // Gale - JettPack - reduce array allocations
+         }
  
          public boolean isEmpty() {
-             return this.size == 0;
 @@ -401,7 +400,7 @@ public final class ChunkEntitySlices {
          }
  

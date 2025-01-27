@@ -39,10 +39,10 @@ index df972d47848f9cb74be269019b196c4f2699bfc1..c08a7a2d12fbf67dc675f79e8452b90b
      public void absMoveTo(double x, double y, double z, float yRot, float xRot) {
          this.absMoveTo(x, y, z);
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index 2568a7f2459ed783d4612546b86d46721d48a396..f3eec8b75fcda47e6632a2a7db9a238b515bc8a0 100644
+index 2568a7f2459ed783d4612546b86d46721d48a396..acf2e306ad26e5f0413ee320b9b514b56fefc21b 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
-@@ -1594,20 +1594,30 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1594,20 +1594,32 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
      protected void playAttackSound() {
      }
  
@@ -73,7 +73,9 @@ index 2568a7f2459ed783d4612546b86d46721d48a396..f3eec8b75fcda47e6632a2a7db9a238b
 +            if (lightLevelDependentMagicValue <= 0.5F) return false;
 +            if (this.random.nextFloat() * 30.0F >= (lightLevelDependentMagicValue - 0.4F) * 2.0F) return false;
 +            // Gale end - JettPack - optimize sun burn tick - optimizations and cache eye blockpos
++
 +            boolean flag = this.isInWaterRainOrBubble() || this.isInPowderSnow || this.wasInPowderSnow;
++
 +            return !flag && this.level().canSeeSky(this.cached_eye_blockpos); // Gale - JettPack - optimize sun burn tick - optimizations and cache eye blockpos
          }
  

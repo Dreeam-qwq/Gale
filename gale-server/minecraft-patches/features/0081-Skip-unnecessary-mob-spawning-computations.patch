@@ -13,10 +13,10 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..b6127fff62c49809cfa54e39a35c89f45f46c66c 100644
+index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..0e298479c91a2789b3d808d512ec5210dabcbb06 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
-@@ -550,9 +550,14 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -550,9 +550,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
      }
  
      private void tickChunks(long timeInhabited, List<LevelChunk> chunks) { // Gale - Purpur - remove vanilla profiler
@@ -24,6 +24,7 @@ index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..b6127fff62c49809cfa54e39a35c89f4
 +        NaturalSpawner.SpawnState spawnState; // moved down
 +        final boolean _boolean = this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && !this.level.players().isEmpty(); // CraftBukkit
 +        boolean flagAndHasNaturalSpawn = _boolean && this.anySpawnCategoryIsSpawnedThisTick();
++
 +        if (flagAndHasNaturalSpawn) {
 +            // Gale end - MultiPaper - skip unnecessary mob spawning computations
          int naturalSpawnChunkCount = this.distanceManager.getNaturalSpawnChunkCount();
@@ -32,7 +33,7 @@ index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..b6127fff62c49809cfa54e39a35c89f4
          if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
              // re-set mob counts
              for (ServerPlayer player : this.level.players) {
-@@ -574,10 +579,14 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -574,10 +580,14 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          }
          // Paper end - Optional per player mob spawns
          this.lastSpawnState = spawnState;
@@ -49,7 +50,7 @@ index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..b6127fff62c49809cfa54e39a35c89f4
              // Paper start - PlayerNaturallySpawnCreaturesEvent
              for (ServerPlayer entityPlayer : this.level.players()) {
                  int chunkRange = Math.min(level.spigotConfig.mobSpawnRange, entityPlayer.getBukkitEntity().getViewDistance());
-@@ -609,6 +618,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -609,6 +619,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          }
      }
  

@@ -43,28 +43,6 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
 
         }
 
-        // Gale start - xor-shift random
-        public UseXorShiftRandom useXorShiftRandom;
-        public class UseXorShiftRandom extends ConfigurationPart {
-
-            public boolean autoReplenishLootableRefill = true;
-            public boolean elytraFireworkSpeed = true;
-            public boolean entityWakeUpDuration = true;
-            public boolean lightningRandomTick = true;
-
-            @Setting("generate-tree-with-bukkit-api")
-            public boolean generateTreeWithBukkitAPI = true;
-
-            @PostProcess
-            public void postProcess() {
-                com.destroystokyo.paper.loottable.PaperLootableInventoryData.RANDOM = autoReplenishLootableRefill ? new org.galemc.gale.random.XorShiftRandom() : new Random();
-                io.papermc.paper.entity.activation.ActivationRange.wakeUpDurationRandom = entityWakeUpDuration ? new org.galemc.gale.random.XorShiftRandom() : new Random();
-                org.bukkit.craftbukkit.CraftWorld.rand = generateTreeWithBukkitAPI ? new org.galemc.gale.random.XorShiftRandom() : new Random();
-            }
-
-        }
-        // Gale end - xor-shift random
-
     }
 
     public GameplayMechanics gameplayMechanics;

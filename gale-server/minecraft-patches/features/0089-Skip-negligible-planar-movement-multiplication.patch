@@ -7,15 +7,16 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 295dc5f9f7d8765d345e1c543c7ffea5baaf3cfc..985581d3b289911e4d2509a1a2e08f9dbf957e54 100644
+index 295dc5f9f7d8765d345e1c543c7ffea5baaf3cfc..7cbeb351d40245a159bacc8cc089957a95d095e9 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
-@@ -1212,8 +1212,17 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1212,8 +1212,18 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      }
                  }
  
 +                // Gale start - skip negligible planar movement multiplication
 +                Vec3 oldDeltaMovement = this.getDeltaMovement();
++
 +                if (oldDeltaMovement.x < -1e-6 || oldDeltaMovement.x > 1e-6 || oldDeltaMovement.z < -1e-6 || oldDeltaMovement.z > 1e-6) {
 +                    // Gale end - skip negligible planar movement multiplication
                  float blockSpeedFactor = this.getBlockSpeedFactor();

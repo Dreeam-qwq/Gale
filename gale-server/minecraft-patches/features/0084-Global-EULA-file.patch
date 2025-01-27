@@ -23,10 +23,10 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/net/minecraft/server/Eula.java b/net/minecraft/server/Eula.java
-index 1f0413214f54e9a47f53c623484d6882c85f54c9..e7db86ad7b0991dcfab101e0a6bb7fb279af3258 100644
+index 1f0413214f54e9a47f53c623484d6882c85f54c9..2ffd2ee5846c35b0394230116334518ba95ed409 100644
 --- a/net/minecraft/server/Eula.java
 +++ b/net/minecraft/server/Eula.java
-@@ -17,13 +17,29 @@ public class Eula {
+@@ -17,13 +17,31 @@ public class Eula {
  
      public Eula(Path file) {
          this.file = file;
@@ -42,10 +42,12 @@ index 1f0413214f54e9a47f53c623484d6882c85f54c9..e7db86ad7b0991dcfab101e0a6bb7fb2
 +    private boolean readGlobalFile() {
 +        try {
 +            Path globalFile = Path.of(System.getProperty("user.home"), "eula.txt");
++
 +            if (globalFile.toFile().exists()) {
 +                return readFile(globalFile);
 +            }
 +        } catch (Throwable ignored) {}
++
 +        return false;
 +    }
 +
@@ -58,7 +60,7 @@ index 1f0413214f54e9a47f53c623484d6882c85f54c9..e7db86ad7b0991dcfab101e0a6bb7fb2
                  Properties map = new Properties();
                  map.load(inputStream);
                  var3 = Boolean.parseBoolean(map.getProperty("eula", "false"));
-@@ -31,8 +47,10 @@ public class Eula {
+@@ -31,8 +49,10 @@ public class Eula {
  
              return var3;
          } catch (Exception var6) {

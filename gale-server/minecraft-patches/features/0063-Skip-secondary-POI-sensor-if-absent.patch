@@ -17,15 +17,16 @@ Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 villagers that have no secondary POI (farmland) do not search for it
 
 diff --git a/net/minecraft/world/entity/ai/sensing/SecondaryPoiSensor.java b/net/minecraft/world/entity/ai/sensing/SecondaryPoiSensor.java
-index 6b99afb4f237b5d6def98f3e03492975b795bc95..05c664732adfca7d18bfcbebae9bb455f001aa93 100644
+index 6b99afb4f237b5d6def98f3e03492975b795bc95..d9318a5a9eb3de89f48efa23b944c6d9e2ba37d1 100644
 --- a/net/minecraft/world/entity/ai/sensing/SecondaryPoiSensor.java
 +++ b/net/minecraft/world/entity/ai/sensing/SecondaryPoiSensor.java
-@@ -22,6 +22,13 @@ public class SecondaryPoiSensor extends Sensor<Villager> {
+@@ -22,6 +22,14 @@ public class SecondaryPoiSensor extends Sensor<Villager> {
  
      @Override
      protected void doTick(ServerLevel level, Villager entity) {
 +        // Gale start - Lithium - skip secondary POI sensor if absent
 +        var secondaryPoi = entity.getVillagerData().getProfession().secondaryPoi();
++
 +        if (secondaryPoi.isEmpty()) {
 +            entity.getBrain().eraseMemory(MemoryModuleType.SECONDARY_JOB_SITE);
 +            return;

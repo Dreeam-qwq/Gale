@@ -18,10 +18,10 @@ this patch is focused around the sensors used for ai
 delete the line of sight cache less often and use a faster nearby comparison
 
 diff --git a/net/minecraft/world/entity/ai/sensing/Sensing.java b/net/minecraft/world/entity/ai/sensing/Sensing.java
-index e17b1a2a95975d1eae5adaa679e027b9181dddbd..9a2c3a8ee9b0f863bf2761901a7550ff71b58acc 100644
+index e17b1a2a95975d1eae5adaa679e027b9181dddbd..cc25f5838aec5ed9fca2fb8b0322fafad9397a46 100644
 --- a/net/minecraft/world/entity/ai/sensing/Sensing.java
 +++ b/net/minecraft/world/entity/ai/sensing/Sensing.java
-@@ -7,33 +7,70 @@ import net.minecraft.world.entity.Mob;
+@@ -7,33 +7,79 @@ import net.minecraft.world.entity.Mob;
  
  public class Sensing {
      private final Mob mob;
@@ -41,10 +41,12 @@ index e17b1a2a95975d1eae5adaa679e027b9181dddbd..9a2c3a8ee9b0f863bf2761901a7550ff
          this.mob = mob;
 +        // Gale start - Petal - reduce line of sight updates - expiring entity id lists
 +        int updateLineOfSightInterval = org.galemc.gale.configuration.GaleGlobalConfiguration.get().smallOptimizations.reducedIntervals.updateEntityLineOfSight;
++
 +        if (updateLineOfSightInterval <= 1) {
 +            this.expiring = null;
 +        } else {
 +            this.expiring = new it.unimi.dsi.fastutil.ints.IntList[updateLineOfSightInterval];
++
 +            for (int i = 0; i < updateLineOfSightInterval; i++) {
 +                this.expiring[i] = new it.unimi.dsi.fastutil.ints.IntArrayList(0);
 +            }
@@ -59,13 +61,18 @@ index e17b1a2a95975d1eae5adaa679e027b9181dddbd..9a2c3a8ee9b0f863bf2761901a7550ff
 +            // Gale start - Petal - reduce line of sight updates
 +        } else {
 +            var expiringNow = this.expiring[this.nextToExpireIndex];
++
 +            expiringNow.forEach(this.seen::remove);
 +            expiringNow.clear();
++
 +            this.currentCacheAddIndex++;
++
 +            if (this.currentCacheAddIndex == this.expiring.length) {
 +                this.currentCacheAddIndex = 0;
 +            }
++
 +            this.nextToExpireIndex++;
++
 +            if (this.nextToExpireIndex == this.expiring.length) {
 +                this.nextToExpireIndex = 0;
 +            }
@@ -78,6 +85,7 @@ index e17b1a2a95975d1eae5adaa679e027b9181dddbd..9a2c3a8ee9b0f863bf2761901a7550ff
 -        if (this.seen.contains(id)) {
 +        // Gale start - Petal - reduce line of sight cache lookups - merge sets
 +        int cached = this.seen.get(id);
++
 +        if (cached == 1) {
 +            // Gale end - Petal - reduce line of sight cache lookups - merge sets
              return true;
@@ -93,6 +101,7 @@ index e17b1a2a95975d1eae5adaa679e027b9181dddbd..9a2c3a8ee9b0f863bf2761901a7550ff
 -                this.unseen.add(id);
 +                this.seen.put(id, 2); // Gale - Petal - reduce line of sight cache lookups - merge sets
 +            }
++
 +            // Gale start - Petal - reduce line of sight updates
 +            if (this.expiring != null) {
 +                this.expiring[this.currentCacheAddIndex].add(id);

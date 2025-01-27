@@ -28,10 +28,10 @@ index bbcfb7b535514d8e394b31f74d2bbc2ba90e7498..55c05f5e8e5045292f77621fed78a049
          return this.chunkPosition;
      }
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 830ae2b569b533f2ded23826c48727f1d7fd0272..062e83860a3f9e3a40c513ca389d628ba936f465 100644
+index 830ae2b569b533f2ded23826c48727f1d7fd0272..b242b9b6c1f798c2656fa77b1d04e57b2caec5dc 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -2029,8 +2029,16 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2029,8 +2029,17 @@ public abstract class LivingEntity extends Entity implements Attackable {
  
      public boolean onClimbableCached() {
          if (!this.blockPosition().equals(this.lastClimbingPosition)) {
@@ -39,6 +39,7 @@ index 830ae2b569b533f2ded23826c48727f1d7fd0272..062e83860a3f9e3a40c513ca389d628b
 -            this.lastClimbingPosition = this.blockPosition();
 +            // Gale start - don't load chunks to activate climbing entities
 +            Boolean onClimbableIfLoaded = this.onClimbable(this.level().galeConfig().smallOptimizations.loadChunks.toActivateClimbingEntities);
++
 +            if (onClimbableIfLoaded != null) {
 +                this.cachedOnClimbable = onClimbableIfLoaded;
 +                this.lastClimbingPosition = this.blockPosition();
@@ -50,7 +51,7 @@ index 830ae2b569b533f2ded23826c48727f1d7fd0272..062e83860a3f9e3a40c513ca389d628b
          }
  
          return this.cachedOnClimbable;
-@@ -2038,11 +2046,27 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2038,11 +2047,28 @@ public abstract class LivingEntity extends Entity implements Attackable {
      // Gale end - Airplane - cache on climbable check
  
      public boolean onClimbable() {
@@ -70,6 +71,7 @@ index 830ae2b569b533f2ded23826c48727f1d7fd0272..062e83860a3f9e3a40c513ca389d628b
 +                inBlockState = this.getInBlockState();
 +            } else {
 +                inBlockState = this.getInBlockStateIfLoaded();
++
 +                if (inBlockState == null) {
 +                    return null;
 +                }
