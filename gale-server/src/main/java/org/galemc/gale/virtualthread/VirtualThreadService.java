@@ -60,7 +60,7 @@ public sealed abstract class VirtualThreadService permits ReflectionVirtualThrea
     /**
      * @return The {@link VirtualThreadService} for the current runtime,
      * or null if virtual threads are not {@linkplain #isSupported() supported}.
-     *
+     * <p>
      * This method is thread-safe only after the first time it has been fully run.
      */
     public static @Nullable VirtualThreadService get() {

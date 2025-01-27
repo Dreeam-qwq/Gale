@@ -11,13 +11,14 @@ import org.slf4j.Logger;
 import org.spigotmc.SpigotWorldConfig;
 import org.spongepowered.configurate.objectmapping.meta.Setting;
 
-@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "NotNullFieldNotInitialized", "InnerClassMayBeStatic"})
+@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "InnerClassMayBeStatic"})
 public class GaleWorldConfiguration extends ConfigurationPart {
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final int CURRENT_VERSION = 1;
 
     private transient final SpigotWorldConfig spigotConfig;
     private transient final ResourceLocation worldKey;
+
     public GaleWorldConfiguration(SpigotWorldConfig spigotConfig, ResourceLocation worldKey) {
         this.spigotConfig = spigotConfig;
         this.worldKey = worldKey;
@@ -31,6 +32,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
     public int version = CURRENT_VERSION;
 
     public SmallOptimizations smallOptimizations;
+
     public class SmallOptimizations extends ConfigurationPart {
 
         public boolean saveFireworks = true; // Gale - EMC - make saving fireworks configurable
@@ -38,11 +40,13 @@ public class GaleWorldConfiguration extends ConfigurationPart {
 
         // Gale start - Airplane - reduce projectile chunk loading
         public MaxProjectileChunkLoads maxProjectileChunkLoads;
+
         public class MaxProjectileChunkLoads extends ConfigurationPart {
 
             public int perTick = 10;
 
             public PerProjectile perProjectile;
+
             public class PerProjectile extends ConfigurationPart {
                 public int max = 10;
                 public boolean resetMovementAfterReachLimit = false;
@@ -53,6 +57,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
         // Gale end - Airplane - reduce projectile chunk loading
 
         public ReducedIntervals reducedIntervals;
+
         public class ReducedIntervals extends ConfigurationPart {
 
             public int acquirePoiForStuckEntity = 60; // Gale - Airplane - reduce acquire POI for stuck entities
@@ -60,20 +65,24 @@ public class GaleWorldConfiguration extends ConfigurationPart {
             public int villagerItemRepickup = 100; // Gale - EMC - reduce villager item re-pickup
 
             public CheckNearbyItem checkNearbyItem;
+
             public class CheckNearbyItem extends ConfigurationPart {
 
                 // Gale start - EMC - reduce hopper item checks
                 public Hopper hopper;
+
                 public class Hopper extends ConfigurationPart {
 
                     public int interval = 1;
 
                     public Minecart minecart;
+
                     public class Minecart extends ConfigurationPart {
 
                         public int interval = 1;
 
                         public TemporaryImmunity temporaryImmunity;
+
                         public class TemporaryImmunity extends ConfigurationPart {
                             public int duration = 100;
                             public int nearbyItemMaxAge = 1200;
@@ -93,6 +102,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
         }
 
         public LoadChunks loadChunks;
+
         public class LoadChunks extends ConfigurationPart {
             public boolean toSpawnPhantoms = false; // Gale - MultiPaper - don't load chunks to spawn phantoms
             public boolean toActivateClimbingEntities = false; // Gale - don't load chunks to activate climbing entities
@@ -101,9 +111,11 @@ public class GaleWorldConfiguration extends ConfigurationPart {
     }
 
     public GameplayMechanics gameplayMechanics;
+
     public class GameplayMechanics extends ConfigurationPart {
 
         public Fixes fixes;
+
         public class Fixes extends ConfigurationPart {
 
             public boolean broadcastCritAnimationsAsTheEntityBeingCritted = false; // Gale - MultiPaper - broadcast crit animations as the entity being critted

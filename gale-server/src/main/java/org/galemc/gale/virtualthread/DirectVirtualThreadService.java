@@ -36,7 +36,7 @@ final class DirectVirtualThreadService extends VirtualThreadService {
     /**
      * @return A functional {@link DirectVirtualThreadService}.
      * @throws Throwable If creating virtual threads directly is not supported by the current runtime.
-     * This could be any {@link Throwable}, including an {@link Exception} or an {@link Error}.
+     *                   This could be any {@link Throwable}, including an {@link Exception} or an {@link Error}.
      */
     static @NotNull DirectVirtualThreadService create() throws Throwable {
         // Disabled until Minecraft requires servers to have a Java version that can read class files compiled with functionality from Java 19+ on preview / Java 21+ on stable

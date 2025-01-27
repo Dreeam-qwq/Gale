@@ -35,5 +35,5 @@ public final class VersionCommand extends PermissionedGaleSubcommand {
     public boolean testPermission(CommandSender sender) {
         return super.testPermission(sender) && sender.hasPermission("bukkit.command.version");
     }
-    
+
 }

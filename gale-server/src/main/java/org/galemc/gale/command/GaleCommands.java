@@ -16,16 +16,18 @@ public final class GaleCommands {
 
     public static final String COMMAND_BASE_PERM = CraftDefaultPermissions.GALE_ROOT + ".command";
 
-    private GaleCommands() {}
+    private GaleCommands() {
+    }
 
     private static final Map<String, Command> COMMANDS = new HashMap<>();
+
     static {
         COMMANDS.put(GaleCommand.COMMAND_LABEL, new GaleCommand());
     }
 
     public static void registerCommands(final MinecraftServer server) {
-        COMMANDS.forEach((s, command) -> {
-            server.server.getCommandMap().register(s, "Gale", command);
-        });
+        COMMANDS.forEach((s, command) ->
+            server.server.getCommandMap().register(s, "Gale", command)
+        );
     }
 }

@@ -28,6 +28,7 @@ public final class GaleSemanticVersion {
      * The "<code>major.minor</code>" portion of the {@link #version}.
      */
     public static final @NotNull String majorMinorVersion;
+
     static {
         int firstDotIndex = version.indexOf('.');
         int secondDotIndex = version.indexOf('.', firstDotIndex + 1);

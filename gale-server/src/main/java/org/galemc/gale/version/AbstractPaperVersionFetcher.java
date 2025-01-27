@@ -105,11 +105,11 @@ public abstract class AbstractPaperVersionFetcher implements VersionFetcher {
             case 0 -> text("You are running the latest version", NamedTextColor.GREEN);
             case DISTANCE_UNKNOWN -> text("Unknown version", NamedTextColor.YELLOW);
             default -> text("You are " + distance + " version(s) behind", NamedTextColor.YELLOW)
-                    .append(Component.newline())
-                    .append(text("Download the new version at: ")
-                            .append(text(this.downloadPage, NamedTextColor.GOLD) // Gale - branding changes - version fetcher
-                                    .hoverEvent(text("Click to open", NamedTextColor.WHITE))
-                                    .clickEvent(ClickEvent.openUrl(this.downloadPage)))); // Gale - branding changes - version fetcher
+                .append(Component.newline())
+                .append(text("Download the new version at: ")
+                    .append(text(this.downloadPage, NamedTextColor.GOLD) // Gale - branding changes - version fetcher
+                        .hoverEvent(text("Click to open", NamedTextColor.WHITE))
+                        .clickEvent(ClickEvent.openUrl(this.downloadPage)))); // Gale - branding changes - version fetcher
         };
     }
 

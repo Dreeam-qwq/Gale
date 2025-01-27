@@ -62,7 +62,7 @@ final class ReflectionVirtualThreadService extends VirtualThreadService {
     /**
      * @return A functional {@link ReflectionVirtualThreadService}.
      * @throws Throwable If creating virtual threads via reflection is not supported by the current runtime.
-     * This could be any {@link Throwable}, including an {@link Exception} or an {@link Error}.
+     *                   This could be any {@link Throwable}, including an {@link Exception} or an {@link Error}.
      */
     static @NotNull ReflectionVirtualThreadService create() throws Throwable {
         // This will already throw something if the reflection fails

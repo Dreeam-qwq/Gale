@@ -22,9 +22,9 @@ public final class InfoCommand implements GaleSubcommand {
     public boolean execute(final CommandSender sender, final String subCommand, final String[] args) {
         sender.sendMessage(
             text("Gale is a performant Minecraft server system. Find us on: ")
-            .append(text("https://github.com/GaleMC/Gale")
-                .decorate(TextDecoration.UNDERLINED)
-                .clickEvent(ClickEvent.openUrl("https://github.com/GaleMC/Gale")))
+                .append(text("https://github.com/GaleMC/Gale")
+                    .decorate(TextDecoration.UNDERLINED)
+                    .clickEvent(ClickEvent.openUrl("https://github.com/GaleMC/Gale")))
         );
         return true;
     }
