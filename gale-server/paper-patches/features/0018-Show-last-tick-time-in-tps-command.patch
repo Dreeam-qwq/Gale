@@ -23,7 +23,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/org/spigotmc/TicksPerSecondCommand.java b/src/main/java/org/spigotmc/TicksPerSecondCommand.java
-index d336b27ee314366fe44760db6fdb68370ab3995a..bb5e442fa66de449decf5daf78fd8e5dd8bca99e 100644
+index d336b27ee314366fe44760db6fdb68370ab3995a..e1532490b14d15fd5687f242137d470d5b82ea12 100644
 --- a/src/main/java/org/spigotmc/TicksPerSecondCommand.java
 +++ b/src/main/java/org/spigotmc/TicksPerSecondCommand.java
 @@ -46,6 +46,24 @@ public class TicksPerSecondCommand extends Command {
@@ -36,22 +36,22 @@ index d336b27ee314366fe44760db6fdb68370ab3995a..bb5e442fa66de449decf5daf78fd8e5d
 +            long lastTickOversleepTime = net.minecraft.server.MinecraftServer.lastTickOversleepTime;
 +            var lastTickTimeMessage = text("Last tick: ")
 +                .append(formatTickTimeDuration(lastTickProperTime, 44, 50, 51));
++
 +            if (org.galemc.gale.configuration.GaleGlobalConfiguration.get().misc.lastTickTimeInTpsCommand.addOversleep) {
 +                lastTickTimeMessage = lastTickTimeMessage.append(text(" self + "))
 +                    .append(formatTickTimeDuration(lastTickOversleepTime, Math.max(1, 51 - lastTickProperTime), Math.max(2, 52 - lastTickProperTime), Math.max(3, 53 - lastTickProperTime)))
 +                    .append(text(" oversleep = "))
 +                    .append(formatTickTimeDuration(lastTickProperTime + lastTickOversleepTime, 51, 52, 53));
 +            }
++
 +            lastTickTimeMessage = lastTickTimeMessage.color(NamedTextColor.GOLD);
-+            sender.sendMessage(
-+                lastTickTimeMessage
-+            );
++            sender.sendMessage(lastTickTimeMessage);
 +        }
 +        // Gale end - YAPFA - last tick time - in TPS command
          if (args.length > 0 && args[0].equals("mem") && sender.hasPermission("bukkit.command.tpsmemory")) {
              sender.sendMessage(text()
                  .append(text("Current Memory Usage: ", NamedTextColor.GOLD))
-@@ -68,4 +86,15 @@ public class TicksPerSecondCommand extends Command {
+@@ -68,4 +86,16 @@ public class TicksPerSecondCommand extends Command {
          return text(amount, color);
          // Paper end
      }
@@ -61,7 +61,8 @@ index d336b27ee314366fe44760db6fdb68370ab3995a..bb5e442fa66de449decf5daf78fd8e5d
 +    private static final TextColor closeColor = NamedTextColor.YELLOW;
 +    private static final TextColor problematicColor = TextColor.color(0xf77c1e);
 +    private static final TextColor severeColor = NamedTextColor.RED;
-+    public static Component formatTickTimeDuration(long ms, long safeLimit, long closeLimit, long nonSevereLimit) {
++
++    private static Component formatTickTimeDuration(long ms, long safeLimit, long closeLimit, long nonSevereLimit) {
 +        return text(ms + " ", ms <= safeLimit ? safeColor : ms <= closeLimit ? closeColor : ms <= nonSevereLimit ? problematicColor : severeColor)
 +            .append(text("ms", NamedTextColor.GOLD));
 +    }
