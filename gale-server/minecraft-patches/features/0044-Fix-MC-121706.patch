@@ -37,22 +37,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java b/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java
-index 722f378bb3726200b6fe88948bf1e1d3514a7b5c..dc3c709912367fc2789b789f178d16feb3c0a2ed 100644
+index 722f378bb3726200b6fe88948bf1e1d3514a7b5c..b896f13f5aea09dafb1f1e74e1ef90dc53eae2ae 100644
 --- a/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java
-@@ -103,7 +103,10 @@ public class RangedBowAttackGoal<T extends Monster & RangedAttackMob> extends Go
+@@ -103,7 +103,11 @@ public class RangedBowAttackGoal<T extends Monster & RangedAttackMob> extends Go
                  this.strafingTime = 0;
              }
  
 -            if (this.strafingTime > -1) {
 +            // Gale start - Purpur - fix MC-121706
 +            boolean hasStrafingTime = this.strafingTime > -1;
++
 +            if (hasStrafingTime) {
 +                // Gale end - Purpur - fix MC-121706
                  if (d > this.attackRadiusSqr * 0.75F) {
                      this.strafingBackwards = false;
                  } else if (d < this.attackRadiusSqr * 0.25F) {
-@@ -116,7 +119,10 @@ public class RangedBowAttackGoal<T extends Monster & RangedAttackMob> extends Go
+@@ -116,7 +120,10 @@ public class RangedBowAttackGoal<T extends Monster & RangedAttackMob> extends Go
                  }
  
                  this.mob.lookAt(target, 30.0F, 30.0F);

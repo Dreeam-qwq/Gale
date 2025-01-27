@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 1a2b9a2e2cabf542523982f6f8742840933b0f4a..1fa2bb9e9866ad6f0394327df934388b7fcd7f93 100644
+index 6f025ce8785feb5901ac0bf92fac950d87c1285d..2ec59747ed7102a90d637f3b6fb6520339b2c57e 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2479,7 +2479,7 @@ public class ServerGamePacketListenerImpl

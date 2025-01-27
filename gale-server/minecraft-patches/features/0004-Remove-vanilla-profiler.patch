@@ -888,7 +888,7 @@ index 6540b2d6a1062d883811ce240c49d30d1925b291..9500fc2f841819b0d40e8a6e48353bb2
          }
  
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 13db4411e5bd635315b27b92a3e97bf286d14577..93b0265e3b1ea133877682721ff28d735d9b688b 100644
+index 3fe8ae3b49163f1b124562165dbb27ab96a6eb05..ae89315cb35a55d0dd0e36db35cba467209762c7 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -77,8 +77,6 @@ import net.minecraft.util.ProgressListener;
@@ -1198,33 +1198,31 @@ index 407bd4b8026869bc14ee5e79ff80e7bdd1a07bcb..6e2a3d4171dbb2a30ba18f1657236917
  
      void onResourceManagerReload(ResourceManager resourceManager);
 diff --git a/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java b/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
-index 64b0508ef21952c65b0b967b756b2a4c64d96899..bd7005d29ec81039e6fa1c487c9e5633fa90bd5e 100644
+index 64b0508ef21952c65b0b967b756b2a4c64d96899..b6b03fbbd669e6331b30255df5419611c38e0495 100644
 --- a/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
 +++ b/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
-@@ -2,7 +2,8 @@ package net.minecraft.server.packs.resources;
+@@ -2,7 +2,6 @@ package net.minecraft.server.packs.resources;
  
  import java.util.concurrent.CompletableFuture;
  import java.util.concurrent.Executor;
 -import net.minecraft.util.profiling.Profiler;
-+
-+import net.minecraft.util.profiling.InactiveProfiler;
  import net.minecraft.util.profiling.ProfilerFiller;
  
  public abstract class SimplePreparableReloadListener<T> implements PreparableReloadListener {
-@@ -10,9 +11,9 @@ public abstract class SimplePreparableReloadListener<T> implements PreparableRel
+@@ -10,9 +9,9 @@ public abstract class SimplePreparableReloadListener<T> implements PreparableRel
      public final CompletableFuture<Void> reload(
          PreparableReloadListener.PreparationBarrier barrier, ResourceManager manager, Executor backgroundExecutor, Executor gameExecutor
      ) {
 -        return CompletableFuture.<T>supplyAsync(() -> this.prepare(manager, Profiler.get()), backgroundExecutor)
-+        return CompletableFuture.<T>supplyAsync(() -> this.prepare(manager, InactiveProfiler.INSTANCE), backgroundExecutor) // Gale - Purpur - remove vanilla profiler
++        return CompletableFuture.<T>supplyAsync(() -> this.prepare(manager, net.minecraft.util.profiling.InactiveProfiler.INSTANCE), backgroundExecutor) // Gale - Purpur - remove vanilla profiler
              .thenCompose(barrier::wait)
 -            .thenAcceptAsync(object -> this.apply((T)object, manager, Profiler.get()), gameExecutor);
-+            .thenAcceptAsync(object -> this.apply((T)object, manager, InactiveProfiler.INSTANCE), gameExecutor); // Gale - Purpur - remove vanilla profiler
++            .thenAcceptAsync(object -> this.apply((T)object, manager, net.minecraft.util.profiling.InactiveProfiler.INSTANCE), gameExecutor); // Gale - Purpur - remove vanilla profiler
      }
  
      protected abstract T prepare(ResourceManager resourceManager, ProfilerFiller profiler);
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 1d0151a042ed5de4e235ef0bdac1a0e8240e85e7..3594240116d3b61dbf838490df7a30345d7d8925 100644
+index 525210788937af70f9a0df1c66e0064d20552c1b..386291cf55f6a36e813719abbd2206401352c862 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -78,8 +78,6 @@ import net.minecraft.tags.FluidTags;
@@ -1812,7 +1810,7 @@ index 97adf8142cdd322c4873c420ed760e9dee34da23..a04d71967976731b4858d44ac138b7ac
      }
  
 diff --git a/net/minecraft/world/entity/animal/goat/Goat.java b/net/minecraft/world/entity/animal/goat/Goat.java
-index 504a30ead8d2bb13d559acbde62f9d44a5dda1cb..25c0c27979f49f08d0cc150de9afe6112f115666 100644
+index c91e1f8e5fd39bcc48f9f0bf002770b2dff74404..c4c0ebb9b43018d795e02b2ab15d38bc475e4330 100644
 --- a/net/minecraft/world/entity/animal/goat/Goat.java
 +++ b/net/minecraft/world/entity/animal/goat/Goat.java
 @@ -21,8 +21,6 @@ import net.minecraft.tags.ItemTags;
@@ -2222,7 +2220,7 @@ index 761fdcd4a4e18f45547afd8edff44f61c6eeacb4..3a7707427691a7862499a7efa3b39ead
                          // Paper start - Prevent block entity and entity crashes
                          final String msg = String.format("BlockEntity threw exception at %s:%s,%s,%s", LevelChunk.this.getLevel().getWorld().getName(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
 diff --git a/net/minecraft/world/level/pathfinder/PathFinder.java b/net/minecraft/world/level/pathfinder/PathFinder.java
-index 81de6c1bbef1cafd3036e736dd305fbedc8368c6..d48057d387b6937a0194e5300eb1cb46dec2896b 100644
+index 81de6c1bbef1cafd3036e736dd305fbedc8368c6..c2baadcdceb1df6a881d6f73aa4eb4dd264bcdfe 100644
 --- a/net/minecraft/world/level/pathfinder/PathFinder.java
 +++ b/net/minecraft/world/level/pathfinder/PathFinder.java
 @@ -12,9 +12,6 @@ import java.util.function.Function;
@@ -2245,12 +2243,11 @@ index 81de6c1bbef1cafd3036e736dd305fbedc8368c6..d48057d387b6937a0194e5300eb1cb46
          // Set<Target> set = targetPositions.keySet(); // Paper
          node.g = 0.0F;
          node.h = this.getBestH(node, positions); // Paper - optimize collection
-@@ -129,7 +123,7 @@ public class PathFinder {
+@@ -129,7 +123,6 @@ public class PathFinder {
                  best = path;
              }
          }
 -        profilerFiller.pop();
-+
          return best;
          // Paper end - Perf: remove streams and optimize collection
      }

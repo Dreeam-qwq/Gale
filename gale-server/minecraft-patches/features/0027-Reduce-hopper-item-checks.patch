@@ -17,7 +17,7 @@ Licensed under: MIT (https://opensource.org/licenses/MIT)
 Only do an item "suck in" action once per second
 
 diff --git a/net/minecraft/world/entity/item/ItemEntity.java b/net/minecraft/world/entity/item/ItemEntity.java
-index 52a7ed0d991758bad0dcedcb7f97fb15ac6c6d04..45c152856c46d11f3bd790a01fac89a7c3b68af1 100644
+index 52a7ed0d991758bad0dcedcb7f97fb15ac6c6d04..8e450c9d0111c0ce44feb386cf8b2715e407bf25 100644
 --- a/net/minecraft/world/entity/item/ItemEntity.java
 +++ b/net/minecraft/world/entity/item/ItemEntity.java
 @@ -143,7 +143,13 @@ public class ItemEntity extends Entity implements TraceableEntity {
@@ -34,7 +34,7 @@ index 52a7ed0d991758bad0dcedcb7f97fb15ac6c6d04..45c152856c46d11f3bd790a01fac89a7
      }
      // Paper end - EAR 2
  
-@@ -227,9 +233,29 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -227,9 +233,31 @@ public class ItemEntity extends Entity implements TraceableEntity {
                  }
                  // CraftBukkit end
                  this.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DESPAWN); // CraftBukkit - add Bukkit remove cause
@@ -47,10 +47,12 @@ index 52a7ed0d991758bad0dcedcb7f97fb15ac6c6d04..45c152856c46d11f3bd790a01fac89a7
 +    // Gale start - EMC - reduce hopper item checks
 +    private void markNearbyHopperCartsAsImmune() {
 +        var config = this.level().galeConfig().smallOptimizations.reducedIntervals.checkNearbyItem.hopper.minecart;
++
 +        // No need to mark hopper minecarts as immune if they can pull every tick anyway
 +        if (config.interval <= 1) {
 +            return;
 +        }
++
 +        if (config.temporaryImmunity.duration > 0 && this.isAlive() && this.onGround && !this.isRemoved() && (config.temporaryImmunity.nearbyItemMaxAge == -1 || this.age <= config.temporaryImmunity.nearbyItemMaxAge) && this.age % Math.max(1, config.temporaryImmunity.checkForMinecartNearItemInterval) == 0 && config.temporaryImmunity.maxItemHorizontalDistance >= 0 && config.temporaryImmunity.maxItemVerticalDistance >= 0) {
 +            net.minecraft.world.phys.AABB aabb = this.getBoundingBox().inflate(config.temporaryImmunity.maxItemHorizontalDistance, config.temporaryImmunity.maxItemVerticalDistance, config.temporaryImmunity.maxItemHorizontalDistance);
 +            for (Entity entity : this.level().getEntities(this, aabb)) {
@@ -103,7 +105,7 @@ index 5f042e294db605827000123252b0df646968f897..e1cc15f28fe8da23b74ff4504c5b2da2
  
      double getLevelY();
 diff --git a/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index 5cd1326ad5d046c88b2b3449d610a78fa880b4cd..276cb0dffaa253a6c13b4c68d8c703732118d0d1 100644
+index 5cd1326ad5d046c88b2b3449d610a78fa880b4cd..2549dd08b60cd81dcbf3412ed71cfc40729ae468 100644
 --- a/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -540,7 +540,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
@@ -115,7 +117,7 @@ index 5cd1326ad5d046c88b2b3449d610a78fa880b4cd..276cb0dffaa253a6c13b4c68d8c70373
                  for (ItemEntity itemEntity : getItemsAtAndAbove(level, hopper)) {
                      if (addItem(hopper, itemEntity)) {
                          return true;
-@@ -816,6 +816,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -816,6 +816,34 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          return stack1.getCount() < stack1.getMaxStackSize() && ItemStack.isSameItemSameComponents(stack1, stack2); // Paper - Perf: Optimize Hoppers; used to return true for full itemstacks?!
      }
  
@@ -131,15 +133,18 @@ index 5cd1326ad5d046c88b2b3449d610a78fa880b4cd..276cb0dffaa253a6c13b4c68d8c70373
 +            if (minecartHopper.pickupImmunity > net.minecraft.server.MinecraftServer.currentTick) {
 +                return true;
 +            }
++
 +            suckInterval = level.galeConfig().smallOptimizations.reducedIntervals.checkNearbyItem.hopper.minecart.interval;
 +        } else {
 +            suckInterval = level.galeConfig().smallOptimizations.reducedIntervals.checkNearbyItem.hopper.interval;
 +        }
++
 +        if (suckInterval <= 1) {
 +            return true;
 +        }
 +
 +        final int hopperId = (int) hopper.getLevelX() + (int) hopper.getLevelY() + (int) hopper.getLevelZ();
++
 +        return (hopper.getAndIncrementAttemptCounter() + hopperId) % suckInterval == 0;
 +    }
 +    // Gale end - EMC - reduce hopper item checks

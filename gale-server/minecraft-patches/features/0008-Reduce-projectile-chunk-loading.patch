@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/projectile/Projectile.java b/net/minecraft/world/entity/projectile/Projectile.java
-index af71a71ff11b418a43728fd464b1e673d593140f..689fede25ae3f73ebe897ab9b8abd70ead032f06 100644
+index ad0bb896d6ea669ce88bfe6490319e8ba7a29001..168f50523b00ab8d43cbcc5ea5675a840762be11 100644
 --- a/net/minecraft/world/entity/projectile/Projectile.java
 +++ b/net/minecraft/world/entity/projectile/Projectile.java
-@@ -49,6 +49,45 @@ public abstract class Projectile extends Entity implements TraceableEntity {
+@@ -49,6 +49,55 @@ public abstract class Projectile extends Entity implements TraceableEntity {
          super(entityType, level);
      }
  
@@ -46,33 +46,43 @@ index af71a71ff11b418a43728fd464b1e673d593140f..689fede25ae3f73ebe897ab9b8abd70e
 +    @Override
 +    public void setPos(double x, double y, double z) {
 +        int currentTick = net.minecraft.server.MinecraftServer.currentTick;
++
 +        if (chunksLoadedInTick != currentTick) {
 +            chunksLoadedInTick = currentTick;
 +            chunksLoadedThisTick = 0;
 +        }
++
 +        int previousX = Mth.floor(this.getX()) >> 4, previousZ = Mth.floor(this.getZ()) >> 4;
 +        int newX = Mth.floor(x) >> 4, newZ = Mth.floor(z) >> 4;
++
 +        if (previousX != newX || previousZ != newZ) {
 +            boolean isLoaded = ((net.minecraft.server.level.ServerChunkCache) this.level().getChunkSource()).getChunkAtIfLoadedImmediately(newX, newZ) != null;
++
 +            if (!isLoaded) {
 +                var maxProjectileChunkLoadsConfig = this.level().galeConfig().smallOptimizations.maxProjectileChunkLoads;
 +                int maxChunkLoadsPerTick = maxProjectileChunkLoadsConfig.perTick;
++
 +                if (maxChunkLoadsPerTick >= 0 && chunksLoadedThisTick > maxChunkLoadsPerTick) {
 +                    return;
 +                }
++
 +                int maxChunkLoadsPerProjectile = maxProjectileChunkLoadsConfig.perProjectile.max;
++
 +                if (maxChunkLoadsPerProjectile >= 0 && this.chunksLoadedByProjectile >= maxChunkLoadsPerProjectile) {
 +                    if (maxProjectileChunkLoadsConfig.perProjectile.removeFromWorldAfterReachLimit) {
 +                        this.discard();
 +                    } else if (maxProjectileChunkLoadsConfig.perProjectile.resetMovementAfterReachLimit) {
 +                        this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
 +                    }
++
 +                    return;
 +                }
++
 +                chunksLoadedThisTick++;
 +                this.chunksLoadedByProjectile++;
 +            }
 +        }
++
 +        super.setPos(x, y, z);
 +    }
 +    // Gale end - Airplane - reduce projectile chunk loading

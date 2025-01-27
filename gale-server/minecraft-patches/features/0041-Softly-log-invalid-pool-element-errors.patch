@@ -13,18 +13,9 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java b/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
-index 5c91b11fdb12cd51d9d6c662f4ba7a7f78891e26..c63c357a28e7911c7a227e911a4dc36d914da9b5 100644
+index 786fa3a33334ca6b4b43b89b6fde9de5c41a3b28..42600faa2a2393d71d93b6818ac64ab030737772 100644
 --- a/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
 +++ b/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
-@@ -27,7 +27,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
- import org.slf4j.Logger;
- 
- public class PoolElementStructurePiece extends StructurePiece {
--    private static final Logger LOGGER = LogUtils.getLogger();
-+    public static final Logger LOGGER = LogUtils.getLogger(); // Gale - EMC - softly log invalid pool element errors - private -> public
-     protected final StructurePoolElement element;
-     protected BlockPos position;
-     private final int groundLevelDelta;
 @@ -80,7 +80,7 @@ public class PoolElementStructurePiece extends StructurePiece {
          DynamicOps<Tag> dynamicOps = context.registryAccess().createSerializationContext(NbtOps.INSTANCE);
          StructurePoolElement.CODEC

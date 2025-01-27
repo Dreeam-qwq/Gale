@@ -44,10 +44,10 @@ index bd888ef719b9bfc93bace0b1d0fb771ac659f515..5d1e83658bb9646cf56885627256f0be
              }
              if (entity instanceof final Mob mob && mob.getTarget() != null) {
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 00caebfabfc459eed86f0e6e2cc3f4b628f7ef99..d17020508a1f8d6c7da630b89a11db9bf7d1748f 100644
+index 00caebfabfc459eed86f0e6e2cc3f4b628f7ef99..181eec21013cc37dd252e3df047ad9ddda8ece19 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -2015,6 +2015,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2015,6 +2015,21 @@ public abstract class LivingEntity extends Entity implements Attackable {
          return this.lastClimbablePos;
      }
  
@@ -61,6 +61,7 @@ index 00caebfabfc459eed86f0e6e2cc3f4b628f7ef99..d17020508a1f8d6c7da630b89a11db9b
 +            this.cachedOnClimbable = this.onClimbable();
 +            this.lastClimbingPosition = this.blockPosition();
 +        }
++
 +        return this.cachedOnClimbable;
 +    }
 +    // Gale end - Airplane - cache on climbable check

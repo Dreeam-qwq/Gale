@@ -13,7 +13,7 @@ As part of: SportPaper (https://github.com/Electroid/SportPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 2b9b683023943435a86c42e3a61e0b3329df19d8..8734feabddeb259249213f0084f072a3f12e7daf 100644
+index c697576d3ae22fbb7ae869fa099bffc8ac5cb2e5..ba0b5961535f0dbffda5216a6e4657ea85f30eb7 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -1559,6 +1559,14 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe

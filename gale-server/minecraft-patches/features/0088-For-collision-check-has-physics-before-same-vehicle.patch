@@ -16,7 +16,7 @@ As part of: Akarin (https://github.com/Akarin-project/Akarin)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 411c3829ac99b4a3673419d230e098ff05c272f3..e0af617664641e27ffdee24309e340ede4cc6f73 100644
+index 55c05f5e8e5045292f77621fed78a0498c9b53bf..295dc5f9f7d8765d345e1c543c7ffea5baaf3cfc 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -2168,8 +2168,8 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess

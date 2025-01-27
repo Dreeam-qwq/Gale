@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index ec303fb52aee7a0bc1df42a628fac24276d059de..411c3829ac99b4a3673419d230e098ff05c272f3 100644
+index bbcfb7b535514d8e394b31f74d2bbc2ba90e7498..55c05f5e8e5045292f77621fed78a0498c9b53bf 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -4679,6 +4679,16 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -28,10 +28,10 @@ index ec303fb52aee7a0bc1df42a628fac24276d059de..411c3829ac99b4a3673419d230e098ff
          return this.chunkPosition;
      }
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index d341bf76b4679470a7fb5ff081b79425e4bc1264..4e414a78a6acfb90d5e212398617580a3f34be9b 100644
+index 830ae2b569b533f2ded23826c48727f1d7fd0272..062e83860a3f9e3a40c513ca389d628ba936f465 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -2032,19 +2032,43 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2029,8 +2029,16 @@ public abstract class LivingEntity extends Entity implements Attackable {
  
      public boolean onClimbableCached() {
          if (!this.blockPosition().equals(this.lastClimbingPosition)) {
@@ -48,8 +48,9 @@ index d341bf76b4679470a7fb5ff081b79425e4bc1264..4e414a78a6acfb90d5e212398617580a
 +            }
 +            // Gale end - don't load chunks to activate climbing entities
          }
+ 
          return this.cachedOnClimbable;
-     }
+@@ -2038,11 +2046,27 @@ public abstract class LivingEntity extends Entity implements Attackable {
      // Gale end - Airplane - cache on climbable check
  
      public boolean onClimbable() {

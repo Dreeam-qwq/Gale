@@ -37,10 +37,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/item/crafting/ShapelessRecipe.java b/net/minecraft/world/item/crafting/ShapelessRecipe.java
-index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..03df50182a13978c88b05eff13e33de325de08c4 100644
+index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..6a53e97d27d746621892ced4ca5b4a56b6bc4c23 100644
 --- a/net/minecraft/world/item/crafting/ShapelessRecipe.java
 +++ b/net/minecraft/world/item/crafting/ShapelessRecipe.java
-@@ -23,8 +23,15 @@ public class ShapelessRecipe implements CraftingRecipe {
+@@ -23,8 +23,16 @@ public class ShapelessRecipe implements CraftingRecipe {
      final List<Ingredient> ingredients;
      @Nullable
      private PlacementInfo placementInfo;
@@ -50,13 +50,14 @@ index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..03df50182a13978c88b05eff13e33de3
 +        // Gale start - Airplane - simpler ShapelessRecipe comparison for vanilla
 +        this(group, category, result, ingredients, false);
 +    }
++
 +    public ShapelessRecipe(String group, CraftingBookCategory category, ItemStack result, List<Ingredient> ingredients, boolean isBukkit) {
 +        this.isBukkit = isBukkit;
 +        // Gale end - Airplane - simpler ShapelessRecipe comparison for vanilla
          this.group = group;
          this.category = category;
          this.result = result;
-@@ -72,6 +79,28 @@ public class ShapelessRecipe implements CraftingRecipe {
+@@ -72,6 +80,29 @@ public class ShapelessRecipe implements CraftingRecipe {
  
      @Override
      public boolean matches(CraftingInput input, Level level) {
@@ -75,6 +76,7 @@ index d601b54b1de2f2ae44fe2b20c8116c71a6340e45..03df50182a13978c88b05eff13e33de3
 +                            continue inventory;
 +                        }
 +                    }
++
 +                    return false;
 +                }
 +            }

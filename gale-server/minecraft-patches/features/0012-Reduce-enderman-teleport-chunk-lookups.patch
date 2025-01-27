@@ -31,16 +31,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/monster/EnderMan.java b/net/minecraft/world/entity/monster/EnderMan.java
-index 4b5ffd278e0e9d47100e5452949e8d757bbfece4..c7a77b16ba032eb24b070fd6a5f0f824b3cbcc1a 100644
+index 4b5ffd278e0e9d47100e5452949e8d757bbfece4..00c0d2432b4a0e46f85f1f422772e6c43ef5222c 100644
 --- a/net/minecraft/world/entity/monster/EnderMan.java
 +++ b/net/minecraft/world/entity/monster/EnderMan.java
-@@ -309,11 +309,18 @@ public class EnderMan extends Monster implements NeutralMob {
+@@ -309,11 +309,19 @@ public class EnderMan extends Monster implements NeutralMob {
      private boolean teleport(double x, double y, double z) {
          BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos(x, y, z);
  
 -        while (mutableBlockPos.getY() > this.level().getMinY() && !this.level().getBlockState(mutableBlockPos).blocksMotion()) {
 +        // Gale start - Airplane - single chunk lookup
 +        net.minecraft.world.level.chunk.LevelChunk chunk = this.level().getChunkIfLoaded(mutableBlockPos);
++
 +        if (chunk == null) {
 +            return false;
 +        }

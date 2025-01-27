@@ -40,7 +40,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/phys/shapes/EntityCollisionContext.java b/net/minecraft/world/phys/shapes/EntityCollisionContext.java
-index dafcba6eeba62a5e35ad53c9b38605a17139d8b0..a8ad7c304eca5a1b5b8247077fcb148d760d6ac9 100644
+index dafcba6eeba62a5e35ad53c9b38605a17139d8b0..0c65addf32b09991392dcc1de8b477543fd02a81 100644
 --- a/net/minecraft/world/phys/shapes/EntityCollisionContext.java
 +++ b/net/minecraft/world/phys/shapes/EntityCollisionContext.java
 @@ -19,25 +19,35 @@ public class EntityCollisionContext implements CollisionContext {
@@ -79,7 +79,7 @@ index dafcba6eeba62a5e35ad53c9b38605a17139d8b0..a8ad7c304eca5a1b5b8247077fcb148d
          this(
              entity.isDescending(),
              entity.getY(),
-@@ -45,16 +55,31 @@ public class EntityCollisionContext implements CollisionContext {
+@@ -45,16 +55,19 @@ public class EntityCollisionContext implements CollisionContext {
              canStandOnFluid ? fluidState -> true : (entity instanceof LivingEntity ? ((LivingEntity)entity)::canStandOnFluid : fluidState -> false),
              entity
          );
@@ -91,29 +91,17 @@ index dafcba6eeba62a5e35ad53c9b38605a17139d8b0..a8ad7c304eca5a1b5b8247077fcb148d
      @Override
      public boolean isHoldingItem(Item item) {
 -        return this.heldItem.is(item);
-+        // Gale start - Airplane - make EntityCollisionContext a live representation
-+        Entity entity = this.entity;
-+        if (entity instanceof LivingEntity livingEntity) {
-+            return livingEntity.getMainHandItem().is(item);
-+        }
-+        return ItemStack.EMPTY.is(item);
-+        // Gale end - Airplane - make EntityCollisionContext a live representation
++        return this.entity instanceof LivingEntity livingEntity ? livingEntity.getMainHandItem().is(item) : ItemStack.EMPTY.is(item); // Gale - Airplane - make EntityCollisionContext a live representation
      }
  
      @Override
      public boolean canStandOnFluid(FluidState fluid1, FluidState fluid2) {
 -        return this.canStandOnFluid.test(fluid2) && !fluid1.getType().isSame(fluid2.getType());
-+        // Gale start - Airplane - make EntityCollisionContext a live representation
-+        Entity entity = this.entity;
-+        if (entity instanceof LivingEntity livingEntity) {
-+            return livingEntity.canStandOnFluid(fluid2) && !fluid1.getType().isSame(fluid2.getType());
-+        }
-+        return false;
-+        // Gale end - Airplane - make EntityCollisionContext a live representation
++        return this.entity instanceof LivingEntity livingEntity && livingEntity.canStandOnFluid(fluid2) && !fluid1.getType().isSame(fluid2.getType()); // Gale - Airplane - make EntityCollisionContext a live representation
      }
  
      @Override
-@@ -64,12 +89,12 @@ public class EntityCollisionContext implements CollisionContext {
+@@ -64,12 +77,12 @@ public class EntityCollisionContext implements CollisionContext {
  
      @Override
      public boolean isDescending() {

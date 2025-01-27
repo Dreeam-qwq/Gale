@@ -181,7 +181,7 @@ index 68727deaedd55aa86e76fbc6cc2cfb67913f7add..bad5787de2034dbb0eabb9458a47a89e
      private static final Codec<Object> ARG_CODEC = Codec.either(PRIMITIVE_ARG_CODEC, ComponentSerialization.CODEC)
          .xmap(
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 2caeb69306a42d02b7a5c27e00fb969e392ac6ba..2b9b683023943435a86c42e3a61e0b3329df19d8 100644
+index 6c486f1c04c9fed6e3a07e4d9aa1e79f8fdd7015..c697576d3ae22fbb7ae869fa099bffc8ac5cb2e5 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -1224,7 +1224,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe

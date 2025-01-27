@@ -17,16 +17,17 @@ Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 This can help to hide annoying scanning bots from showing up in console.
 
 diff --git a/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 6689aeacf50d1498e8d23cce696fb4fecbd1cf39..d9c0831dd58a5cdf1b23444489ac04629f8916f9 100644
+index 6689aeacf50d1498e8d23cce696fb4fecbd1cf39..0fdf22af66945c1b6987e07f6c8a167110033b53 100644
 --- a/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-@@ -146,6 +146,14 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -146,6 +146,15 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      public void disconnect(Component reason) {
          try {
 +            // Gale start - Pufferfish - do not log disconnections with null id
 +            if (!org.galemc.gale.configuration.GaleGlobalConfiguration.get().logToConsole.nullIdDisconnections && this.authenticatedProfile != null && this.authenticatedProfile.getId() == null) {
 +                var reasonString = reason.getString();
++
 +                if ("Disconnected".equals(reasonString) || Component.translatable("multiplayer.disconnect.generic").getString().equals(reasonString)) {
 +                    return;
 +                }

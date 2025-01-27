@@ -28,7 +28,7 @@ but is so much cheaper than the suffocation check that it's worth
 keeping it.
 
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index d17020508a1f8d6c7da630b89a11db9bf7d1748f..1fbc971f4bb2473dc67021b4cec9228109e0c43b 100644
+index 181eec21013cc37dd252e3df047ad9ddda8ece19..3a44887fa81676d4c06c10eae5d451eace7f595f 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
 @@ -448,7 +448,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -43,16 +43,13 @@ index d17020508a1f8d6c7da630b89a11db9bf7d1748f..1fbc971f4bb2473dc67021b4cec92281
                      this.hurtServer(serverLevel1, this.damageSources().inWall(), 1.0F);
                  } else if (flag && !this.level().getWorldBorder().isWithinBounds(this.getBoundingBox())) {
                      double d = this.level().getWorldBorder().getDistanceToBorder(this) + this.level().getWorldBorder().getDamageSafeZone();
-@@ -1354,6 +1357,15 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -1354,6 +1357,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
          return this.getHealth() <= 0.0F;
      }
  
 +    // Gale start - Pufferfish - reduce in wall checks
-+    public boolean couldPossiblyBeHurt(float amount) {
-+        if ((float) this.invulnerableTime > (float) this.invulnerableDuration / 2.0F && amount <= this.lastHurt) {
-+            return false;
-+        }
-+        return true;
++    private boolean couldPossiblyBeHurt(float amount) {
++        return !((float) this.invulnerableTime > (float) this.invulnerableDuration / 2.0F) || !(amount <= this.lastHurt);
 +    }
 +    // Gale end - Pufferfish - reduce in wall checks
 +
