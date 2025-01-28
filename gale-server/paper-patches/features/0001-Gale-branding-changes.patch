@@ -433,10 +433,10 @@ index 774556a62eb240da42e84db4502e2ed43495be17..0b5979723bb30f9011ac64c36d894aa4
  
          if (stream != null) {
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index a9339f59f81dff307317ae4afdff0dc296febcc9..64e3c7bd0a1ff93dd87e688f9e49e213c8f6670e 100644
+index dced8899be0bb8d562093dc3a7673ed8185b85a6..349f8207d8a9bc4b2c6be9e64b4325a7a406e706 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -77,14 +77,20 @@ public class WatchdogThread extends Thread {
+@@ -77,14 +77,20 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
                  if (isLongTimeout) {
                      // Paper end
                      logger.log(Level.SEVERE, "------------------------------");
@@ -460,7 +460,7 @@ index a9339f59f81dff307317ae4afdff0dc296febcc9..64e3c7bd0a1ff93dd87e688f9e49e213
  
                      if (net.minecraft.world.level.Level.lastPhysicsProblem != null) {
                          logger.log(Level.SEVERE, "------------------------------");
-@@ -104,12 +110,18 @@ public class WatchdogThread extends Thread {
+@@ -104,12 +110,18 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
                      }
                      // Paper end
                  } else {
@@ -481,7 +481,7 @@ index a9339f59f81dff307317ae4afdff0dc296febcc9..64e3c7bd0a1ff93dd87e688f9e49e213
                  FeatureHooks.dumpAllChunkLoadInfo(MinecraftServer.getServer(), isLongTimeout); // Paper - log detailed tick information
                  WatchdogThread.dumpThread(ManagementFactory.getThreadMXBean().getThreadInfo(MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE), logger);
                  logger.log(Level.SEVERE, "------------------------------");
-@@ -122,7 +134,13 @@ public class WatchdogThread extends Thread {
+@@ -122,7 +134,13 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
                          WatchdogThread.dumpThread(thread, logger);
                      }
                  } else {
