@@ -6,14 +6,19 @@ Subject: [PATCH] Avoid Class#isAssignableFrom call in ClassInstanceMultiMap
 License: MIT (https://opensource.org/licenses/MIT)
 Gale - https://galemc.org
 
-This patch is based on the following mixin:
+This patch is based on the following mixins:
 "com/ishland/vmp/mixins/general/collections/MixinTypeFilterableList.java"
 By: ishland <ishlandmc@yeah.net>
 As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
+"net/caffeinemc/mods/lithium/mixin/collections/entity_filtering/ClassInstanceMultiMapMixin.java"
+By: Angeline <jellysquid3@users.noreply.github.com>
+As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
+Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
+
 diff --git a/net/minecraft/util/ClassInstanceMultiMap.java b/net/minecraft/util/ClassInstanceMultiMap.java
-index 4cd1b8ce60f7befca63a5b6396c0781ae3583dcd..c7420c599aea9d79927419e881aaca8aae11461b 100644
+index 4cd1b8ce60f7befca63a5b6396c0781ae3583dcd..c79aaf21566fe84fd45c8666230c6c5f4fe1db27 100644
 --- a/net/minecraft/util/ClassInstanceMultiMap.java
 +++ b/net/minecraft/util/ClassInstanceMultiMap.java
 @@ -56,18 +56,41 @@ public class ClassInstanceMultiMap<T> extends AbstractCollection<T> {
@@ -26,7 +31,7 @@ index 4cd1b8ce60f7befca63a5b6396c0781ae3583dcd..c7420c599aea9d79927419e881aaca8a
 -            List<? extends T> list = this.byClass
 -                .computeIfAbsent(type, clazz -> this.allInstances.stream().filter(clazz::isInstance).collect(Util.toMutableList()));
 -            return (Collection<S>)Collections.unmodifiableCollection(list);
-+        // Gale start - VMP - avoid Class#isAssignableFrom call in ClassInstanceMultiMap
++        // Gale start - Lithium/VMP - avoid Class#isAssignableFrom call in ClassInstanceMultiMap
 +        /*
 +        Only perform the slow Class#isAssignableFrom(Class) if a list doesn't exist for the type, otherwise
 +        we can assume it's already valid. The slow-path code is moved to a separate method to help the JVM inline this.
@@ -55,7 +60,7 @@ index 4cd1b8ce60f7befca63a5b6396c0781ae3583dcd..c7420c599aea9d79927419e881aaca8a
 +                return ts;
 +            }
 +        );
-+        // Gale end - VMP - avoid Class#isAssignableFrom call in ClassInstanceMultiMap
++        // Gale end - Lithium/VMP - avoid Class#isAssignableFrom call in ClassInstanceMultiMap
      }
  
      @Override

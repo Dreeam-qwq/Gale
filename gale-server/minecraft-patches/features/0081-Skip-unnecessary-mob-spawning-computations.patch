@@ -13,7 +13,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/net/minecraft/server/level/ServerChunkCache.java b/net/minecraft/server/level/ServerChunkCache.java
-index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..0e298479c91a2789b3d808d512ec5210dabcbb06 100644
+index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..7a18b11782b2524280fddf20e6b1cabdddf07c49 100644
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
 @@ -550,9 +550,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
@@ -50,7 +50,13 @@ index 5c8d76b80c6cefd87088282e59f5f0f72a4f1611..0e298479c91a2789b3d808d512ec5210
              // Paper start - PlayerNaturallySpawnCreaturesEvent
              for (ServerPlayer entityPlayer : this.level.players()) {
                  int chunkRange = Math.min(level.spigotConfig.mobSpawnRange, entityPlayer.getBukkitEntity().getViewDistance());
-@@ -609,6 +619,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -604,11 +614,25 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+             }
+         }
+ 
+-        if (_boolean) {
++        if (flagAndHasNaturalSpawn) { // Gale - MultiPaper - skip unnecessary mob spawning computations
+             this.level.tickCustomSpawners(this.spawnEnemies, this.spawnFriendlies);
          }
      }
  

@@ -9,7 +9,7 @@ Gale - https://galemc.org
 This patch is based on the following mixins and classes:
 * "net/caffeinemc/mods/lithium/common/world/chunk/CompactingPackedIntegerArray.java"
 * "net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java"
-* "net/caffeinemc/mods/lithium/mixin/chunk/serialization/PackedIntegerArrayMixin.java"
+* "net/caffeinemc/mods/lithium/mixin/chunk/serialization/SimpleBitStorageMixin.java"
 * "net/caffeinemc/mods/lithium/mixin/chunk/serialization/PalettedContainerMixin.java"
 By: Angeline <jellysquid3@users.noreply.github.com>
 As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
