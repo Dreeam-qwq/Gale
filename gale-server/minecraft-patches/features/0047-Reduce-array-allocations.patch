@@ -192,7 +192,7 @@ index 6c486f1c04c9fed6e3a07e4d9aa1e79f8fdd7015..c697576d3ae22fbb7ae869fa099bffc8
          return ret;
      }
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index b56b41e696adc5f2485439676402e6084265aedd..6a36f6e498fbba976c5f1f48c3648e2e19d46ebc 100644
+index 2b035f3f62016ae2de052755b8e10846cbf1afc7..657fbc5e5d81b44fefc2d9d6c6bfe47f179a7843 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2774,7 +2774,7 @@ public class ServerGamePacketListenerImpl
@@ -283,7 +283,7 @@ index bfda76974ea8d4397e2c2ebf5bdcb5d7e5f0bab5..cabbc93409ca99180d115e2f23419ee1
              String[] strings = new String[pattern.size() - i3 - i2];
  
 diff --git a/net/minecraft/world/level/Level.java b/net/minecraft/world/level/Level.java
-index 51fa382b930ccbeb605064488ab4df985df94ed6..d732a021351d80210e6411565c7a5e9d1b277f0f 100644
+index 39e4a6237d105ea4a695659d5f47314184e44d75..b831f189bcee62a41a16017c2bb958aeee728984 100644
 --- a/net/minecraft/world/level/Level.java
 +++ b/net/minecraft/world/level/Level.java
 @@ -1849,7 +1849,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
@@ -305,7 +305,7 @@ index 51fa382b930ccbeb605064488ab4df985df94ed6..d732a021351d80210e6411565c7a5e9d
      // Paper end - rewrite chunk system
  
 diff --git a/net/minecraft/world/level/block/ComposterBlock.java b/net/minecraft/world/level/block/ComposterBlock.java
-index 5bc259ad1f9f56f4f596a4ae7b1b324b5e1219e6..0d34839618648bb8c606dd2d9b1f9db93641c742 100644
+index 86f9c284f434a16888beb60b89f460de2c0450a8..c8ffb634df661a6a4520731be725b51480764976 100644
 --- a/net/minecraft/world/level/block/ComposterBlock.java
 +++ b/net/minecraft/world/level/block/ComposterBlock.java
 @@ -410,7 +410,7 @@ public class ComposterBlock extends Block implements WorldlyContainerHolder {
@@ -317,7 +317,7 @@ index 5bc259ad1f9f56f4f596a4ae7b1b324b5e1219e6..0d34839618648bb8c606dd2d9b1f9db9
          }
  
          @Override
-@@ -446,7 +446,7 @@ public class ComposterBlock extends Block implements WorldlyContainerHolder {
+@@ -445,7 +445,7 @@ public class ComposterBlock extends Block implements WorldlyContainerHolder {
  
          @Override
          public int[] getSlotsForFace(Direction side) {
