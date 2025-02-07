@@ -2,9 +2,7 @@
 
 package net.caffeinemc.mods.lithium.common.world.chunk;
 
-import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.HashCommon;
-import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
@@ -15,6 +13,7 @@ import net.minecraft.network.VarInt;
 import net.minecraft.world.level.chunk.MissingPaletteEntryException;
 import net.minecraft.world.level.chunk.Palette;
 import net.minecraft.world.level.chunk.PaletteResize;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,11 +32,11 @@ public class LithiumHashPalette<T> implements Palette<T> {
     private final PaletteResize<T> resizeHandler;
     private final int indexBits;
 
-    private final Reference2IntMap<T> table;
+    private final Reference2IntOpenHashMap<T> table;
     private T[] entries;
     private int size = 0;
 
-    public LithiumHashPalette(IdMap<T> idList, PaletteResize<T> resizeHandler, int indexBits, T[] entries, Reference2IntMap<T> table, int size) {
+    private LithiumHashPalette(IdMap<T> idList, PaletteResize<T> resizeHandler, int indexBits, T[] entries, Reference2IntOpenHashMap<T> table, int size) {
         this.idList = idList;
         this.resizeHandler = resizeHandler;
         this.indexBits = indexBits;
@@ -68,7 +67,7 @@ public class LithiumHashPalette<T> implements Palette<T> {
     }
 
     @Override
-    public int idFor(T obj) {
+    public int idFor(@NotNull T obj) {
         int id = this.table.getInt(obj);
 
         if (id == ABSENT_VALUE) {
@@ -79,7 +78,7 @@ public class LithiumHashPalette<T> implements Palette<T> {
     }
 
     @Override
-    public boolean maybeHas(Predicate<T> predicate) {
+    public boolean maybeHas(@NotNull Predicate<T> predicate) {
         for (int i = 0; i < this.size; ++i) {
             if (predicate.test(this.entries[i])) {
                 return true;
@@ -123,7 +122,7 @@ public class LithiumHashPalette<T> implements Palette<T> {
     }
 
     @Override
-    public T valueFor(int id) {
+    public @NotNull T valueFor(int id) {
         T[] entries = this.entries;
 
         T entry = null;
@@ -158,7 +157,7 @@ public class LithiumHashPalette<T> implements Palette<T> {
         int entryCount = buf.readVarInt();
 
         for (int i = 0; i < entryCount; ++i) {
-            this.addEntry(this.idList.byId(buf.readVarInt()));
+            this.addEntry(this.idList.byIdOrThrow(buf.readVarInt()));
         }
     }
 
@@ -189,8 +188,8 @@ public class LithiumHashPalette<T> implements Palette<T> {
     }
 
     @Override
-    public Palette<T> copy(PaletteResize<T> resizeHandler) {
-        return new LithiumHashPalette<>(this.idList, resizeHandler, this.indexBits, this.entries.clone(), new Reference2IntOpenHashMap<>(this.table), this.size);
+    public @NotNull Palette<T> copy(@NotNull PaletteResize<T> resizeHandler) {
+        return new LithiumHashPalette<>(this.idList, resizeHandler, this.indexBits, this.entries.clone(), this.table.clone(), this.size);
     }
 
     private void clear() {
@@ -200,13 +199,8 @@ public class LithiumHashPalette<T> implements Palette<T> {
     }
 
     public List<T> getElements() {
-        ImmutableList.Builder<T> builder = new ImmutableList.Builder<>();
-        for (T entry : this.entries) {
-            if (entry != null) {
-                builder.add(entry);
-            }
-        }
-        return builder.build();
+        T[] copy = Arrays.copyOf(this.entries, this.size);
+        return Arrays.asList(copy);
     }
 
     public static <A> Palette<A> create(int bits, IdMap<A> idList, PaletteResize<A> listener, List<A> list) {
