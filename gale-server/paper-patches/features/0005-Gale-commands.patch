@@ -13,10 +13,10 @@ As part of: Paper (https://github.com/PaperMC/Paper)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 71d5313d0e57e3bc6a256d5384c3a79a8258ef24..cae67031e4ef7ac454373f4684b5730de8ba21a0 100644
+index 9094b8e3ff1d6d07e8a39d379e40a6da7e9888ed..32ac42ec69810470941c29f7add34d03e46b4712 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1119,6 +1119,7 @@ public final class CraftServer implements Server {
+@@ -1120,6 +1120,7 @@ public final class CraftServer implements Server {
          this.reloadData();
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
