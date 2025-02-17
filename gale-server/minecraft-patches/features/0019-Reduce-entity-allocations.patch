@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 3594240116d3b61dbf838490df7a30345d7d8925..72da610c4d0301ddf2940bbc067430d05ff46684 100644
+index a01491bc87d982adadd1890f72e31b893dfa7619..eee00c4d23a8b4c7e66d45d843ffc087fb183702 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
-@@ -360,6 +360,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -361,6 +361,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
          return this.originWorld;
      }
      // Paper end - Entity origin API
