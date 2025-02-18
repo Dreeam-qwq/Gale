@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/net/minecraft/commands/Commands.java b/net/minecraft/commands/Commands.java
-index 0853bd176aa9b583c967c3d868ee7eb32ce22d6f..2caa4f90e15b8cc6343187dbf7db58afd20a0273 100644
+index f8969a68cd352ce4fe5109205e78f5e19ab6e020..9a25fea61abf062571d1261a0d9664d02782377a 100644
 --- a/net/minecraft/commands/Commands.java
 +++ b/net/minecraft/commands/Commands.java
 @@ -55,7 +55,6 @@ import net.minecraft.server.commands.CloneCommands;
@@ -56,7 +56,7 @@ index 0853bd176aa9b583c967c3d868ee7eb32ce22d6f..2caa4f90e15b8cc6343187dbf7db58af
  import net.minecraft.util.profiling.jfr.JvmProfiler;
  import net.minecraft.world.flag.FeatureFlagSet;
  import net.minecraft.world.flag.FeatureFlags;
-@@ -159,7 +157,6 @@ public class Commands {
+@@ -164,7 +162,6 @@ public class Commands {
          DamageCommand.register(this.dispatcher, context);
          DataCommands.register(this.dispatcher);
          DataPackCommand.register(this.dispatcher);
@@ -64,7 +64,7 @@ index 0853bd176aa9b583c967c3d868ee7eb32ce22d6f..2caa4f90e15b8cc6343187dbf7db58af
          DefaultGameModeCommands.register(this.dispatcher);
          DifficultyCommand.register(this.dispatcher);
          EffectCommands.register(this.dispatcher, context);
-@@ -328,7 +325,6 @@ public class Commands {
+@@ -349,7 +346,6 @@ public class Commands {
      public void performCommand(ParseResults<CommandSourceStack> parseResults, String command, String label, boolean throwCommandError) {
          // Paper end
          CommandSourceStack commandSourceStack = parseResults.getContext().getSource();
@@ -72,7 +72,7 @@ index 0853bd176aa9b583c967c3d868ee7eb32ce22d6f..2caa4f90e15b8cc6343187dbf7db58af
          ContextChain contextChain = this.finishParsing(parseResults, command, commandSourceStack, label); // CraftBukkit // Paper - Add UnknownCommandEvent
  
          try {
-@@ -365,8 +361,6 @@ public class Commands {
+@@ -386,8 +382,6 @@ public class Commands {
                  commandSourceStack.sendFailure(Component.literal(Util.describeError(var12)));
                  LOGGER.error("'/{}' threw an exception", command, var12);
              }
@@ -81,7 +81,7 @@ index 0853bd176aa9b583c967c3d868ee7eb32ce22d6f..2caa4f90e15b8cc6343187dbf7db58af
          }
      }
  
-@@ -423,7 +417,7 @@ public class Commands {
+@@ -444,7 +438,7 @@ public class Commands {
              int max = Math.max(1, server.getGameRules().getInt(GameRules.RULE_MAX_COMMAND_CHAIN_LENGTH));
              int _int = server.getGameRules().getInt(GameRules.RULE_MAX_COMMAND_FORK_COUNT);
  
@@ -536,7 +536,7 @@ index d61dcc909a04fb024df509b88dbe5cd455aad622..8b42972dde96f04ba0de53e57e192edf
      public static class TickTimes {
          private final long[] times;
 diff --git a/net/minecraft/server/ReloadableServerResources.java b/net/minecraft/server/ReloadableServerResources.java
-index d56ade6f45057f8c056152c08ad6258a9716604d..432a29d3692669f49e453e289d52c70fe45e5564 100644
+index 84e2b940ab8301b789a01d5b739d69cb50db5bf4..f4205dca158f90450892af1223cc7912e494c05e 100644
 --- a/net/minecraft/server/ReloadableServerResources.java
 +++ b/net/minecraft/server/ReloadableServerResources.java
 @@ -98,7 +98,7 @@ public class ReloadableServerResources {
