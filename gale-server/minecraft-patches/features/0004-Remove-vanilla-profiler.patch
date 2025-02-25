@@ -681,10 +681,10 @@ index a3192400b37274620977e5a40d4283bfec3ab9b3..f23b17416eadc0e800ca34918ac78c03
          String string = String.format(
              Locale.ROOT, "%s-%s-%s", Util.getFilenameFormattedDateTime(), server.getWorldData().getLevelName(), SharedConstants.getCurrentVersion().getId()
 diff --git a/net/minecraft/server/dedicated/DedicatedServer.java b/net/minecraft/server/dedicated/DedicatedServer.java
-index f4a8c7fe830495434f06d45c1a4505e4ea536804..baa92ab485928b2e57adb14af00f7e6120694184 100644
+index 7b54f1842dd455ecf96aa1534b38d3b86b3bcc01..ba82d2e69d40feb834923c3d0980285d8d489359 100644
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -798,12 +798,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -800,12 +800,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          return this.settings.getProperties().serverResourcePackInfo;
      }
  
@@ -888,7 +888,7 @@ index 6540b2d6a1062d883811ce240c49d30d1925b291..9500fc2f841819b0d40e8a6e48353bb2
          }
  
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index c5395407ab506814232fb1f41fd02aa6d2d02377..99a6ca429e4c0749465d256d4228d9ee0c77dd7f 100644
+index 234c16344c325151d307ee19ca57739ecf73056c..4bc5a4f14a84364720c60fc91e9bf53ef1b1832c 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -77,8 +77,6 @@ import net.minecraft.util.ProgressListener;

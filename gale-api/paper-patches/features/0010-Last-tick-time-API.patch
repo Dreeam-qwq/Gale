@@ -23,7 +23,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index d23700abf825d29832ee99d091faf693d4c381e9..4d0ec80ace15ab46e888a3f6e7452842bda8c60c 100644
+index be4c4b204638a3783db54accab2f0d2fb185fa21..e4db2817be2411116ff29cc85ce97e515eb6e51f 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -3032,6 +3032,20 @@ public final class Bukkit {
@@ -44,14 +44,14 @@ index d23700abf825d29832ee99d091faf693d4c381e9..4d0ec80ace15ab46e888a3f6e7452842
 +    }
 +    // Gale end - YAPFA - last tick time - API
 +
-     @NotNull
-     public static Server.Spigot spigot() {
-         return server.spigot();
+     /**
+      * @deprecated All methods on this class have been deprecated, see the individual methods for replacements.
+      */
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index cbb77e090b6268407d43692a0f4ea521545c7585..f7cbfdfca459f9b42ec6bd7ae1b412ce2757c2fe 100644
+index a31eec6def3ccb1bd11fa2f0f1cb693b75756849..3446d5bb24fac345b65ac78927155f60fe437b2c 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -2710,4 +2710,29 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -2750,4 +2750,29 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
       */
      void allowPausing(@NotNull org.bukkit.plugin.Plugin plugin, boolean value);
      // Paper end - API to check if the server is sleeping

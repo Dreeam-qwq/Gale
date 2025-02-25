@@ -53,8 +53,8 @@
      implementation("ca.spottedleaf:concurrentutil:0.0.3")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -176,26 +_,36 @@
-     implementation("me.lucko:spark-paper:1.10.119-SNAPSHOT")
+@@ -177,26 +_,36 @@
+     implementation("me.lucko:spark-paper:1.10.119-20241121.092015-1")
  }
  
 +// Gale start - hide irrelevant compilation warnings
@@ -96,7 +96,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -281,6 +_,8 @@
+@@ -282,6 +_,8 @@
      val memoryGb = providers.gradleProperty("paper.runMemoryGb").getOrElse("2")
      minHeapSize = "${memoryGb}G"
      maxHeapSize = "${memoryGb}G"
@@ -105,7 +105,7 @@
  
      doFirst {
          workingDir.mkdirs()
-@@ -326,3 +_,62 @@
+@@ -327,3 +_,62 @@
      classpath(tasks.createReobfPaperclipJar.flatMap { it.outputZip })
      mainClass.set(null as String?)
  }

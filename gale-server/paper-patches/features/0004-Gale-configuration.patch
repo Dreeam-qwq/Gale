@@ -144,7 +144,7 @@ index 05339a176083af667c16f77d76dc1878dafce3f0..9ca55cba185b9de566f911b08d671bee
      }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index cf5bcb0ebc79c318d106695e39ad2883a5734aa1..9094b8e3ff1d6d07e8a39d379e40a6da7e9888ed 100644
+index a0a1ed48f67f238c492d4acdd3b21147595df9e2..bdb674f238fb2d24774c6af96fe6a3828346a18f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1088,6 +1088,7 @@ public final class CraftServer implements Server {
@@ -169,4 +169,4 @@ index cf5bcb0ebc79c318d106695e39ad2883a5734aa1..9094b8e3ff1d6d07e8a39d379e40a6da
 +
          @Override
          public void restart() {
-             org.spigotmc.RestartCommand.restart();
+             CraftServer.this.restart();
