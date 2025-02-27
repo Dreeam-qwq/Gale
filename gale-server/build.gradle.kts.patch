@@ -73,7 +73,7 @@
          val mcVersion = rootProject.providers.gradleProperty("mcVersion").get()
          val build = System.getenv("BUILD_NUMBER") ?: null
 -        val buildTime = if (build != null) Instant.now() else Instant.EPOCH
-+        val buildTime = Instant.now() // Gale - branding changes - we don't have ci yet
++        val buildTime = Instant.now() // Gale - branding changes - Always use current as build time
          val gitHash = git.exec(providers, "rev-parse", "--short=7", "HEAD").get().trim()
          val implementationVersion = "$mcVersion-${build ?: "DEV"}-$gitHash"
          val date = git.exec(providers, "show", "-s", "--format=%ci", gitHash).get().trim()
