@@ -1349,7 +1349,7 @@ index 379488fe40a4c9e7060b88f39f73e6ebbc88ad35..a01491bc87d982adadd1890f72e31b89
          }
      }
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index d87e31572aa85bffc62dc017520dd408560f79b4..457a03d237f083d23b223803c9e90aa8dbe6c5dd 100644
+index 4546aca8e2e144ec207653c713fc49f849908827..de2ed0f7850a35a5a204ca10122ac79d0060f741 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
 @@ -72,8 +72,6 @@ import net.minecraft.tags.FluidTags;
@@ -1378,7 +1378,7 @@ index d87e31572aa85bffc62dc017520dd408560f79b4..457a03d237f083d23b223803c9e90aa8
      }
  
      @Override
-@@ -3176,11 +3171,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3183,11 +3178,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.run = this.run + (f3 - this.run) * 0.3F;
@@ -1390,7 +1390,7 @@ index d87e31572aa85bffc62dc017520dd408560f79b4..457a03d237f083d23b223803c9e90aa8
  
          // Paper start - stop large pitch and yaw changes from crashing the server
          this.yRotO += Math.round((this.getYRot() - this.yRotO) / 360.0F) * 360.0F;
-@@ -3191,7 +3182,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3198,7 +3189,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
  
          this.yHeadRotO += Math.round((this.yHeadRot - this.yHeadRotO) / 360.0F) * 360.0F;
  
@@ -1398,7 +1398,7 @@ index d87e31572aa85bffc62dc017520dd408560f79b4..457a03d237f083d23b223803c9e90aa8
          this.animStep += f2;
          if (this.isFallFlying()) {
              this.fallFlyTicks++;
-@@ -3403,20 +3393,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3410,20 +3400,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.setDeltaMovement(d, d1, d2);
@@ -1419,7 +1419,7 @@ index d87e31572aa85bffc62dc017520dd408560f79b4..457a03d237f083d23b223803c9e90aa8
          if (this.jumping && this.isAffectedByFluids()) {
              double fluidHeight;
              if (this.isInLava()) {
-@@ -3445,8 +3429,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3452,8 +3436,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.noJumpDelay = 0;
          }
  
@@ -1428,7 +1428,7 @@ index d87e31572aa85bffc62dc017520dd408560f79b4..457a03d237f083d23b223803c9e90aa8
          this.xxa *= 0.98F;
          this.zza *= 0.98F;
          if (this.isFallFlying()) {
-@@ -3470,8 +3452,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3477,8 +3459,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.calculateEntityAnimation(this instanceof FlyingAnimal);
@@ -1437,7 +1437,7 @@ index d87e31572aa85bffc62dc017520dd408560f79b4..457a03d237f083d23b223803c9e90aa8
          if (!this.level().isClientSide && !this.isDeadOrDying() && !this.freezeLocked) { // Paper - Freeze Tick Lock API
              int ticksFrozen = this.getTicksFrozen();
              if (this.isInPowderSnow && this.canFreeze()) {
-@@ -3487,15 +3467,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3494,15 +3474,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.hurtServer(serverLevel, this.damageSources().freeze(), 1.0F);
          }
  
