@@ -25,10 +25,10 @@ index dff1e84584c66045c58f0a6fe8102a27a54716a6..6efb636b0a4443daa4861d35116905d5
      public boolean isRealPlayer; // Paper
      public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 6dd3de8544c9d62bc3af1bef535a11b9878d1b75..f4708bd41f4036faf48e3916ec5675ec43eff394 100644
+index cc7d0dde2ec7b0cc1656295291eba95e6fa0d70f..fc77b81dd87162129742963ea633b19250062b2c 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2332,7 +2332,7 @@ public class ServerGamePacketListenerImpl
+@@ -2334,7 +2334,7 @@ public class ServerGamePacketListenerImpl
              this.disconnectAsync(Component.translatable("multiplayer.disconnect.illegal_characters"), org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_CHARACTERS); // Paper - add proper async disconnect
          } else if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
              this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
@@ -38,7 +38,7 @@ index 6dd3de8544c9d62bc3af1bef535a11b9878d1b75..f4708bd41f4036faf48e3916ec5675ec
              // CraftBukkit start
              if (sync) {
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index fad7f9a80ad79e377d76d1c3a054300183f4a5b6..9b17f42afc0e3e3629382c000d7a4414053783f3 100644
+index 1fd2c7988ebb276a8ee68455d0090e7acd473ba7..22a083de59e429aca7e7f647cae7b54735efb9a1 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
 @@ -330,6 +330,8 @@ public abstract class PlayerList {

@@ -179,7 +179,7 @@ index 68727deaedd55aa86e76fbc6cc2cfb67913f7add..bad5787de2034dbb0eabb9458a47a89e
      private static final Codec<Object> ARG_CODEC = Codec.either(PRIMITIVE_ARG_CODEC, ComponentSerialization.CODEC)
          .xmap(
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 6c486f1c04c9fed6e3a07e4d9aa1e79f8fdd7015..c697576d3ae22fbb7ae869fa099bffc8ac5cb2e5 100644
+index acb1168aba0069f9ac7f47d96f0f4945b37c3888..148be9d5e10d7a770814a10dc40bfb70b71d4021 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -1224,7 +1224,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
@@ -192,10 +192,10 @@ index 6c486f1c04c9fed6e3a07e4d9aa1e79f8fdd7015..c697576d3ae22fbb7ae869fa099bffc8
          return ret;
      }
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 2b035f3f62016ae2de052755b8e10846cbf1afc7..657fbc5e5d81b44fefc2d9d6c6bfe47f179a7843 100644
+index df6f3fb2d2f9b51afbfff8ec41d286cb7d0cde84..32bee1b855766d02905aca495db065f015e37385 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2774,7 +2774,7 @@ public class ServerGamePacketListenerImpl
+@@ -2776,7 +2776,7 @@ public class ServerGamePacketListenerImpl
                                          target.refreshEntityData(ServerGamePacketListenerImpl.this.player);
                                          // SPIGOT-7136 - Allays
                                          if (target instanceof Allay || target instanceof net.minecraft.world.entity.animal.horse.AbstractHorse) { // Paper - Fix horse armor desync
