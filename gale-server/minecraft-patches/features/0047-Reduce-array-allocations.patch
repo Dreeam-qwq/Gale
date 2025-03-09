@@ -192,10 +192,10 @@ index acb1168aba0069f9ac7f47d96f0f4945b37c3888..148be9d5e10d7a770814a10dc40bfb70
          return ret;
      }
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index df6f3fb2d2f9b51afbfff8ec41d286cb7d0cde84..32bee1b855766d02905aca495db065f015e37385 100644
+index 52cb71a46161fd8b910b4b9afde2cb489c3a3c8b..d2b3f0a45c70f06fa7ff5c291cf3f79e9b264a09 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2776,7 +2776,7 @@ public class ServerGamePacketListenerImpl
+@@ -2784,7 +2784,7 @@ public class ServerGamePacketListenerImpl
                                          target.refreshEntityData(ServerGamePacketListenerImpl.this.player);
                                          // SPIGOT-7136 - Allays
                                          if (target instanceof Allay || target instanceof net.minecraft.world.entity.animal.horse.AbstractHorse) { // Paper - Fix horse armor desync
