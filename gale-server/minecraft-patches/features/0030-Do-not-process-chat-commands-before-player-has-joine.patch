@@ -13,10 +13,10 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
-index dff1e84584c66045c58f0a6fe8102a27a54716a6..6efb636b0a4443daa4861d35116905d54549e864 100644
+index c11150dada66888e5332ec88d153dea3eca2aa3e..8a20de0780dbcec5f228f549a4134fce9714d170 100644
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
-@@ -386,6 +386,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -393,6 +393,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
      public boolean joining = true;
      public boolean sentListPacket = false;
      public boolean supressTrackerForLogin = false; // Paper - Fire PlayerJoinEvent when Player is actually ready
@@ -25,7 +25,7 @@ index dff1e84584c66045c58f0a6fe8102a27a54716a6..6efb636b0a4443daa4861d35116905d5
      public boolean isRealPlayer; // Paper
      public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index bac7225ea6095a746a71d5be2ba4bf147971827b..aab9786db66740d281cf0be3ad921ccdfbc8c27e 100644
+index 5582c7045a78bd69091c3bd72d221c8cbc90da6f..fdffb9dac6bba5562f584e63d52ecf45383214ab 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2342,7 +2342,7 @@ public class ServerGamePacketListenerImpl
@@ -38,7 +38,7 @@ index bac7225ea6095a746a71d5be2ba4bf147971827b..aab9786db66740d281cf0be3ad921ccd
              // CraftBukkit start
              if (sync) {
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index 1fd2c7988ebb276a8ee68455d0090e7acd473ba7..22a083de59e429aca7e7f647cae7b54735efb9a1 100644
+index d37df76d08d53374f862de400a379f8b76e9f241..6ed4b7c5315d7bbeefc94f1320f52e5189f93518 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
 @@ -330,6 +330,8 @@ public abstract class PlayerList {

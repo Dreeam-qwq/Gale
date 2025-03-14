@@ -26,10 +26,10 @@ index d381800ad054be6b054dcca43fbe80d3f0c0c771..5904b9d985487ff8bd1f330667c43096
              double d1 = center.y - maxRange;
              double d2 = center.x + maxRange;
 diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
-index e676e2082700a2bdc2a93b0a356e4f6b1000776e..e56e930df980613a13f92d771f1036eba82b1d19 100644
+index b44cb6db29668767d0f092ddb6382f4b2baf72b8..f51d699461f5aef81e1187a4068c78f844e83878 100644
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
-@@ -461,7 +461,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -468,7 +468,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
              long l1 = l * l;
              int i = l1 > 2147483647L ? Integer.MAX_VALUE : (int)l1;
              int coprime = this.getCoprime(i);
@@ -73,7 +73,7 @@ index 1e012c7ef699a64ff3f1b00f897bb893ab25ecbd..800db05c1d2f2452a9e8ab7532f5ec10
  
      public FishingHook(EntityType<? extends FishingHook> entityType, Level level) {
 diff --git a/net/minecraft/world/entity/raid/Raid.java b/net/minecraft/world/entity/raid/Raid.java
-index 27234627933ccaa70b2c51a792efb2e68104a84f..7b0de83f1eb79007c6fe0ecf00660143781d1aa6 100644
+index 536c84362d3e74a5bf0e0494483da3c0e9b26f0b..b83fbdb3093dbd56a9e707a652074d0b6033a761 100644
 --- a/net/minecraft/world/entity/raid/Raid.java
 +++ b/net/minecraft/world/entity/raid/Raid.java
 @@ -99,7 +99,7 @@ public class Raid {

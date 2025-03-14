@@ -888,7 +888,7 @@ index 6540b2d6a1062d883811ce240c49d30d1925b291..9500fc2f841819b0d40e8a6e48353bb2
          }
  
 diff --git a/net/minecraft/server/level/ServerLevel.java b/net/minecraft/server/level/ServerLevel.java
-index 234c16344c325151d307ee19ca57739ecf73056c..4bc5a4f14a84364720c60fc91e9bf53ef1b1832c 100644
+index 3223cbb7b6407bdd0e574688e2e5de2947af6ec9..6f568698939b5d995da0fa2cc493b5d513634318 100644
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
 @@ -77,8 +77,6 @@ import net.minecraft.util.ProgressListener;
@@ -1069,7 +1069,7 @@ index 234c16344c325151d307ee19ca57739ecf73056c..4bc5a4f14a84364720c60fc91e9bf53e
              for (Entity entity : passengerEntity.getPassengers()) {
                  this.tickPassenger(passengerEntity, entity, isActive); // Paper - EAR 2
 diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
-index 57d432dc9e8d8e9a3e088e7c40b35178c30fe786..dff1e84584c66045c58f0a6fe8102a27a54716a6 100644
+index 3de65c4025be91d938a350c884975cb6edc234d3..c11150dada66888e5332ec88d153dea3eca2aa3e 100644
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
 @@ -96,8 +96,6 @@ import net.minecraft.tags.FluidTags;
@@ -1081,7 +1081,7 @@ index 57d432dc9e8d8e9a3e088e7c40b35178c30fe786..dff1e84584c66045c58f0a6fe8102a27
  import net.minecraft.world.Container;
  import net.minecraft.world.Difficulty;
  import net.minecraft.world.InteractionHand;
-@@ -1426,14 +1424,10 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -1433,14 +1431,10 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
                  this.unsetRemoved();
                  */
                  // CraftBukkit end
@@ -1096,7 +1096,7 @@ index 57d432dc9e8d8e9a3e088e7c40b35178c30fe786..dff1e84584c66045c58f0a6fe8102a27
                  // CraftBukkit start
                  this.isChangingDimension = true; // CraftBukkit - Set teleport invulnerability only if player changing worlds
                  LevelData worlddata = level.getLevelData();
-@@ -1450,7 +1444,6 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -1457,7 +1451,6 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
                  this.connection.internalTeleport(PositionMoveRotation.of(teleportTransition), teleportTransition.relatives()); // CraftBukkit - use internal teleport without event
                  this.connection.resetPosition();
                  level.addDuringTeleport(this);
@@ -1223,7 +1223,7 @@ index 64b0508ef21952c65b0b967b756b2a4c64d96899..b6b03fbbd669e6331b30255df5419611
  
      protected abstract T prepare(ResourceManager resourceManager, ProfilerFiller profiler);
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 379488fe40a4c9e7060b88f39f73e6ebbc88ad35..a01491bc87d982adadd1890f72e31b893dfa7619 100644
+index f6a06336fa12d26ea88d1543aed8f9d41c71b949..e4ec46fdb3b3db47476cd09be767689f6f7d884f 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -78,8 +78,6 @@ import net.minecraft.tags.FluidTags;
@@ -1454,7 +1454,7 @@ index 4546aca8e2e144ec207653c713fc49f849908827..de2ed0f7850a35a5a204ca10122ac79d
          if (((ServerLevel) this.level()).hasEntityMoveEvent && !(this instanceof Player)) {
              if (this.xo != this.getX() || this.yo != this.getY() || this.zo != this.getZ() || this.yRotO != this.getYRot() || this.xRotO != this.getXRot()) {
 diff --git a/net/minecraft/world/entity/Mob.java b/net/minecraft/world/entity/Mob.java
-index 1ed07fd23985a6bf8cf8300f74c92b7531a79fc6..2568a7f2459ed783d4612546b86d46721d48a396 100644
+index e330bf990e4874baed1b21cd8c9b44d66ec5b823..49f4d8d4cc36669f889d9970d1dfdf3af4a720ce 100644
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
 @@ -33,8 +33,6 @@ import net.minecraft.sounds.SoundEvent;

@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index 23645f84f705bfbea29d7eaeaca84d0b115aae5a..a0d56fcd58f943353b55821557d79c4dc0cdf46b 100644
+index 6ed4b7c5315d7bbeefc94f1320f52e5189f93518..7b8cc9e29bf021ce3b73803e820ee9b7926e05da 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -1258,7 +1258,7 @@ public abstract class PlayerList {
+@@ -1263,7 +1263,7 @@ public abstract class PlayerList {
      public void broadcastChatMessage(PlayerChatMessage message, Predicate<ServerPlayer> shouldFilterMessageTo, @Nullable ServerPlayer sender, ChatType.Bound boundChatType, @Nullable Function<net.kyori.adventure.audience.Audience, Component> unsignedFunction) {
          // Paper end
          boolean flag = this.verifyChatTrusted(message);
