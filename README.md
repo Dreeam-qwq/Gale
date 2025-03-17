@@ -1,3 +1,7 @@
+> [!WARNING]
+> Gale has been merged into [Leaf](https://github.com/Winds-Studio/Leaf) since Minecraft 1.21.5
+> This repository is archived and won't receive any updates or bug fixes!
+
 <img src="logo.png" alt="Gale logo" align="right" width="26%">
 <div align="center">
   <h1>Gale</h1>
