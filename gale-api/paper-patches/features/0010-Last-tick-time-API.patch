@@ -23,10 +23,10 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index be4c4b204638a3783db54accab2f0d2fb185fa21..e4db2817be2411116ff29cc85ce97e515eb6e51f 100644
+index 1cea2ffd44b02927f6d1b3a3b0e44346870c973f..4328764f428824078136dc761bd234d01d4bec1e 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -3032,6 +3032,20 @@ public final class Bukkit {
+@@ -3033,6 +3033,20 @@ public final class Bukkit {
      }
      // Paper end - Folia region threading API
  
@@ -48,7 +48,7 @@ index be4c4b204638a3783db54accab2f0d2fb185fa21..e4db2817be2411116ff29cc85ce97e51
       * @deprecated All methods on this class have been deprecated, see the individual methods for replacements.
       */
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index a31eec6def3ccb1bd11fa2f0f1cb693b75756849..3446d5bb24fac345b65ac78927155f60fe437b2c 100644
+index ae382fc53b0c8544f55dc0f811f05d7a39a8980c..45dc5c9775c0a70452f91c401acbbe91168875c7 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -2750,4 +2750,29 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
