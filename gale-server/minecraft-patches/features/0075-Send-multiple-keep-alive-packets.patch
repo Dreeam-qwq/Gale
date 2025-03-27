@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 2b059bff0d24b52b106a0af4b7e79818f385596e..ea34bb4913e7357f5b76a64443f7e744abdf7b5e 100644
+index 9133ede1cfac62d3ece698dae2de43039e3ca7d9..060becd4c0b7aa399496ad70ba28cb3449cfaea3 100644
 --- a/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -40,6 +40,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
@@ -85,7 +85,7 @@ index 2b059bff0d24b52b106a0af4b7e79818f385596e..ea34bb4913e7357f5b76a64443f7e744
      }
  
      @Override
-@@ -236,6 +251,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -240,6 +255,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          // Paper start - give clients a longer time to respond to pings as per pre 1.12.2 timings
          // This should effectively place the keepalive handling back to "as it was" before 1.12.2
          final long elapsedTime = millis - this.keepAliveTime;
@@ -107,7 +107,7 @@ index 2b059bff0d24b52b106a0af4b7e79818f385596e..ea34bb4913e7357f5b76a64443f7e744
          if (!this.isSingleplayerOwner() && elapsedTime >= 15000L) { // use vanilla's 15000L between keep alive packets
              if (this.keepAlivePending) {
                  if (!this.processedDisconnect && elapsedTime >= KEEPALIVE_LIMIT) { // check keepalive limit, don't fire if already disconnected
-@@ -249,6 +279,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -253,6 +283,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
                  this.send(new ClientboundKeepAlivePacket(this.keepAliveChallenge));
              }
          }
