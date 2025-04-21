@@ -1069,7 +1069,7 @@ index 3223cbb7b6407bdd0e574688e2e5de2947af6ec9..6f568698939b5d995da0fa2cc493b5d5
              for (Entity entity : passengerEntity.getPassengers()) {
                  this.tickPassenger(passengerEntity, entity, isActive); // Paper - EAR 2
 diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
-index 3de65c4025be91d938a350c884975cb6edc234d3..c11150dada66888e5332ec88d153dea3eca2aa3e 100644
+index dece7eb69603ffc8e50e8096cb07c02a897bf49e..4f16ca4ba80391807db7aa8a9dd939f9eb0f0334 100644
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
 @@ -96,8 +96,6 @@ import net.minecraft.tags.FluidTags;
@@ -1081,7 +1081,7 @@ index 3de65c4025be91d938a350c884975cb6edc234d3..c11150dada66888e5332ec88d153dea3
  import net.minecraft.world.Container;
  import net.minecraft.world.Difficulty;
  import net.minecraft.world.InteractionHand;
-@@ -1433,14 +1431,10 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -1434,14 +1432,10 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
                  this.unsetRemoved();
                  */
                  // CraftBukkit end
@@ -1096,7 +1096,7 @@ index 3de65c4025be91d938a350c884975cb6edc234d3..c11150dada66888e5332ec88d153dea3
                  // CraftBukkit start
                  this.isChangingDimension = true; // CraftBukkit - Set teleport invulnerability only if player changing worlds
                  LevelData worlddata = level.getLevelData();
-@@ -1457,7 +1451,6 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -1458,7 +1452,6 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
                  this.connection.internalTeleport(PositionMoveRotation.of(teleportTransition), teleportTransition.relatives()); // CraftBukkit - use internal teleport without event
                  this.connection.resetPosition();
                  level.addDuringTeleport(this);

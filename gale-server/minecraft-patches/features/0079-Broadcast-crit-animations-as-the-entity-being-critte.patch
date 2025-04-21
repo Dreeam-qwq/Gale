@@ -13,10 +13,10 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
-index 8a20de0780dbcec5f228f549a4134fce9714d170..b44cb6db29668767d0f092ddb6382f4b2baf72b8 100644
+index 7b74e2ea24b248685ab7c09dd07ddc57ed596fd6..998d3b40cc426e6c3a8c332ef306a81863f77497 100644
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
-@@ -2157,12 +2157,18 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -2158,12 +2158,18 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
  
      @Override
      public void crit(Entity entityHit) {
