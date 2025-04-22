@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/net/minecraft/world/entity/Entity.java b/net/minecraft/world/entity/Entity.java
-index 479e6162f9e9783b9e20fac238b3d8a9fc583c44..6bb24d659e1b325337da82c649a9b4b641851b62 100644
+index 872247eda4cd86f8592b078a9cd9349f338dd09b..5c6ccbd74fcb55d17073fd4a1618d5d06f049bae 100644
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
 @@ -4676,6 +4676,16 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -28,7 +28,7 @@ index 479e6162f9e9783b9e20fac238b3d8a9fc583c44..6bb24d659e1b325337da82c649a9b4b6
          return this.chunkPosition;
      }
 diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
-index 538183d980de59b010fadacf9bf902bd4e9d1ec5..368f1c1028f92bcf6c03bdc6a7435fe25f63f288 100644
+index bb3805c6f66d31d963d6c18e8e1ed387a7a0b10e..10dbc84a700fd982e0a93c464f0b6f94620e3bea 100644
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
 @@ -2029,8 +2029,17 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -65,8 +65,9 @@ index 538183d980de59b010fadacf9bf902bd4e9d1ec5..368f1c1028f92bcf6c03bdc6a7435fe2
              return false;
          } else {
              BlockPos blockPos = this.blockPosition();
-             BlockState inBlockState = this.getInBlockState();
+-            BlockState inBlockState = this.getInBlockState();
 +            // Gale start - don't load chunks to activate climbing entities
++            BlockState inBlockState;
 +            if (loadChunk) {
 +                inBlockState = this.getInBlockState();
 +            } else {
