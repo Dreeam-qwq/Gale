@@ -13,10 +13,10 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
-index c11150dada66888e5332ec88d153dea3eca2aa3e..8a20de0780dbcec5f228f549a4134fce9714d170 100644
+index 1777ce19cf6365781327536d4bf2ad3a1a45f9c4..ab92c06c9157bf6960342e9c009051442b96b4a0 100644
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
-@@ -393,6 +393,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+@@ -386,6 +386,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
      public boolean joining = true;
      public boolean sentListPacket = false;
      public boolean supressTrackerForLogin = false; // Paper - Fire PlayerJoinEvent when Player is actually ready
@@ -25,7 +25,7 @@ index c11150dada66888e5332ec88d153dea3eca2aa3e..8a20de0780dbcec5f228f549a4134fce
      public boolean isRealPlayer; // Paper
      public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 5582c7045a78bd69091c3bd72d221c8cbc90da6f..fdffb9dac6bba5562f584e63d52ecf45383214ab 100644
+index ef290bc7c5572681fb900e4b924fe142542ff7de..0471329eae9295d34f36e92e7092af3b005182bf 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2342,7 +2342,7 @@ public class ServerGamePacketListenerImpl
