@@ -46,8 +46,21 @@ out/
 # other stuff
 run/
 
-gale-server
-gale-api
+gale-server/.gradle/
+gale-server/build/
+gale-server/classes/
+gale-server/generated/
+gale-server/libs/
+gale-server/tmp/
+gale-server/src/minecraft/
+gale-api/.gradle/
+gale-api/build/
+gale-api/classes/
+gale-api/generated/
+gale-api/libs/
+gale-api/tmp/
 
+paper-api/
+paper-server/
 
 !gradle/wrapper/gradle-wrapper.jar
