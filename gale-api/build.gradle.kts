@@ -17,9 +17,13 @@ val bungeeCordChatVersion = "1.21-R0.2-deprecated+build.21"
 val slf4jVersion = "2.0.17"
 val log4jVersion = "2.26.0"
 
-val apiAndDocs: Configuration by configurations.creating
-configurations.api {
-    extendsFrom(apiAndDocs)
+val apiAndDocs: Configuration by configurations.creating {
+    attributes {
+        attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.DOCUMENTATION))
+        attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        attribute(DocsType.DOCS_TYPE_ATTRIBUTE, objects.named(DocsType.SOURCES))
+        attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
+    }
 }
 val javadocSourcepath: Configuration by configurations.creating {
     attributes {
@@ -28,6 +32,9 @@ val javadocSourcepath: Configuration by configurations.creating {
         attribute(DocsType.DOCS_TYPE_ATTRIBUTE, objects.named(DocsType.SOURCES))
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
     }
+}
+configurations.api {
+    extendsFrom(apiAndDocs)
 }
 
 // Configure mockito agent that is needed in newer Java versions
@@ -94,7 +101,8 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
 }
 
-val generatedDir: java.nio.file.Path = layout.projectDirectory.dir("src/generated/java").asFile.toPath()
+val generatedDir: java.nio.file.Path =
+    rootProject.layout.projectDirectory.dir("paper-api/src/generated/java").asFile.toPath()
 idea {
     module {
         generatedSourceDirs.add(generatedDir.toFile())
@@ -103,19 +111,19 @@ idea {
 sourceSets {
     main {
         java {
-            srcDir("../paper-api/src/main/java")
-            srcDir("../paper-api/src/generated/java")
+            srcDir(generatedDir)
+            srcDir(file("../paper-api/src/main/java"))
         }
         resources {
-            srcDir("../paper-api/src/main/resources")
+            srcDir(file("../paper-api/src/main/resources"))
         }
     }
     test {
         java {
-            srcDir("../paper-api/src/test/java")
+            srcDir(file("../paper-api/src/test/java"))
         }
         resources {
-            srcDir("../paper-api/src/test/resources")
+            srcDir(file("../paper-api/src/test/resources"))
         }
     }
 }
@@ -259,18 +267,4 @@ val scanJarForBadCalls by tasks.registering(io.papermc.paperweight.tasks.ScanJar
 }
 tasks.check {
     dependsOn(scanJarForBadCalls)
-}
-// Gale start - hide irrelevant compilation warnings
-tasks.withType<JavaCompile> {
-    val compilerArgs = options.compilerArgs
-    compilerArgs.add("-Xlint:-module")
-    compilerArgs.add("-Xlint:-removal")
-    compilerArgs.add("-Xlint:-dep-ann")
-    compilerArgs.add("--add-modules=jdk.incubator.vector")
-}
-// Gale end - hide irrelevant compilation warnings
-tasks.jar {
-    from("${project.projectDir}/LICENSE.txt") {
-        into("")
-    }
 }
