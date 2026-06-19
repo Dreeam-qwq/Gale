@@ -22,11 +22,14 @@ jobs:
       - name: Configure Git user details
         run: git config --global user.email "no-reply@github.com" && git config --global user.name "Github Actions"
       - name: Apply patches
-        run: ./gradlew applyPatches
+        run: ./gradlew applyAllPatches
       - name: Create Paperclip jar
-        run: ./gradlew createReobfPaperclipJar
+        run: ./gradlew :gale-server:createPaperclipJar --stacktrace
+      - name: Rename and move JAR
+        run: mv gale-server/build/libs/gale-paperclip-*.jar gale-$(basename gale-server/build/libs/gale-paperclip-*.jar | sed -E 's/^gale-paperclip-(.*)\.jar$/\1/').jar
       - name: Upload Paperclip jar
         uses: actions/upload-artifact@v4
         with:
           name: Gale
-          path: build/libs/gale-paperclip-*-reobf.jar
+          path: build/libs/gale-*.jar
+          archive: false
