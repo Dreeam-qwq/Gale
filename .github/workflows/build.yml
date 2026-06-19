@@ -31,5 +31,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Gale
-          path: build/libs/gale-*.jar
+          path: gale-*.jar
           archive: false
