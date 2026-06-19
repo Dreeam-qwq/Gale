@@ -60,6 +60,8 @@ gale-api/generated/
 gale-api/libs/
 gale-api/tmp/
 
+gale-api/build.gradle.kts
+
 paper-api/
 paper-server/
 
