@@ -2,27 +2,22 @@
 <div align="center">
   <h1>Gale</h1>
   <h3>A Minecraft server fork of <a href="https://github.com/PaperMC/Paper">Paper</a></h3>
-  <h5><i>In active testing - reporting any issues you encounter is highly appreciated!</i></h5>
+  <h5><i>Minecraft 1.21.4 (Paper 26.2) - Port in progress</i></h5>
 
 [![Discord](https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge)](https://discord.com/invite/gwezNT8c24)
 </div>
 
 ## About
 
-Gale is a fork of [Paper](https://github.com/PaperMC/Paper). It is intended to provide strong performance.
-The project is in open alpha.
+Gale is a fork of [Paper](https://github.com/PaperMC/Paper) focused on reliable performance.
+Currently being ported to Minecraft 1.21.4 (Paper 26.2).
 
 ## Current features
 
-* **Faster threading system**\
-  Gale comes with a custom threading system, that immediately makes terrain generation 2-3x faster than Paper on most systems!\
-  (this is up to 1.19 only, working on rewriting it to 1.20 too but there were some chunk system changes related to Folia, my apologies)
 * **Micro-optimizations**\
-  A number of micro-optimizations that do not change game mechanics from other projects, such as [Airplane](https://github.com/TECHNOVE/Airplane) and [Lithium](https://github.com/CaffeineMC/lithium-fabric), are also included. Every included optimization has been carefully tested and reviewed line-by-line; faulty or risky optimizations will not be added.
-* **Fixes and options**\
-  Gale contains fixes for a few small Minecraft bugs from [Purpur](https://github.com/PurpurMC/Purpur), options to disable some console logs, the option to re-enable sand duping, and more. Every change is fully configurable, and can always be set to Paper behavior.
-* **Variable entity wake-up**\
-  Waking up inactive entities happens spread over time, instead of many entities at once, which makes entities feel and behave more natural.
+  Carefully reviewed optimizations that do not change game mechanics. Every patch is verified line-by-line before inclusion.
+* **Branding**\
+  Server identifies as Gale, with appropriate branding in console, watchdog, and version output.
 
 ## Contributing
 

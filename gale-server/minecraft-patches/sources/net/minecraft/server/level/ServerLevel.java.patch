@@ -1,0 +1,34 @@
+--- a/net/minecraft/server/level/ServerLevel.java
++++ b/net/minecraft/server/level/ServerLevel.java
+@@ -1716,6 +1716,13 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+ 
+     @Override
+     public void destroyBlockProgress(final int id, final BlockPos blockPos, final int progress) {
++        // Gale start - reduce block destruction packet allocations
++        var players = this.server.getPlayerList().getPlayers();
++        if (players.isEmpty()) {
++            return;
++        }
++        ClientboundBlockDestructionPacket packet = new ClientboundBlockDestructionPacket(id, blockPos, progress);
++        // Gale end
+         // CraftBukkit start
+         Player breakerPlayer = null;
+         Entity entity = this.getEntity(id);
+@@ -1732,7 +1739,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+                 .callEvent();
+         }
+         // Paper end - Add BlockBreakProgressUpdateEvent
+-        for (ServerPlayer player : this.server.getPlayerList().getPlayers()) {
++        for (ServerPlayer player : players) { // Gale - reduce block destruction packet allocations
+             if (player.level() == this && player.getId() != id) {
+                 double xd = blockPos.getX() - player.getX();
+                 double yd = blockPos.getY() - player.getY();
+@@ -1743,7 +1750,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ServerEntityGet
+                         continue;
+                     }
+                     // CraftBukkit end
+-                    player.connection.send(new ClientboundBlockDestructionPacket(id, blockPos, progress));
++                    player.connection.send(packet); // Gale - reduce block destruction packet allocations
+                 }
+             }
+         }
