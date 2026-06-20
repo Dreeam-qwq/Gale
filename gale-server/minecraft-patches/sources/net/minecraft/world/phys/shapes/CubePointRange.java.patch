@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/phys/shapes/CubePointRange.java
++++ b/net/minecraft/world/phys/shapes/CubePointRange.java
+@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.doubles.AbstractDoubleList;
+ 
+ public class CubePointRange extends AbstractDoubleList {
+     private final int parts;
++    private final double scale; // Gale - replace division by multiplication
+ 
+     public CubePointRange(final int parts) {
+         if (parts <= 0) {
+@@ -11,11 +12,12 @@ public class CubePointRange extends AbstractDoubleList {
+         }
+ 
+         this.parts = parts;
++        this.scale = 1.0D / parts; // Gale - replace division by multiplication
+     }
+ 
+     @Override
+     public double getDouble(final int index) {
+-        return (double)index / this.parts;
++        return index * this.scale; // Gale - replace division by multiplication
+     }
+ 
+     @Override
