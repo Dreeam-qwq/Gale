@@ -13,7 +13,7 @@ Gale is a fork of [Paper](https://github.com/PaperMC/Paper) with reliable and no
 ## Benefits
 
 * **Reliability**\
-  All features are reviewed with care. Every patch is carefully implemented and verified line-by-line.
+  All features are reviewed with care. Every feature is carefully implemented and verified line-by-line.
 
 * **No changes to game mechanics**\
   Gale improves performance without changing behavior (by default).
@@ -50,8 +50,7 @@ If you wish to try more experimental software, consider
 ## License
 
 Paperweight files are licensed under MIT.
-Patches are licensed under GPL-3.0, unless indicated differently in their header.
-Binaries are licensed under GPL-3.0.
+Patch files and binaries are licensed under GPL-3.0.
 
 ## Features
 
