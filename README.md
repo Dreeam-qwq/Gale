@@ -8,7 +8,7 @@
 
 ## About
 
-Gale is a fork of [Paper](https://github.com/PaperMC/Paper) with reliable and non-gameplay-changing performance enhancements.
+Gale is a fork of [Paper](https://github.com/PaperMC/Paper) with reliable and non-gameplay-changing performance improvements.
 
 ## Benefits
 
@@ -43,9 +43,9 @@ Additional thanks goes out to the contributors to
 [Spigot](https://www.spigotmc.org/) and Bukkit,
 and to the contributors to other Minecraft server software.
 
-Gale prioritizes trust and reliability.
-If you wish to try more experimental software, consider
-[Leaf](https://www.leafmc.one/).
+Gale includes only *strongly verified* performance improvements.
+If you need even more performance, you can try
+[Leaf](https://www.leafmc.one/), which comes with more features.
 
 ## License
 
