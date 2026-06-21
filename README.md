@@ -8,7 +8,7 @@
 
 ## About
 
-Gale is a fork of [Paper](https://github.com/PaperMC/Paper) with reliable and non-gameplay-changingn performance enhancements.
+Gale is a fork of [Paper](https://github.com/PaperMC/Paper) with reliable and non-gameplay-changing performance enhancements.
 
 ## Benefits
 
