@@ -23,7 +23,10 @@ Gale is a fork of [Paper](https://github.com/PaperMC/Paper) focused on reliable 
 
 ## Contributing
 
-Pull requests are welcomed! Don't be afraid to submit a pull request that you may feel is just for yourself. All ideas are welcome. If submitted pull requests do not meet our standards, we can work together to improve them.
+Pull requests are welcomed!
+Don't be afraid to submit a pull request that you may feel is just for yourself.
+All ideas are welcome.
+If submitted pull requests do not meet our standards, we can work together to improve them.
 
 ## Building from source
 
@@ -33,46 +36,78 @@ Pull requests are welcomed! Don't be afraid to submit a pull request that you ma
 
 ## Acknowledgements
 
-Of course, this fork would not exist without the years-long work of all the contributors to [Paper](https://github.com/PaperMC/Paper).
+Of course, this fork would not exist without the years-long work of all the contributors to
+[Paper](https://github.com/PaperMC/Paper).
 
-Additional thanks goes out to the contributors to [Spigot](https://www.spigotmc.org/) and Bukkit, and to the contributors to other Minecraft server software.
+Additional thanks goes out to the contributors to
+[Spigot](https://www.spigotmc.org/) and Bukkit,
+and to the contributors to other Minecraft server software.
 
-Gale prioritizes trust and reliability. If you wish to try more experimental software, consider [Leaf](https://www.leafmc.one/).
+Gale prioritizes trust and reliability.
+If you wish to try more experimental software, consider
+[Leaf](https://www.leafmc.one/).
 
 ## License
+
 Paperweight files are licensed under MIT.
 Patches are licensed under GPL-3.0, unless indicated differently in their header.
 Binaries are licensed under GPL-3.0.
 
-## Patches
+## Features
 
 All changes are listed below. Changes are maintained by the Gale team.
 
-* **Branding**\
-  Server identifies as Gale, with appropriate branding in console, watchdog, and version output.
-* **Configuration**\
-  Adds Gale configuration files
-* **Allocate zero or one block destruction packets** (original by [vytskalt](https://github.com/vytskalt))\
-  Leaf: `Reduce-block-destruction-packet-allocations.patch`
-* **Cache Identifier toString and hashCode** (original by [OverwriteMC](https://github.com/OverwriteMC))\
-  Lazily cache `Identifier` `toString()` and `hashCode()`.\
-  Leaf: `Cache-identifier-toString-and-hash.patch`
-* **Only update frozen ticks if changed** (original by [hayanesuru](https://github.com/hayanesuru))\
-  Leaf: `Only-update-frozen-ticks-if-changed.patch`
-* **Optimize matching item checks**\
-  Leaf: `Optimize-matching-item-checks.patch`
-* **Optimize pushable selector** (original by [OverwriteMC](https://github.com/OverwriteMC))\
-  Avoid duplicated `Bukkit#isPushable` check, already checked inside the `Bukkit#canCollideWithBukkit`.\
-  Leaf: `Optimize-pushable-selector.patch`
-* **Replace division by multiplication** (original by [2No2Name](https://github.com/2No2Name))\
-  Multiplication is faster than division in every environment.\
-  Leaf: `Replace-division-by-multiplication-in-CubePointRange.patch`
-* **Skip Bukkit callEvent early if no listeners** (original by [lilingfengdev](https://github.com/lilingfengdev))\
-  Leaf: `Skip-event-if-no-listeners.patch`
-* **Skip cloning advancement criteria** (original by [etil2jz](https://github.com/etil2jz))\
-  Leaf: `Skip-cloning-advancement-criteria.patch`
-* **Skip entity move if movement is zero** (original by [ishland](https://github.com/ishland))\
-  Run a simplified version of `Entity#move()` if the movement delta is zero.\
-  Leaf: `Skip-entity-move-if-movement-is-zero.patch`
-* **Store mob counts in an array** (original by [ishland](https://github.com/ishland))\
-  Leaf: `Store-mob-counts-in-an-array.patch`
+<h6><ul>
+  <li>
+    <b>Branding</b><br>
+    Server identifies as Gale, with appropriate branding in console, watchdog, and version output.
+  </li>
+  <li>
+    <b>Configuration</b><br>
+    Adds Gale configuration files
+  </li>
+  <li>
+    <b>Allocate zero or one block destruction packets</b> (original by <a href="https://github.com/vytskalt">vytskalt</a>)<br>
+    Leaf: <code>Reduce-block-destruction-packet-allocations.patch</code>
+  </li>
+  <li>
+    <b>Cache Identifier toString and hashCode</b> (original by <a href="https://github.com/OverwriteMC">OverwriteMC</a>)<br>
+    Lazily cache <code>Identifier</code> <code>toString()</code> and <code>hashCode()</code>.<br>
+    Leaf: <code>Cache-identifier-toString-and-hash.patch</code>
+  </li>
+  <li>
+    <b>Only update frozen ticks if changed</b> (original by <a href="https://github.com/hayanesuru">hayanesuru</a>)<br>
+    Leaf: <code>Only-update-frozen-ticks-if-changed.patch</code>
+  </li>
+  <li>
+    <b>Optimize matching item checks</b><br>
+    Leaf: <code>Optimize-matching-item-checks.patch</code>
+  </li>
+  <li>
+    <b>Optimize pushable selector</b> (original by <a href="https://github.com/OverwriteMC">OverwriteMC</a>)<br>
+    Avoid duplicated <code>Bukkit#isPushable</code> check, already checked inside the <code>Bukkit#canCollideWithBukkit</code>.<br>
+    Leaf: <code>Optimize-pushable-selector.patch</code>
+  </li>
+  <li>
+    <b>Replace division by multiplication</b> (original by <a href="https://github.com/2No2Name">2No2Name</a>)<br>
+    Multiplication is faster than division in every environment.<br>
+    Leaf: <code>Replace-division-by-multiplication-in-CubePointRange.patch</code>
+  </li>
+  <li>
+    <b>Skip Bukkit callEvent early if no listeners</b> (original by <a href="https://github.com/lilingfengdev">lilingfengdev</a>)<br>
+    Leaf: <code>Skip-event-if-no-listeners.patch</code>
+  </li>
+  <li>
+    <b>Skip cloning advancement criteria</b> (original by <a href="https://github.com/etil2jz">etil2jz</a>)<br>
+    Leaf: <code>Skip-cloning-advancement-criteria.patch</code>
+  </li>
+  <li>
+    <b>Skip entity move if movement is zero</b> (original by <a href="https://github.com/ishland">ishland</a>)<br>
+    Run a simplified version of <code>Entity#move()</code> if the movement delta is zero.<br>
+    Leaf: <code>Skip-entity-move-if-movement-is-zero.patch</code>
+  </li>
+  <li>
+    <b>Store mob counts in an array</b> (original by <a href="https://github.com/ishland">ishland</a>)<br>
+    Leaf: <code>Store-mob-counts-in-an-array.patch</code>
+  </li>
+</ul></h6>
