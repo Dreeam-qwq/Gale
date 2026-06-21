@@ -1,13 +1,15 @@
 --- a/net/minecraft/world/entity/ai/sensing/Sensing.java
 +++ b/net/minecraft/world/entity/ai/sensing/Sensing.java
-@@ -9,8 +9,8 @@ import net.minecraft.world.entity.Mob;
+@@ -9,8 +_,10 @@
  
  public class Sensing {
      private final Mob mob;
 -    private final IntSet seen = new IntOpenHashSet();
 -    private final IntSet unseen = new IntOpenHashSet();
++    // Gale start - Initialize sensing with low capacity
 +    private final IntSet seen = new IntOpenHashSet(2);
 +    private final IntSet unseen = new IntOpenHashSet(2);
++    // Gale end - Initialize sensing with low capacity
  
      public Sensing(final Mob mob) {
          this.mob = mob;

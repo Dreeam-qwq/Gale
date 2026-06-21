@@ -55,59 +55,66 @@ Binaries are licensed under GPL-3.0.
 
 ## Features
 
-All changes are listed below. Changes are maintained by the Gale team.
+All included features are listed below.\
+Features originating from other projects are carefully verified and updated as part of Gale.
 
 <h6><ul>
   <li>
-    <b>Branding</b><br>
+    <i>Branding</i><br>
     Server identifies as Gale, with appropriate branding in console, watchdog, and version output.
   </li>
   <li>
-    <b>Configuration</b><br>
+    <i>Configuration</i><br>
     Adds Gale configuration files
   </li>
   <li>
-    <b>Allocate zero or one block destruction packets</b> (original by <a href="https://github.com/vytskalt">vytskalt</a>)<br>
+    <i>Allocate zero or one block destruction packets</i> (original by <a href="https://github.com/vytskalt">vytskalt</a>)<br>
     Leaf: <code>Reduce-block-destruction-packet-allocations.patch</code>
   </li>
   <li>
-    <b>Cache Identifier toString and hashCode</b> (original by <a href="https://github.com/OverwriteMC">OverwriteMC</a>)<br>
+    <i>Cache Identifier toString and hashCode</i> (original by <a href="https://github.com/OverwriteMC">OverwriteMC</a>)<br>
     Lazily cache <code>Identifier</code> <code>toString()</code> and <code>hashCode()</code>.<br>
     Leaf: <code>Cache-identifier-toString-and-hash.patch</code>
   </li>
   <li>
-    <b>Only update frozen ticks if changed</b> (original by <a href="https://github.com/hayanesuru">hayanesuru</a>)<br>
+    <i>Initialize sensing with low capacity</i><br>
+    Most mobs only ever target at most 1 entity (typically a nearby player or a mob farm bait entity)<br>
+    so we create their sensing cache with an initial capacity of 2 instead of 16.<br>
+    Leaf: <code>Initialize-line-of-sight-cache-with-low-capacity.patch</code>
+  </li>
+  <li>
+    <i>Only update frozen ticks if changed</i> (original by <a href="https://github.com/hayanesuru">hayanesuru</a>)<br>
     Leaf: <code>Only-update-frozen-ticks-if-changed.patch</code>
   </li>
   <li>
-    <b>Optimize matching item checks</b><br>
+    <i>Optimize matching item checks</i><br>
     Leaf: <code>Optimize-matching-item-checks.patch</code>
   </li>
   <li>
-    <b>Optimize pushable selector</b> (original by <a href="https://github.com/OverwriteMC">OverwriteMC</a>)<br>
+    <i>Optimize pushable selector</i> (original by <a href="https://github.com/OverwriteMC">OverwriteMC</a>)<br>
     Avoid duplicated <code>Bukkit#isPushable</code> check, already checked inside the <code>Bukkit#canCollideWithBukkit</code>.<br>
     Leaf: <code>Optimize-pushable-selector.patch</code>
   </li>
   <li>
-    <b>Replace division by multiplication</b> (original by <a href="https://github.com/2No2Name">2No2Name</a>)<br>
+    <i>Replace division by multiplication</i> (original by <a href="https://github.com/2No2Name">2No2Name</a>)<br>
     Multiplication is faster than division in every environment.<br>
     Leaf: <code>Replace-division-by-multiplication-in-CubePointRange.patch</code>
   </li>
   <li>
-    <b>Skip Bukkit callEvent early if no listeners</b> (original by <a href="https://github.com/lilingfengdev">lilingfengdev</a>)<br>
+    <i>Skip Bukkit callEvent early if no listeners</i> (original by <a href="https://github.com/lilingfengdev">lilingfengdev</a>)<br>
     Leaf: <code>Skip-event-if-no-listeners.patch</code>
   </li>
   <li>
-    <b>Skip cloning advancement criteria</b> (original by <a href="https://github.com/etil2jz">etil2jz</a>)<br>
+    <i>Skip cloning advancement criteria</i> (original by <a href="https://github.com/etil2jz">etil2jz</a>)<br>
     Leaf: <code>Skip-cloning-advancement-criteria.patch</code>
   </li>
   <li>
-    <b>Skip entity move if movement is zero</b> (original by <a href="https://github.com/ishland">ishland</a>)<br>
+    <i>Skip entity move if movement is zero</i> (original by <a href="https://github.com/ishland">ishland</a>)<br>
     Run a simplified version of <code>Entity#move()</code> if the movement delta is zero.<br>
     Leaf: <code>Skip-entity-move-if-movement-is-zero.patch</code>
   </li>
   <li>
-    <b>Store mob counts in an array</b> (original by <a href="https://github.com/ishland">ishland</a>)<br>
+    <i>Store mob counts in an array</i> (original by <a href="https://github.com/ishland">ishland</a>)<br>
     Leaf: <code>Store-mob-counts-in-an-array.patch</code>
   </li>
 </ul></h6>
