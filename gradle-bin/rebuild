@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Rebuilds all patches (in IntelliJ, right-click -> Run 'rebuild')
+
+cd ..
+./gradlew rebuildPaperApiFeaturePatches # includes rebuildPaperApiFilePatches
+./gradlew rebuildPaperSingleFilePatches
+./gradlew :gale-server:rebuildMinecraftFeaturePatches # includes :gale-server:rebuildMinecraftFilePatches, which includes :gale-server:rebuildMinecraftResourcePatches and :gale-server:rebuildMinecraftSourcePatches
+./gradlew :gale-server:rebuildPaperServerFeaturePatches # includes :gale-server:rebuildPaperServerFilePatches
+cd gradle-bin

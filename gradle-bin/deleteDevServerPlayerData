@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Deletes all player data from the dev server (in IntelliJ, right-click -> Run 'deleteDevServerPlayerData')
+
+cd ../run/world
+rm -f advancements/*.json
+rm -f playerdata/*.dat
+rm -f playerdata/*.dat_old
+rm -f stats/*.json
+cd ../../gradle-bin
