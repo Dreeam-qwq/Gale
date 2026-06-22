@@ -76,6 +76,12 @@ Features originating from other projects are carefully verified and updated as p
     Leaf: <code>Cache-identifier-toString-and-hash.patch</code>
   </li>
   <li>
+    <i>Cache world generator sea level</i> (original by <a href="https://github.com/jaskarth">jaskarth</a>)<br>
+    This method is potentially called for every block in the chunk,
+    so this will save a lot of registry lookups.<br>
+    Leaf: <code>Cache-world-generator-sea-level.patch</code>
+  </li>
+  <li>
     <i>Initialize sensing with low capacity</i><br>
     Most mobs only ever target at most 1 entity (typically a nearby player or a mob farm bait entity)<br>
     so we create their sensing cache with an initial capacity of 2 instead of 16.<br>
@@ -119,5 +125,11 @@ Features originating from other projects are carefully verified and updated as p
   <li>
     <i>Store mob counts in an array</i> (original by <a href="https://github.com/ishland">ishland</a>)<br>
     Leaf: <code>Store-mob-counts-in-an-array.patch</code>
+  </li>
+  <li>
+    <i>Use fastutil collections</i><br>
+    Use <code>it.unimi.dsi.fastutil</code> collections
+    instead of other (such as <code>java.util</code>) collections.<br>
+    Leaf: <code>Replace-throttle-tracker-map-with-optimized-collecti.patch</code>
   </li>
 </ul></h6>
