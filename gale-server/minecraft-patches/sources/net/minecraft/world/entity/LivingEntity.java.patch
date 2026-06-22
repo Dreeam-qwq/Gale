@@ -1,5 +1,21 @@
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
+@@ -561,13 +_,14 @@
+     }
+ 
+     protected void tryAddFrost() {
+-        if (!this.getBlockStateOnLegacy().isAir()) {
++//        if (!this.getBlockStateOnLegacy().isAir()) { // Gale - Sort tryAddFrost checks
+             int ticksFrozen = this.getTicksFrozen();
+             if (ticksFrozen > 0) {
+                 AttributeInstance speed = this.getAttribute(Attributes.MOVEMENT_SPEED);
+                 if (speed == null) {
+                     return;
+                 }
++        if (!this.getBlockStateOnLegacy().isAir()) { // Gale - Sort tryAddFrost checks
+ 
+                 float slowAmount = -0.05F * this.getPercentFrozen();
+                 speed.addTransientModifier(new AttributeModifier(SPEED_MODIFIER_POWDER_SNOW_ID, slowAmount, AttributeModifier.Operation.ADD_VALUE));
 @@ -3793,7 +_,13 @@
          if (this.level() instanceof ServerLevel serverLevel) {
              profiler.push("freezing");
