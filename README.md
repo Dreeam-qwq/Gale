@@ -8,18 +8,16 @@
 
 ## About
 
-Gale is a fork of [Paper](https://github.com/PaperMC/Paper) with reliable and non-gameplay-changing performance improvements.
+Gale is a high-performance fork of [Paper](https://github.com/PaperMC/Paper) that puts reliability first.
 
 ## Benefits
 
-* **Reliability**\
-  All features are reviewed with care. Every feature is carefully implemented and verified line-by-line.
+* **High reliability**\
+  All features are reviewed with care, verified line-by-line and tested in production.
 
 * **No changes to game mechanics**\
-  Gale improves performance without changing behavior (by default).
-
-* **Configuration is optional**\
-  By default, Gale behaves the same as Paper. Editing the configuration is optional.
+  Gale improves performance without changing behavior (by default).\
+  Editing the configuration is optional.
 
 ## Contributing
 
@@ -123,8 +121,19 @@ Features originating from other projects are carefully verified and updated as p
     Leaf: <code>Skip-entity-move-if-movement-is-zero.patch</code>
   </li>
   <li>
+    <i>Skip PlayerCommandSendEvent if no listeners</i> (original by <a href="https://github.com/billygalbreath">BillyGalbreath</a>)<br>
+    Leaf: <code>Skip-PlayerCommandSendEvent-if-there-are-no-listener.patch</code>
+  </li>
+  <li>
     <i>Store mob counts in an array</i> (original by <a href="https://github.com/ishland">ishland</a>)<br>
     Leaf: <code>Store-mob-counts-in-an-array.patch</code>
+  </li>
+  <li>
+    <i>Update boss bar within tick</i> (original by <a href="https://github.com/jellysquid3">jellysquid3</a>)<br>
+    Performs boss bar update code at most once per tick during <code>tick()</code>,
+    instead of every time <code>updateBossbar()</code> is called.
+    <br>
+    Leaf: <code>Update-boss-bar-within-tick.patch</code>
   </li>
   <li>
     <i>Use fastutil collections</i><br>

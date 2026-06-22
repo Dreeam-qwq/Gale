@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/entity/raid/Raid.java
 +++ b/net/minecraft/world/entity/raid/Raid.java
-@@ -132,6 +132,7 @@ public class Raid {
+@@ -132,6 +_,7 @@
      private Raid.RaidStatus status;
      private int celebrationTicks;
      private Optional<BlockPos> waveSpawnPos = Optional.empty();
@@ -8,7 +8,7 @@
  
      public Raid(final BlockPos center, final Difficulty difficulty) {
          this.active = true;
-@@ -284,6 +285,12 @@ public class Raid {
+@@ -284,6 +_,12 @@
      }
  
      public void tick(final ServerLevel level) {
@@ -21,7 +21,7 @@
          if (!this.isStopped()) {
              if (this.status == Raid.RaidStatus.ONGOING) {
                  boolean oldActive = this.active;
-@@ -616,6 +623,11 @@ public class Raid {
+@@ -616,6 +_,11 @@
      }
  
      public void updateBossbar() {
