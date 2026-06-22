@@ -4,6 +4,7 @@
   <h3>A reliable high-performance Minecraft server fork.</h3>
 
 [![Discord](https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge)](https://discord.com/invite/gwezNT8c24)
+[![Latest version](https://img.shields.io/badge/Latest_version-26.2-4fa31a?style=for-the-badge)](https://github.com/GaleMC/Gale/actions)
 </div>
 
 ## About
