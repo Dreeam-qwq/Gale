@@ -28,6 +28,24 @@
              delta = this.maybeBackOffFromEdge(delta, moverType);
              Vec3 movement = this.collide(delta);
              double movementLength = movement.lengthSqr();
+@@ -1262,8 +_,15 @@
+                     }
+                 }
+ 
+-                float blockSpeedFactor = this.getBlockSpeedFactor();
+-                this.setDeltaMovement(this.getDeltaMovement().multiply(blockSpeedFactor, 1.0, blockSpeedFactor));
++                // Gale start - skip negligible planar movement multiplication
++                Vec3 currentDelta = this.getDeltaMovement();
++                if (currentDelta.x < -1.0E-6D || currentDelta.x > 1.0E-6D || currentDelta.z < -1.0E-6D || currentDelta.z > 1.0E-6D) {
++                    float blockSpeedFactor = this.getBlockSpeedFactor();
++                    if (blockSpeedFactor < 1.0F - 1.0E-6F || blockSpeedFactor > 1.0F + 1.0E-6F) {
++                        this.setDeltaMovement(currentDelta.multiply(blockSpeedFactor, 1.0D, blockSpeedFactor));
++                    }
++                }
++                // Gale end - skip negligible planar movement multiplication
+                 profiler.pop();
+             }
+         }
 @@ -4580,6 +_,11 @@
      }
  
