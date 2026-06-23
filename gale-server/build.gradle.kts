@@ -108,6 +108,7 @@ sourceSets {
 }
 
 val log4jPlugins = sourceSets.create("log4jPlugins")
+log4jPlugins.java.srcDir("../paper-server/src/log4jPlugins/java")
 configurations.named(log4jPlugins.compileClasspathConfigurationName) {
     extendsFrom(configurations.compileClasspath.get())
 }
