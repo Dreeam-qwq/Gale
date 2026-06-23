@@ -1,0 +1,11 @@
+--- a/net/minecraft/server/commands/SpreadPlayersCommand.java
++++ b/net/minecraft/server/commands/SpreadPlayersCommand.java
+@@ -114,7 +_,7 @@
+             throw ERROR_INVALID_MAX_HEIGHT.create(maxHeight, minY);
+         }
+ 
+-        RandomSource random = RandomSource.createThreadLocalInstance();
++        RandomSource random = level.getRandom(); // Gale - Patina - reduce RandomSource instances
+         double minX = center.x - maxRange;
+         double minZ = center.y - maxRange;
+         double maxX = center.x + maxRange;
