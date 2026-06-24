@@ -93,6 +93,11 @@ Features originating from other projects are carefully verified and updated as p
     Leaf: <code>Check-targeting-range-before-getting-visibility.patch</code>
   </li>
   <li>
+    <i>Check type before distance when testing targets</i> (original by <a href="https://github.com/Taiyou06">Taiyou</a>)<br>
+    Check type before computing distance, because the latter is more expensive.<br>
+    Leaf: part of <code>Optimize-SetLookAndInteract-and-NearestVisibleLiving.patch</code>
+  </li>
+  <li>
     <i>Compute heuristic persistence reactively</i><br>
     Compute a heuristic for whether mobs are persistent when conditions change, instead of every tick.
   </li>
@@ -176,6 +181,10 @@ Features originating from other projects are carefully verified and updated as p
     <i>Predict Halloween</i><br>
     Pre-compute the epoch milliseconds for Halloween, for faster comparison.<br>
     Leaf: <code>Predict-Halloween.patch</code>
+  </li>
+  <li>
+    <i>Quick NearestVisibleLivingEntities entity iteration</i> (original by <a href="https://github.com/Taiyou06">Taiyou</a>)<br>
+    Leaf: part of <code>Optimize-SetLookAndInteract-and-NearestVisibleLiving.patch</code>
   </li>
   <li>
     <i>Reduce RandomSource instances</i> (original by <a href="https://github.com/foss-mc">foss-mc</a>)<br>
