@@ -4,7 +4,7 @@
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
-+        this.console.galeConfigurations.reloadConfigs(this.console); // Gale - Configuration - Reload Gale configuration files
++        // this.console.galeConfigurations.reloadConfigs(this.console); // Gale - Configuration - Reload Gale configuration files // TODO Gale configuration temp disabled
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.isSpawningMonsters()); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))

@@ -5,8 +5,8 @@
          this.paperConfigurations.initializeGlobalConfiguration(this.registryAccess());
          this.paperConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
 +        // Gale start - Configuration - Initialize configuration
-+        this.galeConfigurations.initializeGlobalConfiguration(this.registryAccess());
-+        this.galeConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
++        // this.galeConfigurations.initializeGlobalConfiguration(this.registryAccess()); // TODO Gale configuration temp disabled
++        // this.galeConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess()); // TODO Gale configuration temp disabled
 +        // Gale end - Configuration - Initialize configuration
          // Paper end - initialize global and world-defaults configuration
          this.server.spark.enableEarlyIfRequested(); // Paper - spark
