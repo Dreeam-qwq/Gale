@@ -1,0 +1,43 @@
+--- a/net/minecraft/util/SpecialDates.java
++++ b/net/minecraft/util/SpecialDates.java
+@@ -12,13 +12,39 @@ public class SpecialDates {
+     );
+     public static final MonthDay CHRISTMAS = MonthDay.of(Month.DECEMBER, 24);
+     public static final MonthDay NEW_YEAR = MonthDay.of(Month.JANUARY, 1);
++    // Gale start - predict Halloween
++    private static final int HALLOWEEN_MONTH = 10;
++    private static final int HALLOWEEN_DAY = 31;
++    private static long nextHalloweenStart = 0;
++    private static long nextHalloweenEnd = 0;
++    // Gale end - predict Halloween
+ 
+     public static MonthDay dayNow() {
+         return MonthDay.from(ZonedDateTime.now());
+     }
+ 
+     public static boolean isHalloween() {
+-        return HALLOWEEN.equals(dayNow());
++        // Gale start - predict Halloween
++        long currentEpochMillis = System.currentTimeMillis();
++
++        if (nextHalloweenEnd == 0 || currentEpochMillis >= nextHalloweenEnd) {
++            java.time.OffsetDateTime currentDate = java.time.OffsetDateTime.ofInstant(java.time.Instant.ofEpochMilli(currentEpochMillis), java.time.ZoneId.systemDefault())
++                .withHour(0).withMinute(0).withSecond(0).withNano(0);
++
++            java.time.OffsetDateTime thisHalloweenStart = currentDate.withMonth(HALLOWEEN_MONTH).withDayOfMonth(HALLOWEEN_DAY);
++            java.time.OffsetDateTime thisHalloweenEnd = thisHalloweenStart.plusDays(1);
++
++            if (!currentDate.isBefore(thisHalloweenEnd)) {
++                thisHalloweenStart = thisHalloweenStart.plusYears(1);
++                thisHalloweenEnd = thisHalloweenEnd.plusYears(1);
++            }
++
++            nextHalloweenStart = thisHalloweenStart.toInstant().toEpochMilli();
++            nextHalloweenEnd = thisHalloweenEnd.toInstant().toEpochMilli();
++        }
++
++        return currentEpochMillis >= nextHalloweenStart && currentEpochMillis < nextHalloweenEnd;
++        // Gale end - predict Halloween
+     }
+ 
+     public static boolean isExtendedChristmas() {
