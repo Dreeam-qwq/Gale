@@ -16,7 +16,7 @@
 * **Full parity** - No changes to plugin/game behavior\
   (suitable for every server)
 * **Stable** - Changes are reviewed, verified line-by-line and tested in production\
-  (risky or unnecessary features will not be added)
+  (no risky or unnecessary features)
 
 ## Installation
 
