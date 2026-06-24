@@ -2,6 +2,9 @@
 
 We welcome contributions! This document outlines the process for contributing to Gale.
 
+Don't be afraid to submit a pull request that you may feel is just for yourself.\
+If submitted pull requests do not meet our standards, we can work together to improve them.
+
 ## Getting Started
 
 1. Fork the repository
