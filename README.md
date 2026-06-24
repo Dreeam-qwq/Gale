@@ -8,9 +8,9 @@
 [![Latest version](https://img.shields.io/badge/Latest_version-26.2-4fa31a?style=for-the-badge)](https://github.com/GaleMC/Gale/releases)
 </div>
 
-## Install
+## Installation
 
-Gale is an easy drop-in replacement: 
+As easy as it gets!
 * [Download the `.jar`](https://github.com/GaleMC/Gale/releases)
 * Point to the `.jar` in your start script (replace `paper-<version>.jar` with `gale-<version>.jar`)
 
