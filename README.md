@@ -1,61 +1,42 @@
 <img src="logo.png" alt="Gale logo" align="right" width="26%">
 <div align="center">
   <h1>Gale</h1>
-  <h3>The reliable high-performance Minecraft server fork.</h3>
+  <h3>High-performance Paper fork</h3>
+  <h4>Fast - Stable - Zero-config - Open-source - Free</h4>
 
 [![Discord](https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge)](https://discord.gg/gwezNT8c24)
-[![Latest version](https://img.shields.io/badge/Latest_version-26.2-4fa31a?style=for-the-badge)](https://github.com/GaleMC/Gale/actions)
+[![Latest version](https://img.shields.io/badge/Latest_version-26.2-4fa31a?style=for-the-badge)](https://github.com/GaleMC/Gale/releases)
 </div>
 
-## About
+## Install
 
-Gale is a drop-in replacement for [Paper](https://github.com/PaperMC/Paper)
-that improves performance reliably and without changing game mechanics.
-
-## Installation
-
-* Download the latest dev build from [GitHub Actions](https://github.com/GaleMC/Gale/actions)
-* Replace the Paper server `.jar` file with the Gale `.jar` file
+Gale is an easy drop-in replacement: 
+* [Download the `.jar`](https://github.com/GaleMC/Gale/releases)
+* Point to the `.jar` in your start script (replace `paper-<version>.jar` with `gale-<version>.jar`)
 
 ## Benefits
 
-* **High reliability**\
-  All features are reviewed with care, verified line-by-line and tested in production.
-
-* **No changes to game mechanics**\
-  Gale improves performance without changing behavior (by default).\
-  Editing the configuration is optional.
+* Gale is free and runs faster than Paper for every server. Pinky promise :)
+* All features are reviewed with care, verified line-by-line and tested in production
+* Gale does not change game mechanics, it is identical to paper
 
 ## Contributing
 
-Pull requests are welcomed!
-Don't be afraid to submit a pull request that you may feel is just for yourself.
-All ideas are welcome.
-If submitted pull requests do not meet our standards, we can work together to improve them.
+Pull requests are welcomed! See the [guidelines](CONTRIBUTING.md).
 
 ## Building from source
 
-* Clone the project
-* Run `./gradlew applyAllPatches`
-* Run `./gradlew :gale-server:createPaperclipJar`
+* `./gradlew applyAllPatches`
+* `./gradlew :gale-server:createPaperclipJar`
 
 ## Acknowledgements
 
-Of course, this fork would not exist without the years-long work of all the contributors to
-[Paper](https://github.com/PaperMC/Paper).
-
-Additional thanks goes out to the contributors to
-[Spigot](https://www.spigotmc.org/) and Bukkit,
-and to the contributors to other Minecraft server software.
-
-Gale includes only *strongly verified* performance improvements.
-If you need even more performance, you can try
-[Leaf](https://www.leafmc.one/), which comes with more features.
-
-## License
-
-Paperweight files are licensed under MIT.
-Patch files and binaries are licensed under GPL-3.0.
+Built on [Paper](https://papermc.io/),
+[Spigot](https://www.spigotmc.org/),
+[Bukkit](https://bukkit.org/)
+and other Minecraft server software.\
+Alternatively, if you are looking for additional features,
+you may be interested in [Leaf](https://www.leafmc.one/).
 
 ## Features
 
