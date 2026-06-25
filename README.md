@@ -1,7 +1,9 @@
 <!--<img src="logo.png" alt="Gale logo" align="right" width="26%">-->
 <div align="center">
-  <h1>Gale</h1>
-  <h3>The faster Paper fork for everyone:<br>same server, better engine</h3>
+  <h1>Gale 💨</h1>
+  <!-- <h3>The fast Paper fork that is suitable for every server</h3> -->
+  <!-- <h3>The faster Paper fork that is suitable for everyone:<br>same server, better engine.</h3> -->
+  <h3>The faster Paper fork that is suitable for every server:<br>same server, better engine.</h3>
   <!--<h3>A faster Paper server:<br>the easiest server upgrade you'll ever make</h3>-->
   <!--<h3>Do you use Paper? You can do even better!</h3>-->
   <!--<h3>Paper but faster 💨</h3>-->
@@ -10,13 +12,19 @@
 [![Latest version](https://img.shields.io/badge/Latest_version-26.2-4fa31a?style=for-the-badge)](https://github.com/GaleMC/Gale/releases)
 </div>
 
-## Benefits
+## About
 
-* **Fast** - <ins>Gale runs faster than Paper for *every* server</ins>
-* **Full parity** - No changes to plugin/game behavior\
-  (suitable for every server)
-* **Stable** - Changes are reviewed, verified line-by-line and tested in production\
-  (no risky or unnecessary features)
+Gale is a drop-in replacement for Paper, suitable for every server.
+
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper, for ***every*** server
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Full parity - No changes to behavior<!--plugin/game behavior--><!--\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(suitable for every server)-->
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Stable - Changes are carefully reviewed and verified<!--, verified line-by-line and tested in production\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(no risky or unnecessary features)-->
+
+Gale contains [dozens](https://github.com/GaleMC/Gale/wiki/Features) of performance improvements.
 
 ## Installation
 
