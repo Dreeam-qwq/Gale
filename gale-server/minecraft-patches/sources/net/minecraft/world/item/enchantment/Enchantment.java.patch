@@ -42,6 +42,20 @@
 +    public HolderSet<Enchantment> exclusiveSet() { return this.exclusiveSet; }
 +    public DataComponentMap effects() { return this.effects; }
 +
++    @Override
++    public boolean equals(Object obj) {
++        return this == obj || obj instanceof Enchantment other && java.util.Objects.equals(this.description, other.description) && java.util.Objects.equals(this.definition, other.definition) && java.util.Objects.equals(this.exclusiveSet, other.exclusiveSet) && java.util.Objects.equals(this.effects, other.effects);
++    }
++
++    @Override
++    public int hashCode() {
++        int result = this.description.hashCode();
++        result = 31 * result + this.definition.hashCode();
++        result = 31 * result + this.exclusiveSet.hashCode();
++        result = 31 * result + this.effects.hashCode();
++        return result;
++    }
++
 +    /**
 +     * Contains a boolean for each {@link EquipmentSlot}.
 +     */
