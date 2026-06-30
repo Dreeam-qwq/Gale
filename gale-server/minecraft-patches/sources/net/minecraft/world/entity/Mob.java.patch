@@ -141,7 +141,7 @@
 +    public boolean gale$eventDriven_isPersistent;
 +
 +    public void gale$eventDriven_isPersistent_update() {
-+        this.gale$eventDriven_isPersistent = this.persistenceRequired && this.gale$eventDriven_requiresCustomPersistence;
++        this.gale$eventDriven_isPersistent = this.persistenceRequired || this.gale$eventDriven_requiresCustomPersistence;
 +    }
 +    // Gale end - Event-driven - Mob.isPersistent
 +
@@ -179,14 +179,17 @@
 -        this.leashData = leashData;
 +        // Gale start - Event-driven - Mob.isLeashed
 +        if (this.leashData != leashData) {
-+            if (this.leashDataListenerReference == null) {
-+                this.leashDataListenerReference = new java.lang.ref.WeakReference<>(this);
-+            } else {
++            if (this.leashData != null && this.leashDataListenerReference != null) {
 +                this.leashData.removeLeashHolderListener(this.leashDataListenerReference);
 +            }
 +            this.leashData = leashData;
 +            this.gale$eventDriven_isLeashed_update();
-+            leashData.addLeashHolderListener(this.leashDataListenerReference);
++            if (leashData != null) {
++                if (this.leashDataListenerReference == null) {
++                    this.leashDataListenerReference = new java.lang.ref.WeakReference<>(this);
++                }
++                leashData.addLeashHolderListener(this.leashDataListenerReference);
++            }
 +        }
 +        // Gale end - Event-driven - Mob.isLeashed
      }
