@@ -31,7 +31,7 @@
          this.setYRot(this.random.nextFloat() * (float) (Math.PI * 2));
          this.yHeadRot = this.getYRot();
          this.brain = this.makeBrain(Brain.Packed.EMPTY);
-+        this.gale$eventDriven_isAlive_update(); // Gale - Event-driven - LivingEntity.isAlive
++        this.gale$eventDriven_isAlive_updateFor_health(this.entityData.get(DATA_HEALTH_ID)); // Gale - Event-driven - LivingEntity.isAlive
      }
  
      @Override
