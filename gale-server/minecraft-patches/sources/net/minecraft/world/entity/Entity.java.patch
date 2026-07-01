@@ -130,6 +130,17 @@
      }
  
 +    public void setVehicle(@Nullable Entity vehicle) {
++        Entity oldVehicle = this.vehicle;
++        if (oldVehicle == vehicle) return;
++        int playerPassengerCount = this.gale$eventDriven_playerPassengerCount;
++        if (playerPassengerCount != 0) {
++            if (oldVehicle != null) {
++                oldVehicle.gale$eventDriven_playerPassengerCount_add(-playerPassengerCount);
++            }
++            if (vehicle != null) {
++                vehicle.gale$eventDriven_playerPassengerCount_add(playerPassengerCount);
++            }
++        }
 +        this.vehicle = vehicle;
 +    }
 +
@@ -178,16 +189,17 @@
 +    private int gale$eventDriven_playerPassengerCount;
 +
 +    public void gale$eventDriven_playerPassengerCount_increment() {
-+        this.gale$eventDriven_playerPassengerCount++;
-+        if (this.vehicle != null) {
-+            this.vehicle.gale$eventDriven_playerPassengerCount_increment();
-+        }
++        this.gale$eventDriven_playerPassengerCount_add(1);
 +    }
 +
 +    public void gale$eventDriven_playerPassengerCount_decrement() {
-+        this.gale$eventDriven_playerPassengerCount--;
++        this.gale$eventDriven_playerPassengerCount_add(-1);
++    }
++
++    private void gale$eventDriven_playerPassengerCount_add(int delta) {
++        this.gale$eventDriven_playerPassengerCount += delta;
 +        if (this.vehicle != null) {
-+            this.vehicle.gale$eventDriven_playerPassengerCount_decrement();
++            this.vehicle.gale$eventDriven_playerPassengerCount_add(delta);
 +        }
 +    }
 +
