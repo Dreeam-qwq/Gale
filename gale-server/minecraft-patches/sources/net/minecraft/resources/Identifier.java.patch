@@ -11,19 +11,6 @@
  
      private Identifier(final String namespace, final String path) {
          assert isValidNamespace(namespace);
-@@ -50,7 +_,11 @@
-     }
- 
-     public static Identifier parse(final String identifier) {
--        return bySeparator(identifier, ':');
-+        // Gale start - Cache - Identifier.hashCode() and Identifier.toString()
-+        Identifier toReturn = bySeparator(identifier, ':');
-+        toReturn.cachedString = identifier;
-+        return toReturn;
-+        // Gale end - Cache - Identifier.hashCode() and Identifier.toString()
-     }
- 
-     public static Identifier withDefaultNamespace(final String path) {
 @@ -131,7 +_,14 @@
  
      @Override
