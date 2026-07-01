@@ -1,5 +1,14 @@
 --- a/net/minecraft/world/entity/animal/axolotl/Axolotl.java
 +++ b/net/minecraft/world/entity/animal/axolotl/Axolotl.java
+@@ -82,7 +_,7 @@
+     );
+     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.INT);
+     private static final EntityDataAccessor<Boolean> DATA_PLAYING_DEAD = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.BOOLEAN);
+-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.BOOLEAN);
++    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.BOOLEAN); // Gale - Event-driven - Mob.requiresCustomPersistence - TODO Watch for new writes
+     public static final double PLAYER_REGEN_DETECTION_RANGE = 20.0;
+     public static final int RARE_VARIANT_CHANCE = 1200;
+     private static final int AXOLOTL_TOTAL_AIR_SUPPLY = 6000;
 @@ -120,6 +_,7 @@
          this.setPathfindingMalus(PathType.WATER, 0.0F);
          this.moveControl = new Axolotl.AxolotlMoveControl<>(this);

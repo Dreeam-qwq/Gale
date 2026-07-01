@@ -1,6 +1,13 @@
 --- a/net/minecraft/world/entity/animal/fish/AbstractFish.java
 +++ b/net/minecraft/world/entity/animal/fish/AbstractFish.java
-@@ -39,6 +_,7 @@
+@@ -33,12 +_,13 @@
+ import net.minecraft.world.phys.Vec3;
+ 
+ public abstract class AbstractFish extends WaterAnimal implements Bucketable {
+-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(AbstractFish.class, EntityDataSerializers.BOOLEAN);
++    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(AbstractFish.class, EntityDataSerializers.BOOLEAN); // Gale - Event-driven - Mob.requiresCustomPersistence - TODO Watch for new writes
+     private static final boolean DEFAULT_FROM_BUCKET = false;
+ 
      public AbstractFish(final EntityType<? extends AbstractFish> type, final Level level) {
          super(type, level);
          this.moveControl = new AbstractFish.FishMoveControl<>(this);
