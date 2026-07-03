@@ -32,6 +32,15 @@
      }
  
      public static <T extends Entity> CraftEntity getEntity(CraftServer server, T entity) {
+@@ -578,7 +_,7 @@
+     @Override
+     public void setTicksLived(int value) {
+         Preconditions.checkArgument(value > 0, "Age value (%s) must be greater than 0", value);
+-        this.getHandle().tickCount = value;
++        this.getHandle().setTickCount(value); // Gale - Event-driven - Cat.canRemoveWhenFarAway, Ocelot.canRemoveWhenFarAway
+         this.getHandle().totalEntityAge = value;
+     }
+ 
 @@ -726,6 +_,20 @@
          return this.getHandle().visibleByDefault;
      }
