@@ -1,12 +1,13 @@
 --- a/net/minecraft/util/SpecialDates.java
 +++ b/net/minecraft/util/SpecialDates.java
-@@ -12,13 +_,35 @@
+@@ -12,13 +_,44 @@
      );
      public static final MonthDay CHRISTMAS = MonthDay.of(Month.DECEMBER, 24);
      public static final MonthDay NEW_YEAR = MonthDay.of(Month.JANUARY, 1);
 +    // Gale start - Cache - SpecialDates.isHalloween()
-+    private static long gale$cache_isHalloween_nextStart = Long.MIN_VALUE;
-+    private static long gale$cache_isHalloween_nextEnd = Long.MIN_VALUE;
++    private static boolean gale$cache_isHalloween;
++    private static long gale$cache_isHalloween_nextCheck = Long.MIN_VALUE;
++    private static int gale$cache_isHalloween_tick = Integer.MIN_VALUE;
 +    // Gale end - Cache - SpecialDates.isHalloween()
  
      public static MonthDay dayNow() {
@@ -16,23 +17,30 @@
      public static boolean isHalloween() {
 -        return HALLOWEEN.equals(dayNow());
 +        // Gale start - Cache - SpecialDates.isHalloween()
++        int currentTick = net.minecraft.server.MinecraftServer.currentTick;
++        if (currentTick == gale$cache_isHalloween_tick) {
++            return gale$cache_isHalloween;
++        }
++        gale$cache_isHalloween_tick = currentTick;
++
 +        long currentEpochMillis = System.currentTimeMillis();
 +
-+        if (currentEpochMillis >= gale$cache_isHalloween_nextEnd) {
++        if (currentEpochMillis >= gale$cache_isHalloween_nextCheck) {
 +            java.time.ZoneId zone = java.time.ZoneId.systemDefault();
 +            java.time.LocalDate today = java.time.LocalDate.now(zone);
-+            int year = today.getYear();
-+            java.time.LocalDate nov1 = java.time.LocalDate.of(year, 11, 1);
-+            if (!today.isBefore(nov1)) {
-+                nov1 = nov1.plusYears(1);
++            java.time.LocalDate halloween = HALLOWEEN.atYear(today.getYear());
++
++            gale$cache_isHalloween = today.equals(halloween);
++            if (!today.isBefore(halloween)) {
++                halloween = halloween.plusYears(1);
 +            }
-+            gale$cache_isHalloween_nextEnd = nov1.atStartOfDay(zone)
++
++            gale$cache_isHalloween_nextCheck = (gale$cache_isHalloween ? today.plusDays(1) : halloween).atStartOfDay(zone)
 +                .toInstant()
 +                .toEpochMilli();
-+            gale$cache_isHalloween_nextStart = gale$cache_isHalloween_nextEnd - 86_400_000;
 +        }
 +
-+        return currentEpochMillis >= gale$cache_isHalloween_nextStart && currentEpochMillis < gale$cache_isHalloween_nextEnd;
++        return gale$cache_isHalloween;
 +        // Gale end - Cache - SpecialDates.isHalloween()
      }
  
