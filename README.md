@@ -5,7 +5,7 @@
   <!-- <h3>The faster Paper fork that is suitable for everyone:<br>same server, better engine.</h3> -->
   <!-- <h3>The faster Paper fork that is suitable for every server:<br>same server, better engine.</h3> -->
   <!-- <h3>The faster Paper fork that for every server:<br>same server, better engine.</h3> -->
-  <h3>High-performance Paper fork<br>without any gameplay or behavior changes</h3>
+  <h3>High-performance Paper fork<br>without any <!--gameplay or behavior changes-->changes to behavior</h3>
   <!-- <h3>Pure high-performance Paper fork</h3> -->
   <!-- <h3>High-performance pure Paper fork</h3> -->
   <!-- <h3>Run the same Paper server with better performance!</h3> -->
@@ -19,14 +19,18 @@
 
 ## About
 
-Gale is a drop-in replacement for Paper, suitable for every server.
+Gale is a <!--drop-in -->direct replacement for Paper.
 
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper, for ***every*** server
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Full parity - No changes to behavior<!--plugin/game behavior--><!--\
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;<!--Full parity - -->No changes to behavior<!--plugin/game behavior--><!--\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(suitable for every server)-->
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Stable - Changes are carefully reviewed and verified<!--, verified line-by-line and tested in production\
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Just a replacement `.jar`, no configuration
+<!--<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Stable and tested -->
+<!-- - Changes are carefully reviewed and verified-->
+<!--, verified line-by-line and tested in production\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(no risky or unnecessary features)-->
 
 Gale contains [dozens](https://github.com/GaleMC/Gale/wiki/Features) of performance improvements.
