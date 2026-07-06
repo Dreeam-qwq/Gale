@@ -49,7 +49,7 @@
          this.isClientSide = isClientSide;
          this.thread = Thread.currentThread();
 -        this.biomeManager = new BiomeManager(this, biomeZoomSeed);
-+        this.biomeManager = new BiomeManager(this, biomeZoomSeed, true); // Gale - Cache - BiomeManager.getBiome() - Use BiomeManager with cache
++        this.biomeManager = new BiomeManager(this, biomeZoomSeed, ((Collection<ServerLevel>) MinecraftServer.getServer().getAllLevels()).size() < 100); // Gale - Cache - BiomeManager.getBiome() - Use BiomeManager with cache
          this.isDebug = isDebug;
          this.neighborUpdater = new CollectingNeighborUpdater(this, maxChainedNeighborUpdates);
          this.registryAccess = registryAccess;
