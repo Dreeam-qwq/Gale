@@ -11,7 +11,7 @@
         <td>
             <div align="center">
               <h1>Gale</h1>
-              <p>A higher-performance <a href="https://github.com/PaperMC/Paper">Paper</a> fork<br>without behavioral changes</p>
+              <p>Higher-performance <a href="https://github.com/PaperMC/Paper">Paper</a> fork<br>without behavioral changes</p>
                 <a href="https://discord.gg/gwezNT8c24"><img alt="Discord" src="https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge"></a>
             </div>
             <img width="627">
@@ -48,13 +48,20 @@
 
 ## About
 
-Gale provides higher performance than Paper, without other changes.
+<!--Gale provides higher performance than Paper, without other changes.-->
+Gale is a direct replacement for Paper, that provides higher performance without other changes.
 
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper, on every server
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;No changes to behavior
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Stable, reliable and carefully reviewed
+
+<!--&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper, on every server
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;No changes to behavior
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Stable, reliable and carefully reviewed-->
 <!-- - Changes are carefully reviewed and verified-->
 <!--, verified line-by-line and tested in production\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(no risky or unnecessary features)-->
