@@ -11,7 +11,7 @@
         <td>
             <div align="center">
               <h1>Gale</h1>
-              <p>Higher-performance <a href="https://github.com/PaperMC/Paper">Paper</a> fork<br>without behavioral changes</p>
+              <p>High-performance <a href="https://github.com/PaperMC/Paper">Paper</a> fork<br>without behavioral changes</p>
                 <a href="https://discord.gg/gwezNT8c24"><img alt="Discord" src="https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge"></a>
             </div>
             <img width="627">
