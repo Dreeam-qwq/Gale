@@ -1,11 +1,40 @@
-<img src="logo.png" alt="Gale logo" align="right" width="26%">
+<!--<div align=center>
+    <img src="logo.png" width="150" alt="Gale logo">
+    <h1>Gale</h1>
+    <br><br>
+    <p>A higher-performance <a href="https://github.com/PaperMC/Paper">Paper</a> fork</p>
+    <a href="https://discord.gg/gwezNT8c24"><img alt="Discord" src="https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge"></a>
+</div>-->
+
+<table>
+    <tr>
+        <td>
+            <div align="center">
+              <h1>Gale</h1>
+              <p>A higher-performance <a href="https://github.com/PaperMC/Paper">Paper</a> fork<br>without behavioral changes</p>
+                <a href="https://discord.gg/gwezNT8c24"><img alt="Discord" src="https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge"></a>
+            </div>
+            <img width="627">
+        </td>
+        <td>
+            <img src="logo.png" alt="Gale logo" align="right" width="210">
+        </td>
+    </tr>
+</table>
+
+<!-- <img src="logo.png" alt="Gale logo" align="right" width="210">
+![Discord](https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge)](https://discord.gg/gwezNT8c24) -->
+
+<!-- <img src="logo.png" alt="Gale logo" align="right" width="26%">
 <div align="center">
-  <h1>Gale<!-- 💨--></h1>
+  <h1>Gale💨</h1>-->
   <!-- <h3>The fast Paper fork that is suitable for every server</h3> -->
   <!-- <h3>The faster Paper fork that is suitable for everyone:<br>same server, better engine.</h3> -->
   <!-- <h3>The faster Paper fork that is suitable for every server:<br>same server, better engine.</h3> -->
   <!-- <h3>The faster Paper fork that for every server:<br>same server, better engine.</h3> -->
-  <h3>High-performance Paper fork<br>without any <!--gameplay or behavior changes-->changes to behavior</h3>
+  <!--<h3>The high-performance Paper fork<br>for everyone</h3>-->
+  <!--<h3>High-performance Paper fork<br>without any gameplay or behavior changes</h3>-->
+  <!--<h3>High-performance Paper fork<br>without any changes to behavior</h3>-->
   <!-- <h3>Pure high-performance Paper fork</h3> -->
   <!-- <h3>High-performance pure Paper fork</h3> -->
   <!-- <h3>Run the same Paper server with better performance!</h3> -->
@@ -13,25 +42,26 @@
   <!--<h3>Do you use Paper? You can do even better!</h3>-->
   <!--<h3>Paper but faster 💨</h3>-->
 
-[![Discord](https://img.shields.io/discord/1045402468416233592?color=5865F2&label=discord&style=for-the-badge)](https://discord.gg/gwezNT8c24)
-[![Latest version](https://img.shields.io/badge/Latest_version-26.2-4fa31a?style=for-the-badge)](https://github.com/GaleMC/Gale/releases)
-</div>
+<!--[![Discord]()](https://discord.gg/gwezNT8c24)
+[![Latest version]()]()
+</div>-->
 
 ## About
 
-Gale is a <!--drop-in -->direct replacement for Paper.
+Gale provides higher performance than Paper, without other changes.
 
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper, on every server
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;<!--Full parity - -->No changes to behavior<!--plugin/game behavior--><!--\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(suitable for every server)-->
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;No changes to behavior
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Just a replacement `.jar`, no configuration
-<!--<br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Stable and tested -->
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Stable, reliable and carefully reviewed
 <!-- - Changes are carefully reviewed and verified-->
 <!--, verified line-by-line and tested in production\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(no risky or unnecessary features)-->
+<!--<br>-->
+<!--&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;-->
+<!--Full parity - --><!--No changes to behavior--><!--plugin/game behavior-->
+<!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(suitable for every server)-->
 
 Gale contains [dozens](https://github.com/GaleMC/Gale/wiki/Features) of performance improvements.
 
@@ -55,8 +85,7 @@ Pull requests are welcomed! See the [guidelines](CONTRIBUTING.md).
 ## Acknowledgements
 
 Built on [Paper](https://papermc.io/),
-[Spigot](https://www.spigotmc.org/),
-[Bukkit](https://bukkit.org/)
-and other Minecraft server software.\
+[Spigot](https://www.spigotmc.org/) and
+[Bukkit](https://bukkit.org/).\
 Alternatively, if you are looking for additional features,
 you may be interested in [Leaf](https://www.leafmc.one/).
