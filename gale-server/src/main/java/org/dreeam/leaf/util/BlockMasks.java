@@ -2,6 +2,7 @@ package org.dreeam.leaf.util;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.sensing.PiglinSpecificSensor;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
@@ -124,6 +125,16 @@ public final class BlockMasks {
     public static final int IS_VALID_PIGLIN_REPELLENT = 1 << 19;
 
     /**
+     * {@link BlockTags#RAILS}.
+     */
+    public static final int RAILS_TAG = 1 << 20;
+
+    /**
+     * {@link BlockTags#RAILS} and {@link BaseRailBlock}.
+     */
+    public static final int RAILS_TAG_AND_BASE_RAIL_CLASS = 1 << 21;
+
+    /**
      * {@link #WALLS_TAG} or {@link #FENCE_GATE_CLASS}.
      */
     public static final int WALLS_TAG_OR_FENCE_GATE_CLASS = WALLS_TAG | FENCE_GATE_CLASS;
@@ -170,6 +181,8 @@ public final class BlockMasks {
         i |= state.is(BlockTags.EDIBLE_FOR_SHEEP) ? EDIBLE_FOR_SHEEP_TAG : 0;
         i |= state.is(BlockTags.HOGLIN_REPELLENTS) ? HOGLIN_REPELLENTS_TAG : 0;
         i |= PiglinSpecificSensor.gale$precompute_isValidRepellent_compute(state) ? IS_VALID_PIGLIN_REPELLENT : 0;
+        i |= state.is(BlockTags.RAILS) ? RAILS_TAG : 0;
+        i |= state.is(BlockTags.RAILS) && state.getBlock() instanceof BaseRailBlock ? RAILS_TAG_AND_BASE_RAIL_CLASS : 0;
         return i;
     }
 
