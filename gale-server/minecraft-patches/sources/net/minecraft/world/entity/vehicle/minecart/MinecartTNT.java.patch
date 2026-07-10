@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/entity/vehicle/minecart/MinecartTNT.java
 +++ b/net/minecraft/world/entity/vehicle/minecart/MinecartTNT.java
-@@ -202,14 +202,14 @@
+@@ -202,14 +_,14 @@
      public float getBlockExplosionResistance(
          final Explosion explosion, final BlockGetter level, final BlockPos pos, final BlockState block, final FluidState fluid, final float resistance
      ) {

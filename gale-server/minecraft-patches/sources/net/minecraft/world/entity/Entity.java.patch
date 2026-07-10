@@ -1,16 +1,23 @@
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
-@@ -266,8 +_,8 @@
+@@ -266,13 +_,13 @@
      public boolean blocksBuilding;
      public ImmutableList<Entity> passengers = ImmutableList.of();
      protected int boardingCooldown;
 -    private @Nullable Entity vehicle;
 -    private Level level;
 +    private @Nullable Entity vehicle; // Gale - Event-driven - Mob.requiresCustomPersistence - TODO Watch for new writes
-+    private Level level; // Gale - Event-driven - Mob.despawnRanges, Mob.despawnRangeShape - TODO Watch for new writes
++    private Level level; // Gale - Event-driven - Mob.despawnRange - TODO Watch for new writes
      public double xo;
      public double yo;
      public double zo;
+-    private Vec3 position;
+-    private BlockPos blockPosition;
++    protected Vec3 position; // Gale - Optimize Mob.checkDespawn() - Make protected
++    protected BlockPos blockPosition; // Gale - Optimize Mob.checkDespawn() - Make protected
+     private ChunkPos chunkPosition;
+     private Vec3 deltaMovement = Vec3.ZERO;
+     private float yRot;
 @@ -280,6 +_,7 @@
      public float yRotO;
      public float xRotO;
@@ -94,7 +101,7 @@
 +                profiler.pop();
 +                return;
 +            }
-+            boundingBoxChanged = false;
++            this.boundingBoxChanged = false;
 +            // Gale end - Do less work - Skip unnecessary Entity.move() code if bounding box and position are unchanged
              delta = this.maybeBackOffFromEdge(delta, moverType);
              Vec3 movement = this.collide(delta);

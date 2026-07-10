@@ -1,10 +1,32 @@
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
-@@ -489,6 +_,7 @@
+@@ -489,7 +_,28 @@
          this.bukkitPickUpLoot = true;
          this.maxHealthCache = this.getMaxHealth();
          // CraftBukkit end
+-    }
 +        this.gale$eventDriven_isAlive_update(); // Gale - Event-driven - LivingEntity.isAlive
-     }
++    }
++
++    // Gale start - Optimize Mob.checkDespawn()
++    @Override
++    public void setPosRaw(final double x, final double y, final double z, final boolean forceBoundingBoxUpdate) {
++        if (!this.gale$eventDriven_affectsSpawningSelector || this.gale$eventDriven_trackedByLevel == null || !this.gale$eventDriven_trackedByLevel.gale$checkDespawn_usingSpatialGrid) {
++            super.setPosRaw(x, y, z, forceBoundingBoxUpdate);
++            return;
++        }
++        Vec3 before = this.position;
++        super.setPosRaw(x, y, z, forceBoundingBoxUpdate);
++        Vec3 after = this.position;
++        double newX = after.x;
++        double newY = after.y;
++        double newZ = after.z;
++        if (before.x != after.x || before.y != after.y || before.z != after.z) {
++            BlockPos newBlockPosition = this.blockPosition;
++            this.gale$eventDriven_trackedByLevel.gale$checkDespawn_moveInGrids(this, newX, newY, newZ, newBlockPosition.getX(), newBlockPosition.getY(), newBlockPosition.getZ());
++        }
++    }
++    // Gale end - Optimize Mob.checkDespawn()
  
      @Override
+     public BlockPos adjustSpawnLocation(final ServerLevel level, final BlockPos spawnSuggestion) {

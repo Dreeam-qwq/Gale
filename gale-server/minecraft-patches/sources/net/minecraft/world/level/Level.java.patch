@@ -8,33 +8,60 @@
  
      public static @Nullable BlockPos lastPhysicsProblem; // Spigot
      public final Map<ServerExplosion.CacheKey, Float> explosionDensityCache = new java.util.HashMap<>(); // Paper - Optimize explosions
-@@ -238,6 +_,30 @@
+@@ -238,6 +_,57 @@
          return ret;
      }
  
-+    // Gale start - Event-driven - Level.affectsSpawningSelectorPlayerCount
-+    public int gale$eventDriven_affectsSpawningSelectorPlayerCount; // Gale - Event-driven - Mob.checkDespawnPlayerTrackingMode - TODO Watch for new writes
++    // Gale start - Event-driven - Level.affectsSpawningSelectorPlayers
++    public it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet<Player> gale$eventDriven_affectsSpawningSelectorPlayers = new it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet<>(4); // Gale - Event-driven - Mob.checkDespawnPlayerTrackingMode - TODO Watch for new writes
++    private it.unimi.dsi.fastutil.ints.IntList gale$eventDriven_affectsSpawningSelectorPlayerFreeIds = new it.unimi.dsi.fastutil.ints.IntArrayList();
++    public Player[] gale$eventDriven_affectsSpawningSelectorPlayersById = new Player[4];
++    {
++        for (int i = 0; i < this.gale$eventDriven_affectsSpawningSelectorPlayersById.length; i++) {
++            this.gale$eventDriven_affectsSpawningSelectorPlayerFreeIds.add(i);
++        }
++    }
 +
-+    public void gale$eventDriven_affectsSpawningSelectorPlayerCount_increment() {
-+        if (this.gale$eventDriven_affectsSpawningSelectorPlayerCount++ == 0) {
++    public void gale$eventDriven_affectsSpawningSelectorPlayers_add(Player player) {
++        this.gale$eventDriven_affectsSpawningSelectorPlayers.add(player);
++        int id;
++        if (this.gale$eventDriven_affectsSpawningSelectorPlayerFreeIds.isEmpty()) {
++            id = this.gale$eventDriven_affectsSpawningSelectorPlayersById.length;
++            int newLength = id * 2;
++            this.gale$eventDriven_affectsSpawningSelectorPlayersById = java.util.Arrays.copyOf(this.gale$eventDriven_affectsSpawningSelectorPlayersById, newLength);
++            for (int i = id + 1; i < newLength; i++) {
++                this.gale$eventDriven_affectsSpawningSelectorPlayerFreeIds.add(i);
++            }
++        } else {
++            id = this.gale$eventDriven_affectsSpawningSelectorPlayerFreeIds.removeInt(this.gale$eventDriven_affectsSpawningSelectorPlayerFreeIds.size() - 1);
++        }
++        this.gale$eventDriven_affectsSpawningSelectorPlayersById[id] = player;
++        player.gale$eventDriven_affectsSpawningSelectorLevelId = id;
++        if (this.gale$eventDriven_affectsSpawningSelectorPlayers.size() == 1) {
 +            // Gale start - Event-driven - Mob.checkDespawnPlayerTrackingMode
 +            for (Entity entity : this.getEntities().getAll()) {
 +                if (entity instanceof net.minecraft.world.entity.Mob mob) mob.gale$eventDriven_checkDespawnPlayerTrackingMode_update();
 +            }
 +            // Gale end - Event-driven - Mob.checkDespawnPlayerTrackingMode
 +        }
++        this.gale$checkDespawn_usingSpatialGrid_update();
 +    }
 +
-+    public void gale$eventDriven_affectsSpawningSelectorPlayerCount_decrement() {
-+        if (--this.gale$eventDriven_affectsSpawningSelectorPlayerCount == 0) {
++    public void gale$eventDriven_affectsSpawningSelectorPlayers_remove(Player player) {
++        this.gale$eventDriven_affectsSpawningSelectorPlayers.remove(player);
++        int id = player.gale$eventDriven_affectsSpawningSelectorLevelId;
++        this.gale$eventDriven_affectsSpawningSelectorPlayersById[id] = null;
++        this.gale$eventDriven_affectsSpawningSelectorPlayerFreeIds.add(id);
++        if (this.gale$eventDriven_affectsSpawningSelectorPlayers.size() == 0) {
 +            // Gale start - Event-driven - Mob.checkDespawnPlayerTrackingMode
 +            for (Entity entity : this.getEntities().getAll()) {
 +                if (entity instanceof net.minecraft.world.entity.Mob mob) mob.gale$eventDriven_checkDespawnPlayerTrackingMode_update();
 +            }
 +            // Gale end - Event-driven - Mob.checkDespawnPlayerTrackingMode
 +        }
++        this.gale$checkDespawn_usingSpatialGrid_update();
 +    }
-+    // Gale end - Event-driven - Level.affectsSpawningSelectorPlayerCount
++    // Gale end - Event-driven - Level.affectsSpawningSelectorPlayers
 +
      @Override
      public LevelChunk moonrise$getFullChunkIfLoaded(final int chunkX, final int chunkZ) {
@@ -48,10 +75,11 @@
          java.util.concurrent.Executor executor // Paper - Anti-Xray
      ) {
          // Paper start - getblock optimisations - cache world height/sections
-@@ -853,6 +_,7 @@
+@@ -853,6 +_,8 @@
          final org.bukkit.NamespacedKey worldKey = CraftNamespacedKey.fromMinecraft(dimension.identifier()); // Paper
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(bukkitName, worldKey); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
++        this.gale$checkDespawn_postUpdateSpawnRanges(); // Gale - Optimize Mob.checkDespawn()
 +        this.galeConfig = galeWorldConfigCreator.apply(this.spigotConfig); // Gale - Configuration - Create world config
          this.generator = generator;
          this.world = new CraftWorld((ServerLevel) this, worldKey, biomeProvider, environment);
@@ -65,6 +93,127 @@
          this.isDebug = isDebug;
          this.neighborUpdater = new CollectingNeighborUpdater(this, maxChainedNeighborUpdates);
          this.registryAccess = registryAccess;
+@@ -877,6 +_,120 @@
+         this.chunkPacketBlockController = this.paperConfig().anticheat.antiXray.enabled ? new io.papermc.paper.antixray.ChunkPacketBlockControllerAntiXray(this, executor) : io.papermc.paper.antixray.ChunkPacketBlockController.NO_OPERATION_INSTANCE; // Paper - Anti-Xray
+     }
+ 
++    // Gale start - Optimize Mob.checkDespawn()
++    public org.galemc.gale.util.collection.spatialgrid.SpatialGrid[] gale$checkDespawn_spatialGrids;
++    public boolean[] gale$checkDespawn_noPlayerWithinRangeImpliesNearestPlayerIsFarAwayEnoughToRemoveForPatrollingMonsters;
++
++    /**
++     * The appropriate index in {@link #gale$checkDespawn_spatialGrids} for a specific check, indexed by
++     * the {@link net.minecraft.world.entity.MobCategory#ordinal()}{@code * 2}, plus 1 if
++     * it concerns the hard despawn range.
++     */
++    public int[] gale$checkDespawn_spatialGridIndices;
++
++    public void gale$checkDespawn_postUpdateSpawnRanges() {
++
++        // Create new grids
++        it.unimi.dsi.fastutil.ints.IntList Ws = new it.unimi.dsi.fastutil.ints.IntArrayList();
++        it.unimi.dsi.fastutil.ints.IntList Hs = new it.unimi.dsi.fastutil.ints.IntArrayList();
++        io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning config = this.paperConfig.entities.spawning;
++        net.minecraft.world.entity.MobCategory[] categories = net.minecraft.world.entity.MobCategory.values();
++        this.gale$checkDespawn_spatialGridIndices = new int[categories.length * 2];
++        for (int categoryI = 0; categoryI < categories.length; ++categoryI) {
++            net.minecraft.world.entity.MobCategory category = categories[categoryI];
++            io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair pair = config.despawnRanges.get(category);
++            for (int hard = 0; hard < 2; hard++) {
++                io.papermc.paper.configuration.type.DespawnRange range = hard == 1 ? pair.hard() : pair.soft();
++                int W = range.precomputedHorizontalLimit;
++                int H = range.precomputedVerticalLimit;
++                int indexToUse = 0;
++                while (indexToUse < Ws.size()) {
++                    if (Ws.getInt(indexToUse) == W && Hs.getInt(indexToUse) == H) {
++                        break;
++                    }
++                    indexToUse++;
++                }
++                if (indexToUse == Ws.size()) {
++                    Ws.add(W);
++                    Hs.add(H);
++                }
++                this.gale$checkDespawn_spatialGridIndices[categoryI * 2 + hard] = indexToUse;
++            }
++        }
++        io.papermc.paper.configuration.type.DespawnRange.Shape shape = config.despawnRangeShape;
++        this.gale$checkDespawn_spatialGrids = new org.galemc.gale.util.collection.spatialgrid.SpatialGrid[Ws.size()];
++        this.gale$checkDespawn_noPlayerWithinRangeImpliesNearestPlayerIsFarAwayEnoughToRemoveForPatrollingMonsters = new boolean[Ws.size()];
++        for (int i = 0; i < Ws.size(); i++) {
++            int W = Ws.get(i);
++            int H = Hs.get(i);
++            this.gale$checkDespawn_spatialGrids[i] = shape == io.papermc.paper.configuration.type.DespawnRange.Shape.ELLIPSOID ? new org.galemc.gale.util.collection.spatialgrid.EllipsoidSpatialGrid(W, H, 8) : new org.galemc.gale.util.collection.spatialgrid.CylinderSpatialGrid(W, H, 8);
++            int smallestCenterToBoundaryDistance = Math.min(W, H);
++            long smallestCenterToBoundarySqrDistance = ((long) smallestCenterToBoundaryDistance) * smallestCenterToBoundaryDistance;
++            this.gale$checkDespawn_noPlayerWithinRangeImpliesNearestPlayerIsFarAwayEnoughToRemoveForPatrollingMonsters[i] = smallestCenterToBoundarySqrDistance > net.minecraft.world.entity.monster.PatrollingMonster.MIN_DIST_SQR_TO_REMOVE_LONG;
++        }
++
++        // Populate them
++        if (this.gale$checkDespawn_usingSpatialGrid) {
++            for (Player player : this.gale$eventDriven_affectsSpawningSelectorPlayers) {
++                this.gale$checkDespawn_addToGrids(player);
++            }
++        }
++
++    }
++
++    public void gale$checkDespawn_addToGrids(Player player) {
++        org.galemc.gale.util.collection.spatialgrid.SpatialGrid[] grids = this.gale$checkDespawn_spatialGrids;
++        if (player.gale$checkDespawn_spatialGridSlots == null || player.gale$checkDespawn_spatialGridSlots.length < grids.length) {
++            player.gale$checkDespawn_spatialGridSlots = new int[grids.length];
++        }
++        for (int i = 0; i < grids.length; i++) {
++            org.galemc.gale.util.collection.spatialgrid.SpatialGrid grid = grids[i];
++            Vec3 position = player.position();
++            BlockPos blockPosition = player.blockPosition();
++            player.gale$checkDespawn_spatialGridSlots[i] = grid.add(position.x, position.y, position.z, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ());
++        }
++    }
++
++    public void gale$checkDespawn_removeFromGrids(Player player) {
++        org.galemc.gale.util.collection.spatialgrid.SpatialGrid[] grids = this.gale$checkDespawn_spatialGrids;
++        for (int i = 0; i < grids.length; i++) {
++            org.galemc.gale.util.collection.spatialgrid.SpatialGrid grid = grids[i];
++            grid.remove(player.gale$checkDespawn_spatialGridSlots[i]);
++        }
++    }
++
++    public void gale$checkDespawn_moveInGrids(Player player, double newX, double newY, double newZ, int newBlockX, int newBlockY, int newBlockZ) {
++        org.galemc.gale.util.collection.spatialgrid.SpatialGrid[] grids = this.gale$checkDespawn_spatialGrids;
++        for (int i = 0; i < grids.length; i++) {
++            org.galemc.gale.util.collection.spatialgrid.SpatialGrid grid = grids[i];
++            grid.move(player.gale$checkDespawn_spatialGridSlots[i], newX, newY, newZ, newBlockX, newBlockY, newBlockZ);
++        }
++    }
++
++    private static final int MINIMUM_PLAYERS_FOR_SPATIAL_GRID = 3;
++    private static final int MAXIMUM_PLAYERS_FOR_NON_SPATIAL_GRID = 4;
++
++    public boolean gale$checkDespawn_usingSpatialGrid;
++
++    public void gale$checkDespawn_usingSpatialGrid_update() {
++        if (this.gale$checkDespawn_usingSpatialGrid) {
++            if (this.gale$eventDriven_affectsSpawningSelectorPlayers.size() < MINIMUM_PLAYERS_FOR_SPATIAL_GRID) {
++                this.gale$checkDespawn_usingSpatialGrid = false;
++                for (Player player : this.gale$eventDriven_affectsSpawningSelectorPlayers) {
++                    this.gale$checkDespawn_removeFromGrids(player);
++                }
++            }
++        } else {
++            if (this.gale$eventDriven_affectsSpawningSelectorPlayers.size() > MAXIMUM_PLAYERS_FOR_NON_SPATIAL_GRID) {
++                this.gale$checkDespawn_usingSpatialGrid = true;
++                for (Player player : this.gale$eventDriven_affectsSpawningSelectorPlayers) {
++                    this.gale$checkDespawn_addToGrids(player);
++                }
++            }
++        }
++    }
++    // Gale end - Optimize Mob.checkDespawn()
++
+     public int getNextEntityId() {
+         return 0;
+     }
 @@ -900,10 +_,12 @@
          for (int i = 0, len = entities.size(); i < len; ++i) {
              Entity entity = entities.get(i);
