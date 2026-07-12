@@ -127,4 +127,4 @@ Built on [Paper](https://papermc.io/),
 </details>
 
 If you want further optimizations that may break strict Paper behavior,
-[Leaf](https://www.leafmc.one/) is a good choice.
+consider [Leaf](https://www.leafmc.one/).
