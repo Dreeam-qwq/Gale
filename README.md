@@ -49,7 +49,7 @@
 ## About
 
 <!--Gale provides higher performance than Paper, without other changes.-->
-Gale is a direct replacement for Paper, that provides higher performance without other changes.
+Gale is a drop-in alternative for Paper, that provides higher performance without other changes.
 
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Faster than Paper, on every server
 <br>
@@ -72,7 +72,7 @@ Gale is a direct replacement for Paper, that provides higher performance without
 
 Gale contains [dozens](https://github.com/GaleMC/Gale/wiki/Features) of performance improvements.
 
-## Installation
+## Installation (server owners)
 
 <!--As easy as it gets!-->
 <!--We made it easy!-->
@@ -80,19 +80,51 @@ Gale contains [dozens](https://github.com/GaleMC/Gale/wiki/Features) of performa
 1. Point to the `.jar` in your start script\
    (replace `paper-<version>.jar` with `gale-<version>.jar`)
 
-## Contributing
-
-Pull requests are welcomed! See the [guidelines](CONTRIBUTING.md).
-
-## Building from source
+## Building from source (developers)
 
 * `./gradlew applyAllPatches`
 * `./gradlew :gale-server:createPaperclipJar`
+
+Pull requests are welcomed! See the [guidelines](CONTRIBUTING.md).
 
 ## Acknowledgements
 
 Built on [Paper](https://papermc.io/),
 [Spigot](https://www.spigotmc.org/) and
-[Bukkit](https://bukkit.org/).\
-Alternatively, if you are looking for additional features,
-you may be interested in [Leaf](https://www.leafmc.one/).
+[Bukkit](https://bukkit.org/).
+<!--We also use some strictly reviewed code originally written for other projects.-->
+
+<details>
+    <summary>Expand credits</summary>
+    <p>
+    <ul>
+        <li><a href="https://github.com/2No2Name">2No2Name</a></li>
+        <li><a href="https://github.com/billygalbreath">Billy Galbreath</a></li>
+        <li><a href="https://github.com/Dreeam-qwq">Dreeam</a></li>
+        <li><a href="https://github.com/etil2jz">etil2jz</a></li>
+        <li><a href="https://github.com/foss-mc">foss-mc</a></li>
+        <li><a href="https://github.com/granny">granny</a></li>
+        <li><a href="https://github.com/ishland">ishland</a></li>
+        <li><a href="https://github.com/jaskarth">jaskarth</a></li>
+        <li><a href="https://github.com/jellysquid3">jellysquid3</a></li>
+        <li><a href="https://github.com/HaHaWTH">HaHaWTH</a></li>
+        <li><a href="https://github.com/hayanesuru">hayanesuru</a></li>
+        <li><a href="https://github.com/lilingfengdev">lilingfengdev</a></li>
+        <li><a href="https://github.com/MartijnMuijsers">Martijn Muijsers</a></li>
+        <li><a href="https://github.com/wling-art">MrlingXD</a></li>
+        <li><a href="https://github.com/MrPowerGamerBR">MrPowerGamerBR</a></li>
+        <li><a href="https://github.com/noramibu">noramibu</a></li>
+        <li><a href="https://github.com/nostalfinals">Nostal Yuu</a></li>
+        <li><a href="https://github.com/OverwriteMC">OverwriteMC</a></li>
+        <li><a href="https://github.com/PaulBGD">PaulBGD</a></li>
+        <li><a href="https://github.com/PureGero">PureGero</a></li>
+        <li><a href="https://github.com/RuleGaed">RuleGaed</a></li>
+        <li><a href="https://github.com/Taiyou06">Taiyou</a></li>
+        <li><a href="https://github.com/toprakdevx">Toprak</a></li>
+        <li><a href="https://github.com/vytskalt">vytskalt</a></li>
+    </ul>
+    </p>
+</details>
+
+If you want further optimizations that may break strict Paper behavior,
+[Leaf](https://www.leafmc.one/) is a good choice.
