@@ -126,5 +126,5 @@ Built on [Paper](https://papermc.io/),
     </p>
 </details>
 
-If you want further optimizations that may break strict Paper behavior,
+If you want further features or optimizations that change some behavior,
 consider [Leaf](https://www.leafmc.one/).
