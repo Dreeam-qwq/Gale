@@ -1,8 +1,9 @@
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -237,6 +_,10 @@
+@@ -237,6 +_,11 @@
          // Paper start - initialize global and world-defaults configuration
          this.paperConfigurations.initializeGlobalConfiguration(this.registryAccess());
++        net.minecraft.world.level.block.state.BlockBehaviour.gale$eventDriven_reload(); // Gale - Initialize config-dependent block-state caches
          this.paperConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
 +        // Gale start - Configuration - Initialize configuration
 +        // this.galeConfigurations.initializeGlobalConfiguration(this.registryAccess()); // TODO Gale configuration temp disabled

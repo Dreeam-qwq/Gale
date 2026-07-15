@@ -29,7 +29,7 @@
  
          private static void initCaches(final VoxelShape shape, final boolean neighbours) {
              ((ca.spottedleaf.moonrise.patches.collisions.shape.CollisionVoxelShape)shape).moonrise$isFullBlock();
-@@ -623,6 +_,11 @@
+@@ -623,6 +_,14 @@
  
              this.propagatesSkylightDown = this.owner.propagatesSkylightDown(this.asState());
              this.lightDampening = this.owner.getLightDampening(this.asState());
@@ -69,6 +69,8 @@
 +        }
 +
 +        private void gale$eventDriven_isDestroyable_update() {
++            // Paper configuration is initialized after block bootstrap.
++            if (io.papermc.paper.configuration.GlobalConfiguration.get() == null) return;
 +            boolean newValue = this.getBlock().isDestroyable();
 +            if (this.gale$eventDriven_isDestroyable != newValue) {
 +                this.gale$eventDriven_isDestroyable = newValue;
