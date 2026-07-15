@@ -210,7 +210,7 @@
          // CraftBukkit start - block invalid bounding boxes
          double minX = bb.minX,
                  minY = bb.minY,
-@@ -4718,13 +_,43 @@
+@@ -4718,13 +_,44 @@
      }
  
      public int countPlayerPassengers() {

@@ -63,6 +63,8 @@
 +        // Gale start - Event-driven - BlockBehaviour.isDestroyable()
          public final boolean isDestroyable() {
 -            return this.getBlock().isDestroyable();
+-        }
+-        // Paper end - Protect Bedrock and End Portal/Frames from being destroyed
 +            return this.gale$eventDriven_isDestroyable;
 +        }
 +
@@ -72,8 +74,7 @@
 +                this.gale$eventDriven_isDestroyable = newValue;
 +                this.gale$eventDriven_pistonPushReaction_update();
 +            }
-         }
--        // Paper end - Protect Bedrock and End Portal/Frames from being destroyed
++        }
 +        // Gale end - Event-driven - BlockBehaviour.isDestroyable()
  
          public boolean isValidSpawn(final BlockGetter level, final BlockPos pos, final EntityType<?> type) {
@@ -84,6 +85,7 @@
  
 -        public PushReaction getPistonPushReaction() {
 -            return !this.isDestroyable() ? PushReaction.BLOCK : this.pushReaction; // Paper - Protect Bedrock and End Portal/Frames from being destroyed
+-        }
 +        // Gale start - Event-driven - BlockBehaviour.getPistonPushReaction()
 +        public final PushReaction getPistonPushReaction() {
 +            return this.gale$eventDriven_pistonPushReaction;
@@ -91,7 +93,7 @@
 +
 +        private void gale$eventDriven_pistonPushReaction_update() {
 +            this.gale$eventDriven_pistonPushReaction = !this.gale$eventDriven_isDestroyable ? PushReaction.BLOCK : this.pushReaction;
-         }
++        }
 +        // Gale end - Event-driven - BlockBehaviour.getPistonPushReaction()
  
          public boolean isSolidRender() {
@@ -109,10 +111,11 @@
          }
  
          public boolean shouldChangedStateKeepBlockEntity(final BlockState oldState) {
-@@ -1448,6 +_,18 @@
+@@ -1447,6 +_,18 @@
+     public interface StateArgumentPredicate<A> {
          boolean test(BlockState state, BlockGetter level, BlockPos pos, A a);
      }
- 
++
 +    // Gale start - Event-driven - Reload block event-driven values after Paper configuration reload
 +    public static void gale$eventDriven_reload() {
 +        for (Block block : BuiltInRegistries.BLOCK) {
@@ -124,7 +127,6 @@
 +        }
 +    }
 +    // Gale end - Event-driven - Reload block event-driven values after Paper configuration reload
-+
+ 
      @FunctionalInterface
      public interface StatePredicate {
-         boolean test(BlockState state, BlockGetter level, BlockPos pos);
