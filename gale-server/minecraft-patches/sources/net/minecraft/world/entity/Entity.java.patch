@@ -237,9 +237,10 @@
 +    }
 +
 +    private void gale$eventDriven_playerPassengerCount_add(int delta) {
-+        this.gale$eventDriven_playerPassengerCount += delta;
-+        if (this.vehicle != null) {
-+            this.vehicle.gale$eventDriven_playerPassengerCount_add(delta);
++        Entity current = this;
++        while (current != null) {
++            current.gale$eventDriven_playerPassengerCount += delta;
++            current = current.vehicle;
 +        }
 +    }
 +
