@@ -189,7 +189,7 @@
              Entity.RemovalReason removalReason = this.getRemovalReason();
              if (removalReason == null || removalReason.shouldDestroy()) {
                  this.level().gameEvent(this, GameEvent.ENTITY_DISMOUNT, oldVehicle.position);
-@@ -4580,6 +_,18 @@
+@@ -4580,6 +_,20 @@
      }
  
      public final void setBoundingBox(final AABB bb) {
@@ -206,7 +206,7 @@
 +                this.boundingBoxChanged = true;
 +            }
 +        }
-+        // Gale end - Do less work - Skip unnecessary Entity.move() code if bounding box and position are unchangedgit status
++        // Gale end - Do less work - Skip unnecessary Entity.move() code if bounding box and position are unchanged
          // CraftBukkit start - block invalid bounding boxes
          double minX = bb.minX,
                  minY = bb.minY,
