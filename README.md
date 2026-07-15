@@ -71,7 +71,7 @@ Gale is a drop-in alternative for Paper, that provides higher performance withou
 <!--Full parity - --><!--No changes to behavior--><!--plugin/game behavior-->
 <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(suitable for every server)-->
 
-Gale contains [dozens](https://github.com/GaleMC/Gale/wiki/Features) of performance improvements.
+Gale contains [dozens](Features.md) of performance improvements.
 
 ## Installation (server owners)
 
@@ -120,6 +120,7 @@ Built on [Paper](https://papermc.io/),
         <li><a href="https://github.com/PaulBGD">PaulBGD</a></li>
         <li><a href="https://github.com/PureGero">PureGero</a></li>
         <li><a href="https://github.com/RuleGaed">RuleGaed</a></li>
+        <li><a href="https://github.com/Smorki">Smorki</a></li>
         <li><a href="https://github.com/Taiyou06">Taiyou</a></li>
         <li><a href="https://github.com/toprakdevx">Toprak</a></li>
         <li><a href="https://github.com/vytskalt">vytskalt</a></li>
