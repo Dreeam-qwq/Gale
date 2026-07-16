@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/LeavesBlock.java
++++ b/net/minecraft/world/level/block/LeavesBlock.java
+@@ -120,7 +_,7 @@
+         int newDistance = 7;
+         BlockPos.MutableBlockPos neighborPos = new BlockPos.MutableBlockPos();
+ 
+-        for (Direction direction : Direction.values()) {
++        for (Direction direction : Direction.gale$precompute_VALUES) { // Gale - Pre-compute - Direction.values()
+             neighborPos.setWithOffset(pos, direction);
+             newDistance = Math.min(newDistance, getDistanceAt(level.getBlockState(neighborPos)) + 1);
+             if (newDistance == 1) {
