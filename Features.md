@@ -814,6 +814,11 @@ Every feature is identified in source code by corresponding `// Gale` marker com
         <sub><sup>By: <a href="https://github.com/MartijnMuijsers">Martijn Muijsers</a></sup></sub>
       </li>
       <li>
+        <i>Mob.getType().getCategory.ordinal()</i>
+        <br/>
+        <sub><sup>By: <a href="https://github.com/RuleGaed">RuleGaed</a></sup></sub>
+      </li>
+      <li>
         <i>PoiTypes.forState()</i>
         <br/>
         <sub><sup>By: <a href="https://github.com/MartijnMuijsers">Martijn Muijsers</a></sup></sub>

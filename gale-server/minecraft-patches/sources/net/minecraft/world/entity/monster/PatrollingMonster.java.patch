@@ -53,7 +53,7 @@
 +        }
 +        double dy = Math.abs(dyUnsqr);
 +        // Paper start - Configurable despawn distances
-+        final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$checkDespawn_mobCategoryOrdinal]; // Gale - Pre-compute - Mob.checkDespawn() despawn ranges
++        final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$precompute_typeCategoryOrdinal]; // Gale - Pre-compute - Mob.getType().getCategory.ordinal()
 +        final io.papermc.paper.configuration.type.DespawnRange.Shape shape = level.gale$checkDespawn_despawnRangeShape; // Gale - Pre-compute - Mob.checkDespawn() despawn range shape
 +        // Despawn if hard/soft limit is exceeded
 +        if (this.gale$canRemoveWhenFarAway() && despawnRangePair.hard().shouldDespawn(shape, dxSqr, dySqr, dzSqr, dy) && this.removeWhenFarAway(distanceSquared)) {

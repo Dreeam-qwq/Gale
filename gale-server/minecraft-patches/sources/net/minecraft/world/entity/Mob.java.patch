@@ -137,14 +137,14 @@
 +    // Gale end - Event-driven - Mob.isPersistent
 +
 +    // Gale start - Optimize Mob.checkDespawn()
-+    protected final int gale$checkDespawn_mobCategoryOrdinal = this.getType().getCategory().ordinal(); // Gale - Pre-compute - Mob.checkDespawn() mob category ordinal
++    protected final int gale$precompute_typeCategoryOrdinal = this.getType().getCategory().ordinal(); // Gale - Pre-compute - Mob.getType().getCategory.ordinal()
 +
 +    /**
 +     * The index in {@link Level#gale$checkDespawn_spatialGridIndices}
 +     * that should be used by this mob,
 +     * for the soft range.
 +     */
-+    protected final int gale$checkDespawn_softLevelSpatialGridIndicesIndex = this.gale$checkDespawn_mobCategoryOrdinal << 1;
++    protected final int gale$checkDespawn_softLevelSpatialGridIndicesIndex = this.gale$precompute_typeCategoryOrdinal << 1; // Gale - Pre-compute - Mob.getType().getCategory.ordinal()
 +
 +    /**
 +     * Analogous to {@link #gale$checkDespawn_softLevelSpatialGridIndicesIndex},
@@ -245,7 +245,7 @@
 +            double dxSqr = dx * dx;
 +            double dySqr = dy * dy;
 +            double dzSqr = dz * dz;
-+            final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$checkDespawn_mobCategoryOrdinal]; // Gale - Pre-compute - Mob.checkDespawn() despawn ranges
++            final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$precompute_typeCategoryOrdinal]; // Gale - Pre-compute - Mob.getType().getCategory.ordinal()
 +            io.papermc.paper.configuration.type.DespawnRange despawnRange = despawnRangePair.soft();
 +            final io.papermc.paper.configuration.type.DespawnRange.Shape shape = level.gale$checkDespawn_despawnRangeShape; // Gale - Pre-compute - Mob.checkDespawn() despawn range shape
 +            if (!despawnRange.shouldDespawn(shape, dxSqr, dySqr, dzSqr, dy)) {
@@ -295,7 +295,7 @@
 +                double dxSqr = dx * dx;
 +                double dySqr = dy * dy;
 +                double dzSqr = dz * dz;
-+                final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$checkDespawn_mobCategoryOrdinal]; // Gale - Pre-compute - Mob.checkDespawn() despawn ranges
++                final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$precompute_typeCategoryOrdinal]; // Gale - Pre-compute - Mob.getType().getCategory.ordinal()
 +                io.papermc.paper.configuration.type.DespawnRange despawnRange = despawnRangePair.soft();
 +                final io.papermc.paper.configuration.type.DespawnRange.Shape shape = level.gale$checkDespawn_despawnRangeShape; // Gale - Pre-compute - Mob.checkDespawn() despawn range shape
 +                if (!despawnRange.shouldDespawn(shape, dxSqr, dySqr, dzSqr, dy)) {
@@ -340,7 +340,7 @@
 +        }
 +        double dy = Math.abs(dyUnsqr);
 +        // Paper start - Configurable despawn distances
-+        final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$checkDespawn_mobCategoryOrdinal]; // Gale - Pre-compute - Mob.checkDespawn() despawn ranges
++        final io.papermc.paper.configuration.WorldConfiguration.Entities.Spawning.DespawnRangePair despawnRangePair = level.gale$checkDespawn_despawnRangePairs[this.gale$precompute_typeCategoryOrdinal]; // Gale - Pre-compute - Mob.getType().getCategory.ordinal()
 +        final io.papermc.paper.configuration.type.DespawnRange.Shape shape = level.gale$checkDespawn_despawnRangeShape; // Gale - Pre-compute - Mob.checkDespawn() despawn range shape
 +        // Despawn if hard/soft limit is exceeded
 +        if (this.gale$canRemoveWhenFarAway() && despawnRangePair.hard().shouldDespawn(shape, dxSqr, dySqr, dzSqr, dy)) {
