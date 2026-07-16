@@ -118,14 +118,15 @@ Every feature is identified in source code by corresponding `// Gale` marker com
         <br/>
         <sub><sup>By: <a href="https://github.com/hayanesuru">hayanesuru</a> (as part of <a href="https://github.com/Winds-Studio/Leaf">Leaf</a>), <a href="https://github.com/MartijnMuijsers">Martijn Muijsers</a> and <a href="https://github.com/RuleGaed">RuleGaed</a></sup></sub>
         <br/>
-        <sub><sup>Leaf patches:
-        <ul>
-          <li>part of <code>Cache-block-state-tags.patch</code></li>
-          <li><code>optimize-canHoldAnyFluid.patch</code></li>
-          <li>part of <code>optimize-getOnPos.patch</code></li>
-          <li><code>optimize-isStateClimbable.patch</code></li>
-        </ul>
-        </sup></sub>
+        <sub><sup>Leaf patches:</sup></sub>
+        <br/>
+        <sub><sup>- part of <code>Cache-block-state-tags.patch</code></sup></sub>
+        <br/>
+        <sub><sup>- <code>optimize-canHoldAnyFluid.patch</code></sup></sub>
+        <br/>
+        <sub><sup>- part of <code>optimize-getOnPos.patch</code></sup></sub>
+        <br/>
+        <sub><sup>- <code>optimize-isStateClimbable.patch</code></sup></sub>
       </li>
       <li>
         <i>Registry tags</i>
