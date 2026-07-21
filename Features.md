@@ -652,6 +652,11 @@ Every feature is identified in source code by corresponding `// Gale` marker com
         <sub><sup>By: <a href="https://github.com/noramibu">noramibu</a></sup></sub>
       </li>
       <li>
+        <i>CompoundTag.write() (iterate over entry set)</i>
+        <br/>
+        <sub><sup>By: <a href="https://github.com/Smorki">Smorki</a></sup></sub>
+      </li>
+      <li>
         <i>DedicatedServer.getScaledTrackingDistance()</i>
         <br/>
         <sub><sup>By: <a href="https://github.com/hayanesuru">hayanesuru</a> (as part of <a href="https://github.com/Winds-Studio/Leaf">Leaf</a>)</sup></sub>
@@ -734,7 +739,7 @@ Every feature is identified in source code by corresponding `// Gale` marker com
         <sub><sup>Leaf patch: <code>Optimize-PatchedDataComponentMap-equals.patch</code></sup></sub>
       </li>
       <li>
-        <i>Ravager.roar() (re-use level variable)</i>
+        <i>SecondaryPoiSensor.doTick() (re-use BlockPos instance)</i>
         <br/>
         <sub><sup>By: <a href="https://github.com/RuleGaed">RuleGaed</a></sup></sub>
       </li>
@@ -744,6 +749,43 @@ Every feature is identified in source code by corresponding `// Gale` marker com
         <sub><sup>By: <a href="https://github.com/vytskalt">vytskalt</a> (as part of <a href="https://github.com/Electroid/SportPaper">SportPaper</a>)</sup></sub>
         <br/>
         <sub><sup>Leaf patch: <code>Reduce-block-destruction-packet-allocations.patch</code></sup></sub>
+      </li>
+      <li>
+        <i>Variable extraction</i>
+        <br/>>
+        Extract multiple (in-loop) lookups into a single variable.
+        <ul>
+          <li>
+            <i>AbstractArrow.tick()</i>
+            <br/>
+            <sub><sup>By: <a href="https://github.com/Smorki">Smorki</a></sup></sub>
+          </li>
+          <li>
+            <i>ActivationRange.activateEntities()</i>
+            <br/>
+            <sub><sup>By: <a href="https://github.com/Smorki">Smorki</a></sup></sub>
+          </li>
+          <li>
+            <i>ChunkMap.updatePlayer()</i>
+            <br/>
+            <sub><sup>By: <a href="https://github.com/RuleGaed">RuleGaed</a></sup></sub>
+          </li>
+          <li>
+            <i>ExperienceOrb.tick()</i>
+            <br/>
+            <sub><sup>By: <a href="https://github.com/Smorki">Smorki</a></sup></sub>
+          </li>
+          <li>
+            <i>ItemEntity.mergeWithNeighbors()</i>
+            <br/>
+            <sub><sup>By: <a href="https://github.com/Smorki">Smorki</a></sup></sub>
+          </li>
+          <li>
+            <i>Ravager.roar()</i>
+            <br/>
+            <sub><sup>By: <a href="https://github.com/RuleGaed">RuleGaed</a></sup></sub>
+          </li>
+        </ul>
       </li>
     </ul>
   </li>

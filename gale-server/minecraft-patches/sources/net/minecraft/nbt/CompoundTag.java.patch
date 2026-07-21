@@ -7,11 +7,11 @@
 -        for (String key : this.tags.keySet()) {
 -            Tag tag = this.tags.get(key);
 -            writeNamedTag(key, tag, output);
-+        // Gale start - avoid double map lookup
++        // Gale start - Local code optimization - CompoundTag.write() (iterate over entry set)
 +        for (Entry<String, Tag> entry : this.tags.entrySet()) {
 +            writeNamedTag(entry.getKey(), entry.getValue(), output);
          }
-+        // Gale end - avoid double map lookup
++        // Gale end - Local code optimization - CompoundTag.write() (iterate over entry set)
  
          output.writeByte(0);
      }

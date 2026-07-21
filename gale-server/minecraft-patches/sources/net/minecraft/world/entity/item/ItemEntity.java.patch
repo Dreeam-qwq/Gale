@@ -7,21 +7,21 @@
 -            double radius = this.level().spigotConfig.itemMerge; // Spigot
 -            for (ItemEntity entity : this.level()
 -                .getEntitiesOfClass(ItemEntity.class, this.getBoundingBox().inflate(radius, this.level().paperConfig().entities.behavior.onlyMergeItemsHorizontally ? 0 : radius - 0.5D, radius), other -> other != this && other.isMergable())) { // Spigot // Paper - configuration to only merge items horizontally
-+            // Gale start - hoist level and config lookups
++            // Gale start - Local code optimization - Variable extraction - ItemEntity.mergeWithNeighbors() - fixMergingThroughWalls, level, paperConfig
 +            final Level level = this.level();
 +            final io.papermc.paper.configuration.WorldConfiguration paperConfig = level.paperConfig();
 +            final double radius = level.spigotConfig.itemMerge;
 +            final double yInflate = paperConfig.entities.behavior.onlyMergeItemsHorizontally ? 0 : radius - 0.5D;
 +            final boolean fixMergingThroughWalls = paperConfig.fixes.fixItemsMergingThroughWalls;
-+            // Gale end - hoist level and config lookups
++            // Gale end - Local code optimization - Variable extraction - ItemEntity.mergeWithNeighbors() - fixMergingThroughWalls, level, paperConfig
 +            for (ItemEntity entity : level
 +                .getEntitiesOfClass(ItemEntity.class, this.getBoundingBox().inflate(radius, yInflate, radius), other -> other != this && other.isMergable())) {
                  if (entity.isMergable()) {
                      // Paper start - Fix items merging through walls
 -                    if (this.level().paperConfig().fixes.fixItemsMergingThroughWalls) {
 -                        if (this.level().clipDirect(this.position(), entity.position(),
-+                    if (fixMergingThroughWalls) {
-+                        if (level.clipDirect(this.position(), entity.position(),
++                    if (fixMergingThroughWalls) { // Gale - Local code optimization - Variable extraction - ItemEntity.mergeWithNeighbors() - fixMergingThroughWalls
++                        if (level.clipDirect(this.position(), entity.position(), // Gale - Local code optimization - Variable extraction - ItemEntity.mergeWithNeighbors() - level
                              net.minecraft.world.phys.shapes.CollisionContext.of(this)) == net.minecraft.world.phys.HitResult.Type.BLOCK) {
                              continue;
                          }

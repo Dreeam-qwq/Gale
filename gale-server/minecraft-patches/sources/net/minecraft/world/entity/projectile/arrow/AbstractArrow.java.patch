@@ -1,19 +1,18 @@
 --- a/net/minecraft/world/entity/projectile/arrow/AbstractArrow.java
 +++ b/net/minecraft/world/entity/projectile/arrow/AbstractArrow.java
-@@ -184,12 +_,14 @@
+@@ -184,12 +_,13 @@
  
      @Override
      public void tick() {
-+        // Gale start - hoist level lookup
-+        final Level level = this.level();
++        final Level level = this.level(); // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level
          boolean physicsEnabled = !this.isNoPhysics();
          Vec3 movement = this.getDeltaMovement();
          BlockPos blockPos = this.blockPosition();
 -        BlockState blockState = this.level().getBlockState(blockPos);
-+        BlockState blockState = level.getBlockState(blockPos);
++        BlockState blockState = level.getBlockState(blockPos); // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level
          if (!blockState.isAir() && physicsEnabled) {
 -            VoxelShape shape = blockState.getCollisionShape(this.level(), blockPos);
-+            VoxelShape shape = blockState.getCollisionShape(level, blockPos);
++            VoxelShape shape = blockState.getCollisionShape(level, blockPos); // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level
              if (!shape.isEmpty()) {
                  Vec3 position = this.position();
  
@@ -22,7 +21,7 @@
  
          if (this.isInGround() && physicsEnabled) {
 -            if (!this.level().isClientSide()) {
-+            if (!level.isClientSide()) {
++            if (true) { // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level - isClientSide is always false
                  if (this.lastState != blockState && this.shouldFall()) {
                      this.startFalling();
                  } else {
@@ -31,42 +30,25 @@
              }
  
 -            if (!this.level().isClientSide()) {
-+            if (!level.isClientSide()) {
++            if (true) { // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level - isClientSide is always false
                  this.setSharedFlagOnFire(this.getRemainingFireTicks() > 0);
              }
          } else {
              // Paper start - tick life regardless after X seconds
 -            final io.papermc.paper.configuration.type.number.IntOr.Disabled maxArrowDespawnInvulnerability = this.level().paperConfig().entities.spawning.maxArrowDespawnInvulnerability;
-+            final io.papermc.paper.configuration.type.number.IntOr.Disabled maxArrowDespawnInvulnerability = level.paperConfig().entities.spawning.maxArrowDespawnInvulnerability;
++            final io.papermc.paper.configuration.type.number.IntOr.Disabled maxArrowDespawnInvulnerability = level.paperConfig().entities.spawning.maxArrowDespawnInvulnerability; // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level
              if (maxArrowDespawnInvulnerability.enabled() && this.tickCount > maxArrowDespawnInvulnerability.intValue()) this.tickDespawn();
              // Paper end - tick life regardless after X seconds
              this.inGroundTime = 0;
-@@ -242,16 +_,15 @@
+@@ -242,7 +_,7 @@
  
              if (this.isCritArrow()) {
                  for (int i = 0; i < 4; i++) {
 -                    this.level()
--                        .addParticle(
--                            ParticleTypes.CRIT,
--                            originalPosition.x + movement.x * i / 4.0,
--                            originalPosition.y + movement.y * i / 4.0,
--                            originalPosition.z + movement.z * i / 4.0,
--                            -movement.x,
--                            -movement.y + 0.2,
--                            -movement.z
--                        );
-+                    level.addParticle(
-+                        ParticleTypes.CRIT,
-+                        originalPosition.x + movement.x * i / 4.0,
-+                        originalPosition.y + movement.y * i / 4.0,
-+                        originalPosition.z + movement.z * i / 4.0,
-+                        -movement.x,
-+                        -movement.y + 0.2,
-+                        -movement.z
-+                    );
-                 }
-             }
- 
++                    level // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level
+                         .addParticle(
+                             ParticleTypes.CRIT,
+                             originalPosition.x + movement.x * i / 4.0,
 @@ -267,10 +_,9 @@
              this.setYRot(lerpRotation(this.getYRot(), yRot));
              this.checkLeftOwner();
@@ -75,17 +57,9 @@
 -                    .clipIncludingBorder(
 -                        new ClipContext(originalPosition, originalPosition.add(movement), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)
 -                    );
-+                BlockHitResult blockHitResult = level.clipIncludingBorder(
++                BlockHitResult blockHitResult = level.clipIncludingBorder( // Gale - Local code optimization - Variable extraction - AbstractArrow.tick() - level
 +                    new ClipContext(originalPosition, originalPosition.add(movement), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)
 +                );
                  this.stepMoveAndHit(blockHitResult);
              } else {
                  this.setPos(originalPosition.add(movement));
-@@ -287,6 +_,7 @@
- 
-             super.tick();
-         }
-+        // Gale end - hoist level lookup
-     }
- 
-     @Override
